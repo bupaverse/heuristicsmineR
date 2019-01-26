@@ -1,0 +1,25 @@
+Package: heuristicsmineR
+Title: Heuristics Miner in R
+Version: 0.1.0
+Authors@R: 
+    person(given = "Felix",
+           family = "Mannhardt",
+           role = c("aut", "cre"),
+           email = "felix.mannhardt@sintef.no")
+Description: Process discovery based on the Heuristics Miner algorithm integrated into the bupaR framework.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    DiagrammeR (>= 1.0.0),
+    magrittr,
+    dplyr,
+    processmapR (>= 0.3.1),
+    bupaR
+Suggests: 
+  eventdataR,
+  edeaR
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+URL: https://github.com/fmannhardt/heuristicsmineR
+BugReports: https://github.com/fmannhardt/heuristicsmineR/issues
