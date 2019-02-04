@@ -7,7 +7,7 @@
 #' @param threshold A dependency threshold in the interval `[0,1]` filtering out dependencies below the threshold.
 #' @param type Which approach to use for calculation of the dependency matrix. Currently only `FHM` available.
 #'
-#' @return A data frame with the dependency values between activities.
+#' @return A data frame with class `dependency_matrix` containing the computed dependency values between activities.
 #'
 #' @seealso \code{\link{precedence_matrix}}, \code{\link{dependency_graph}}
 #'
@@ -44,10 +44,12 @@ dependency_matrix <- function(eventlog = NULL,
               by = c("antecedent" = "consequent",
                      "consequent" = "antecedent")) %>%
     mutate_all(funs(replace(., is.na(.), 0))) %>%
+    rename(a_to_c = n.x,
+           c_to_a = n.y) %>%
     # dependencies
-    mutate(dep = if_else(antecedent != consequent, (n.x - n.y) / (n.x + n.y + 1), NA_real_)) %>%
+    mutate(dep = if_else(antecedent != consequent, (a_to_c - c_to_a) / (a_to_c + c_to_a + 1), NA_real_)) %>%
     # l1 loops
-    mutate(dep = if_else(antecedent == consequent, (n.x / (n.x + 1)), dep)) %>%
+    mutate(dep = if_else(antecedent == consequent, (a_to_c / (a_to_c + 1)), dep)) %>%
     na.omit() %>%
     filter(dep >= threshold)
 

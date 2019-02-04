@@ -15,6 +15,7 @@ Imports:
     magrittr,
     dplyr,
     processmapR (>= 0.3.1),
+    petrinetR,
     bupaR
 Suggests: 
   eventdataR,
