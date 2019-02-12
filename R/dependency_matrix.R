@@ -12,10 +12,9 @@
 #' @seealso \code{\link{precedence_matrix}}
 #'
 #' @examples
-#' library(eventdataR)
-#' library(processmapR)
-#' data(patients)
-#' dependency_matrix(patients)
+#' d <- dependency_matrix(L_heur_1)
+#' print(d)
+#' as.matrix(d)
 #'
 #' @import dplyr
 #' @import bupaR

@@ -4,12 +4,12 @@
 \alias{causal_frequency}
 \title{Frequency map profile}
 \usage{
-causal_frequency(value = c("absolute", "relative", "absolute_case",
-  "relative_case"), color_scale = "PuBu", color_edges = "dodgerblue4")
+causal_frequency(value = c("absolute", "relative"),
+  color_scale = "PuBu", color_edges = "dodgerblue4")
 }
 \arguments{
 \item{value}{The type of frequency value to be used:
-absolute, relative (percentage of activity instances) or relative_case (percentage of cases the activity occurs in).}
+absolute, relative (percentage of activity instances).}
 
 \item{color_scale}{Name of color scale to be used for nodes. Defaults to PuBu. See \code{Rcolorbrewer::brewer.pal.info()} for all options.}
 
@@ -17,4 +17,9 @@ absolute, relative (percentage of activity instances) or relative_case (percenta
 }
 \description{
 Function to create a frequency profile for a process map.
+}
+\examples{
+causal_map(L_heur_1,
+           type = causal_frequency("relative"))
+
 }

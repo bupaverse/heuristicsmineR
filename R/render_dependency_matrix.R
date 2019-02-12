@@ -10,10 +10,7 @@
 #' @return A DiagrammeR graph of the (filtered) dependency matrix.
 #'
 #' @examples
-#' library(eventdataR)
-#' library(processmapR)
-#' data(patients)
-#' render_dependency_matrix(dependency_matrix(patients))
+#' render_dependency_matrix(dependency_matrix(L_heur_1))
 #'
 #' @import dplyr
 #' @import DiagrammeR

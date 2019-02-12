@@ -23,9 +23,6 @@ A DiagrammeR graph of the (filtered) dependency matrix.
 Creates a dependency graph visualizing the contents of a dependency matrix.
 }
 \examples{
-library(eventdataR)
-library(processmapR)
-data(patients)
-render_dependency_matrix(dependency_matrix(patients))
+render_dependency_matrix(dependency_matrix(L_heur_1))
 
 }

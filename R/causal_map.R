@@ -31,21 +31,17 @@
 #' @return A DiagrammeR graph of the causal map.
 #'
 #' @examples
-#' library(eventdataR)
-#' library(processmapR)
-#' data(patients)
-#'
 #' # Causal map with default parameters
-#' causal_map(patients)
+#' causal_map(L_heur_1)
 #'
 #' # Causal map with lower dependency treshold
-#' causal_map(patients, threshold = .7)
+#' causal_map(L_heur_1, threshold = .8)
 #'
 #' # For even more control omit the `eventlog` parameter
 #' # and provide `dependencies` and `bindings` directly.
-#' d <- dependency_matrix(patients, threshold = .8)
+#' d <- dependency_matrix(L_heur_1, threshold = .8)
 #' causal_map(dependencies = d,
-#'            bindings = causal_bindings(patients, d, "nearest"))
+#'            bindings = causal_bindings(L_heur_1, d, "nearest"))
 #'
 #' @import dplyr
 #' @import DiagrammeR

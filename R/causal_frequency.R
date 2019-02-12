@@ -7,11 +7,16 @@
 #' @description Function to create a frequency profile for a process map.
 #'
 #' @param value The type of frequency value to be used:
-#' absolute, relative (percentage of activity instances) or relative_case (percentage of cases the activity occurs in).
+#' absolute, relative (percentage of activity instances).
 #' @param color_scale Name of color scale to be used for nodes. Defaults to PuBu. See `Rcolorbrewer::brewer.pal.info()` for all options.
 #' @param color_edges The color used for edges. Defaults to dodgerblue4.
+#'
+#' @examples
+#' causal_map(L_heur_1,
+#'            type = causal_frequency("relative"))
+#'
 #' @export
-causal_frequency <- function(value = c("absolute", "relative", "absolute_case", "relative_case"),
+causal_frequency <- function(value = c("absolute", "relative"),
                       color_scale = "PuBu",
                       color_edges = "dodgerblue4") {
 

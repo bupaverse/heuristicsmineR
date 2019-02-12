@@ -9,7 +9,9 @@
 #' \dontrun{
 #' library(eventdataR)
 #' data(traffic_fines)
-#' precedence_matrix_absolute(traffic_fines)
+#' m <- precedence_matrix_absolute(traffic_fines)
+#' print(m)
+#' as.matrix(m)
 #' }
 #'
 #' @export precedence_matrix_absolute

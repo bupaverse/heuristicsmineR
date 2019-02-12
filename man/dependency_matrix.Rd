@@ -24,10 +24,9 @@ A data frame with class \code{dependency_matrix} containing the computed depende
 Creates a dependency matrix from a precedence matrix (\code{\link{precedence_matrix}}) based on different approaches.
 }
 \examples{
-library(eventdataR)
-library(processmapR)
-data(patients)
-dependency_matrix(patients)
+d <- dependency_matrix(L_heur_1)
+print(d)
+as.matrix(d)
 
 }
 \seealso{
