@@ -5,13 +5,13 @@
 \title{Create a dependency matrix}
 \usage{
 dependency_matrix(eventlog = NULL,
-  precedence = precedence_matrix(eventlog, type = "absolute"),
-  threshold = 0, type = c("FHM"))
+  precedence = precedence_matrix_absolute(eventlog), threshold = 0.9,
+  type = c("FHM"))
 }
 \arguments{
 \item{eventlog}{A bupaR event log, may be NULL when a precedence matrix is provided.}
 
-\item{precedence}{A precedence matrix, for example, created from a bupaR event log using (\code{\link{precedence_matrix}}).}
+\item{precedence}{A precedence matrix as data frame, for example, created from a bupaR event log using (\code{\link{precedence_matrix_absolute}}).}
 
 \item{threshold}{A dependency threshold in the interval \code{[0,1]} filtering out dependencies below the threshold.}
 
@@ -31,5 +31,5 @@ dependency_matrix(patients)
 
 }
 \seealso{
-\code{\link{precedence_matrix}}, \code{\link{dependency_graph}}
+\code{\link{precedence_matrix}}
 }

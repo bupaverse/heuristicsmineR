@@ -41,13 +41,13 @@ render_dependency_matrix <- function(dependencies,
   nodes <- base_nodes %>%
 			mutate(shape = if_end(act, "circle", "rectangle"),
 				   fontcolor = if_end(act, if_start(act, "chartreuse4","brown4"), "black"),
-				   color = if_end(act, if_start(act, "chartreuse4","brown4"), "grey"),
+				   color = if_end(act, if_start(act, "chartreuse4","brown4"), "black"),
 				   label = act)
 
   create_node_df(n = nrow(nodes),
 				   label = nodes$label,
 				   shape = nodes$shape,
-				   style = "rounded,filled",
+				   style = "",
 				   fontcolor = nodes$fontcolor,
 				   color = nodes$color,
 				   penwidth = 1.5,
@@ -61,6 +61,7 @@ render_dependency_matrix <- function(dependencies,
 
 	create_edge_df(from = edges_df$from_id,
 				   to = edges_df$to_id,
+				   color = "black",
 				   label =  round(edges_df$dep, 2)) -> edges_df
 
 	create_graph(nodes_df, edges_df) %>%

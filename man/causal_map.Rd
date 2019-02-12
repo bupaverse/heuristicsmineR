@@ -4,19 +4,42 @@
 \alias{causal_map}
 \title{Create a causal map}
 \usage{
-causal_map(processmap, dependencies, rankdir = "LR", layout = "dot",
-  render = T)
+causal_map(eventlog = NULL, dependencies = dependency_matrix(eventlog,
+  threshold = threshold), threshold = 0.9,
+  bindings = causal_bindings(eventlog, dependencies),
+  type = causal_frequency("absolute"), type_nodes = type,
+  type_edges = type, rankdir = "LR", layout = "dot", render = T,
+  fixed_edge_width = F, fixed_node_pos = NULL, ...)
 }
 \arguments{
-\item{processmap}{A proces map created by processmapR.}
+\item{eventlog}{The event log for which a causal map should be computed.
+Can be left NULL for more control if parameters \code{dependencies} and \code{bindings} are provided directly.}
 
 \item{dependencies}{A dependency matrix created for the event log, for example, by \code{\link{dependency_matrix}}.}
+
+\item{threshold}{The dependency threshold to be used when using the default dependency matrix computation.}
+
+\item{bindings}{Causal bindings created by \code{\link{causal_bindings}}.}
+
+\item{type}{A causal map type. Currently only function \code{\link{causal_frequency}} is supported.}
+
+\item{type_nodes}{A causal map type to be used for nodes only.
+Currently only function \code{\link{causal_frequency}} is supported.}
+
+\item{type_edges}{A causal map type to be used for edges only.
+Currently only function \code{\link{causal_frequency}} is supported.}
 
 \item{rankdir}{Rankdir to be used for DiagrammeR.}
 
 \item{layout}{Layout to be used for DiagrammeR.}
 
 \item{render}{Whether to directly render the DiagrammeR graph or simply return it.}
+
+\item{fixed_edge_width}{If TRUE, don't vary the width of edges.}
+
+\item{fixed_node_pos}{When specified as a data.frame with three columns 'act', 'x', and 'y' the position of nodes is fixed. Note that his can only be used with the 'neato' layout engine.}
+
+\item{...}{Further parameters forwarded to the DiagrammeR render function.}
 }
 \value{
 A DiagrammeR graph of the causal map.
@@ -27,12 +50,23 @@ deals with parallelism by trying to identifying causal dependencies between acti
 several heuristics.
 }
 \details{
-Warning: Projected frequencies are WORK IN PROGRESS and currently not reliable!
+Warning: Projected frequencies are heuristically determined and counts may not add up.
 }
 \examples{
 library(eventdataR)
 library(processmapR)
 data(patients)
-causal_map(patients, dependency_matrix(patients))
+
+# Causal map with default parameters
+causal_map(patients)
+
+# Causal map with lower dependency treshold
+causal_map(patients, threshold = .7)
+
+# For even more control omit the `eventlog` parameter
+# and provide `dependencies` and `bindings` directly.
+d <- dependency_matrix(patients, threshold = .8)
+causal_map(dependencies = d,
+           bindings = causal_bindings(patients, d, "nearest"))
 
 }

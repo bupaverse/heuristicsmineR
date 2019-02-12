@@ -1,6 +1,6 @@
 Package: heuristicsmineR
 Title: Heuristics Miner in R
-Version: 0.1.0
+Version: 0.1.0.9001
 Authors@R: 
     person(given = "Felix",
            family = "Mannhardt",
@@ -10,13 +10,24 @@ Description: Process discovery based on the Heuristics Miner algorithm integrate
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+LinkingTo: Rcpp, Rcpp11, BH
+SystemRequirements: C++11
+Depends:
+  R (>= 2.10)
 Imports: 
     DiagrammeR (>= 1.0.0),
     magrittr,
     dplyr,
     processmapR (>= 0.3.1),
     petrinetR,
-    bupaR
+    bupaR,
+    purrr,
+    tidyr,
+    rlang,
+    scales,
+    Rcpp,
+    Rcpp11,
+    BH
 Suggests: 
   eventdataR,
   edeaR
