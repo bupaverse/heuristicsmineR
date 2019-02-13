@@ -34,7 +34,8 @@ causal_bindings <- function(eventlog,
     arrange(case, start_time, min_order) %>%
     filter(!is.na(act)) %>%
     mutate(possible_output = out_acts[act],
-           possible_input = in_acts[act])
+           possible_input = in_acts[act]) %>%
+    filter_at(vars(possible_input, possible_output), all_vars(sapply(., function(x) !is.null(x))))
 
   act_vec <- prepared_base$act
   rle_ids <- rle(prepared_base$case)
@@ -96,7 +97,6 @@ causal_bindings <- function(eventlog,
   prepared_base %>%
     mutate(binding_output = binding_output,
            binding_input = binding_input)
-
 }
 
 get_active <- function(suffix, act, candidates, competing) {
@@ -136,5 +136,6 @@ build_candidates <- function(dependencies) {
   out_acts <- map(colnames(d), succ)
   names(out_acts) <- colnames(d)
 
-  list(in_acts = in_acts, out_acts = out_acts)
+  list(in_acts = in_acts,
+       out_acts = out_acts)
 }
