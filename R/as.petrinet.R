@@ -3,11 +3,10 @@
 #' @param obj The event log to be used. An object of class
 #'
 #' @examples
-#' library(petrinetR)
+#' data(L_heur_1)
 #' cn <- causal_net(L_heur_1, threshold = .8)
 #' pn <- as.petrinet(cn)
-#' print(pn)
-#' render_PN(pn)
+#' petrinetR::render_PN(pn)
 #'
 #' @import dplyr
 #' @export

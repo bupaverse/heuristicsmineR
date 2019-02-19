@@ -22,7 +22,7 @@ data(patients)
 # Dependency graph / matrix
 dependency_matrix(patients)
 # Causal graph / Heuristics net
-causal_map(patients)
+causal_net(patients)
 
 # Efficient precedence matrix
 m <- precedence_matrix_absolute(L_heur_1)
@@ -30,9 +30,16 @@ as.matrix(m)
 
 # Example from Process mining book
 dependency_matrix(L_heur_1, threshold = .7)
-causal_map(L_heur_1, threshold = .7)
+causal_net(L_heur_1, threshold = .7)
 
 # Sepsis log
-causal_map(sepsis, threshold = .7)
+causal_net(sepsis, threshold = .7)
+
+# Convert to Petri net
+library(petrinetR)
+cn <- causal_net(L_heur_1, threshold = .7)
+pn <- as.petrinet(cn)
+render_PN(pn)
 ```
+
 

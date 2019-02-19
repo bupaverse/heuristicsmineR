@@ -13,10 +13,9 @@ as.petrinet(obj)
 Converts the object to a Petrinet
 }
 \examples{
-library(petrinetR)
+data(L_heur_1)
 cn <- causal_net(L_heur_1, threshold = .8)
 pn <- as.petrinet(cn)
-print(pn)
-render_PN(pn)
+petrinetR::render_PN(pn)
 
 }
