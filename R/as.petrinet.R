@@ -50,7 +50,7 @@ as.petrinet.causal_net <- function(obj) {
       in_acts <- unlist(strsplit(x, ","))
       map_dfr(in_acts, function(y) {
         in_idx <- which(nodes$act == y)
-        gateway_name <- paste0("p_gateway",in_idx,"-",i)
+        gateway_name <- paste0("p_gw_",in_idx,"_",i)
         gate_places <<- c(gate_places, gateway_name)
         data.frame(from = c(gateway_name, inv_name),
                    to = c(inv_name, in_place),
@@ -62,7 +62,7 @@ as.petrinet.causal_net <- function(obj) {
     out_flows <- map_dfr(names(output), function(x) { # with side effects !!
 
       inv_count <<- inv_count + 1
-      inv_name <- paste0("inv",inv_count)
+      inv_name <- paste0("inv_",inv_count)
       inv_trans <<- c(inv_trans, inv_name)
 
       out_place <- paste0("p_out_", i)
@@ -71,7 +71,7 @@ as.petrinet.causal_net <- function(obj) {
       in_acts <- unlist(strsplit(x, ","))
       map_dfr(in_acts, function(y) {
         out_idx <- which(nodes$act == y)
-        gateway_name <- paste0("p_gateway",i,"-",out_idx)
+        gateway_name <- paste0("p_gw_",i,"_",out_idx)
         gate_places <<- c(gate_places, gateway_name)
         data.frame(from = c(inv_name, out_place),
                    to = c(gateway_name, inv_name),
@@ -96,8 +96,12 @@ as.petrinet.causal_net <- function(obj) {
 
   # TODO simplify Petri net by removing irrelevant invisible transitions
 
-  petrinetR::create_PN(places_final,
-            trans_final,
-            flows_final,
-            marking)
+  pn <- petrinetR::create_PN(places_final,
+                       trans_final,
+                       flows_final,
+                       marking)
+  pn$transitions <- pn$transitions %>%
+    mutate(label = if_else(startsWith(id,"inv_"), NA_character_, id))
+
+  pn
 }
