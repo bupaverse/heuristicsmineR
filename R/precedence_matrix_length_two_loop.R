@@ -22,8 +22,8 @@ precedence_matrix_length_two_loops <- function(eventlog) {
 }
 
 precedence_matrix_length_two_loops_impl <- function(simplelog) {
-  mat <- as_tibble(count_length_two_loops(simplelog[[case_id(simplelog)]],
-                                          simplelog[[activity_id(simplelog)]]))
+  mat <- as_tibble(count_length_two_loops(simplelog$case_id,
+                                          simplelog$activity_id))
 
   class(mat) <- c("precedence-matrix", class(mat))
   attr(mat, "matrix_type") <- "absolute"

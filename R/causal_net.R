@@ -37,6 +37,14 @@
 #' d <- dependency_matrix(L_heur_1, threshold = .8)
 #' causal_net(dependencies = d,
 #'            bindings = causal_bindings(L_heur_1, d, "nearest"))
+#' \dontrun{
+#' # The returned DiagrammeR object can be further augmented with
+#' # panning and zooming before rendering:
+#' causal_net(L_heur_1) %>%
+#'  render_causal_net(render = T) %>%
+#'  DiagrammeRsvg::export_svg() %>%
+#'  svgPanZoom::svgPanZoom()
+#' }
 #'
 #' @import dplyr
 #' @import DiagrammeR
@@ -62,8 +70,6 @@ causal_net <- function(eventlog = NULL,
 	extra_data$n_activity_instances <- length(unique(bindings$aid))
 
   check_dependencies(dependencies)
-
-
 
   # Build base structure
 	nodes <- attr(type_nodes, "create_nodes")(bindings, type_nodes, extra_data)

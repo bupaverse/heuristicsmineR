@@ -4,6 +4,7 @@
 #
 
 #' @importFrom rlang sym
+#' @import dplyr
 NULL
 
 case_id_ <- function(eventlog) sym(case_id(eventlog))
@@ -25,9 +26,13 @@ reduce_simple_eventlog <- function(eventlog) {
   .order <- NULL
 
   eventlog %>%
+      as.data.frame() %>%
       arrange(!!case_id_(eventlog), !!timestamp_(eventlog), .order) %>%
       # relies on dplyr taking the first distinct value
-      distinct(!!case_id_(eventlog), !!activity_id_(eventlog), !!activity_instance_id_(eventlog))
+      distinct(!!case_id_(eventlog), !!activity_id_(eventlog), !!activity_instance_id_(eventlog)) %>%
+      rename(case_id = !!case_id_(eventlog),
+             activity_id = !!activity_id_(eventlog),
+             activity_instance_id = !!activity_instance_id_(eventlog))
 }
 
 base_precedence <- function(eventlog) {
