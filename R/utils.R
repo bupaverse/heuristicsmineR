@@ -21,6 +21,15 @@ if_start <- function(node, true, false) {
 	ifelse(node %in% c("Start"), true, false)
 }
 
+reduce_simple_eventlog <- function(eventlog) {
+  .order <- NULL
+
+  eventlog %>%
+      arrange(!!case_id_(eventlog), !!timestamp_(eventlog), .order) %>%
+      # relies on dplyr taking the first distinct value
+      distinct(!!case_id_(eventlog), !!activity_id_(eventlog), !!activity_instance_id_(eventlog))
+}
+
 base_precedence <- function(eventlog) {
 
   .order <- ACTIVITY_CLASSIFIER_ <- ACTIVITY_INSTANCE_CLASSIFIER_ <-

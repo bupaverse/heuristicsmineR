@@ -12,7 +12,7 @@
 #' @param color_edges The color used for edges. Defaults to dodgerblue4.
 #'
 #' @examples
-#' causal_map(L_heur_1,
+#' causal_net(L_heur_1,
 #'            type = causal_frequency("relative"))
 #'
 #' @export
@@ -39,6 +39,14 @@ causal_frequency <- function(value = c("absolute", "relative"),
 	  })
 	}
 
+	replace_null <- function(x, replacement = list()) {
+    if (is.null(x)) {
+      replacement
+    } else {
+      x
+    }
+  }
+
 	attr(value, "create_nodes") <- function(bindings, type, extra_data) {
 
 	  n_cases <- extra_data$n_cases
@@ -55,7 +63,7 @@ causal_frequency <- function(value = c("absolute", "relative"),
       })))
 
     nested_input <- bindings %>%
-      mutate(binding = as.character(map(binding_output, paste, collapse=","))) %>%
+      mutate(binding = as.character(map(binding_input, paste, collapse=","))) %>%
       count(act, binding) %>%
       filter(binding != "") %>% # remove bindings without any activity activated
       group_by(act) %>%
@@ -73,6 +81,8 @@ causal_frequency <- function(value = c("absolute", "relative"),
       rename(bindings_input = bindings) %>%
       left_join(nested_output,  by = c("act" = "act")) %>%
       rename(bindings_output = bindings) %>%
+      mutate(bindings_input = map(bindings_input, replace_null),
+             bindings_output = map(bindings_output, replace_null)) %>%
       mutate(label = case_when(type == "relative" ~ 100*n/n_activity_instances,
               								 type == "absolute" ~ n,
               								 type == "absolute_case" ~ n_distinct_cases,
@@ -88,6 +98,10 @@ causal_frequency <- function(value = c("absolute", "relative"),
     			                    "Output: ", format_bindings(bindings_output))) %>%
   		na.omit()
 
+    attr(nodes, "bindings_input") <- nested_input
+    attr(nodes, "bindings_output") <- nested_output
+
+    nodes
 	}
 
 	attr(value, "create_edges") <- function(dependencies, bindings, type, extra_data) {
@@ -105,21 +119,24 @@ causal_frequency <- function(value = c("absolute", "relative"),
       group_by(act) %>%
       summarise(id = first(from_id))
 
-    edges <- dependencies %>%
-      left_join(base_nodes, by = c("antecedent" = "act")) %>%
-      rename(from_id = id) %>%
-      left_join(base_nodes, by = c("consequent" = "act")) %>%
-      rename(to_id = id) %>%
-      left_join(summary_freq,
-                by = c("antecedent" = "act", "consequent" = "binding")) %>%
-			group_by(from_id) %>%
-      mutate(n = as.double(if_else(is.na(n), 0L, n))) %>%
-			mutate(label = case_when(type == "relative" ~ round(100*n/sum(n),2),
-									             type == "absolute" ~ n)) %>%
-			ungroup() %>%
-			mutate(penwidth = scales::rescale(label, to = c(1,5), from = c(0, max(label)))) %>%
-			mutate(label = case_when(type == "absolute" ~ paste0(label, ""),
-									             type == "relative" ~ paste0(label, "%")))
+    suppressWarnings( # factor / char coercion
+      edges <- dependencies %>%
+        as.data.frame() %>%
+        left_join(base_nodes, by = c("antecedent" = "act")) %>%
+        rename(from_id = id) %>%
+        left_join(base_nodes, by = c("consequent" = "act")) %>%
+        rename(to_id = id) %>%
+        left_join(summary_freq,
+                  by = c("antecedent" = "act", "consequent" = "binding")) %>%
+  			group_by(from_id) %>%
+        mutate(n = as.double(if_else(is.na(n), 0L, n))) %>%
+  			mutate(label = case_when(type == "relative" ~ round(100*n/sum(n),2),
+  									             type == "absolute" ~ n)) %>%
+  			ungroup() %>%
+  			mutate(penwidth = scales::rescale(label, to = c(1,5), from = c(0, max(label)))) %>%
+  			mutate(label = case_when(type == "absolute" ~ paste0(label, ""),
+  									             type == "relative" ~ paste0(label, "%")))
+    )
 
     edges
 	}

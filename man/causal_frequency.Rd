@@ -19,7 +19,7 @@ absolute, relative (percentage of activity instances).}
 Function to create a frequency profile for a process map.
 }
 \examples{
-causal_map(L_heur_1,
+causal_net(L_heur_1,
            type = causal_frequency("relative"))
 
 }

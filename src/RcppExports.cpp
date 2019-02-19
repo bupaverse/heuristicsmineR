@@ -5,21 +5,35 @@
 
 using namespace Rcpp;
 
-// count_precedence
-DataFrame count_precedence(CharacterVector cases, IntegerVector activities);
-RcppExport SEXP _heuristicsmineR_count_precedence(SEXP casesSEXP, SEXP activitiesSEXP) {
+// count_length_two_loops
+DataFrame count_length_two_loops(CharacterVector cases, IntegerVector activities);
+RcppExport SEXP _heuristicsmineR_count_length_two_loops(SEXP casesSEXP, SEXP activitiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type cases(casesSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type activities(activitiesSEXP);
-    rcpp_result_gen = Rcpp::wrap(count_precedence(cases, activities));
+    rcpp_result_gen = Rcpp::wrap(count_length_two_loops(cases, activities));
+    return rcpp_result_gen;
+END_RCPP
+}
+// count_precedence
+DataFrame count_precedence(CharacterVector cases, IntegerVector activities, int lead);
+RcppExport SEXP _heuristicsmineR_count_precedence(SEXP casesSEXP, SEXP activitiesSEXP, SEXP leadSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type cases(casesSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type activities(activitiesSEXP);
+    Rcpp::traits::input_parameter< int >::type lead(leadSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_precedence(cases, activities, lead));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_heuristicsmineR_count_precedence", (DL_FUNC) &_heuristicsmineR_count_precedence, 2},
+    {"_heuristicsmineR_count_length_two_loops", (DL_FUNC) &_heuristicsmineR_count_length_two_loops, 2},
+    {"_heuristicsmineR_count_precedence", (DL_FUNC) &_heuristicsmineR_count_precedence, 3},
     {NULL, NULL, 0}
 };
 

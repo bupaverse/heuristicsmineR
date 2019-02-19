@@ -1,9 +1,11 @@
 #' Precendence Matrix
 #'
-#' Construct a precendence matrix, showing how activities are followed by each other. This function computes the precedence matrix directly in C++ for efficiency.
-#'  Only the type `absolute` of (\code{\link[processmapR]{precedence_matrix}}) is supported.
+#' Construct a precendence matrix, showing how activities are followed by each other.
+#' This function computes the precedence matrix directly in C++ for efficiency.
+#' Only the type `absolute` of (\code{\link[processmapR]{precedence_matrix}}) is supported.
 #'
-#' @param eventlog The event log object to be used
+#' @param eventlog The event log object to be used.
+#' @param lead The distance between activities following/preceding each other.
 #'
 #' @examples
 #' \dontrun{
@@ -15,27 +17,19 @@
 #' }
 #'
 #' @export precedence_matrix_absolute
-precedence_matrix_absolute <- function(eventlog) {
+precedence_matrix_absolute <- function(eventlog, lead = 1) {
   stopifnot("eventlog" %in% class(eventlog))
+  stopifnot(lead > 0)
 
-  antecedent <- NULL
-  consequent <- NULL
-  ts <- NULL
-  min_order <- NULL
-  .order <- NULL
+  eventlog <- reduce_simple_eventlog(eventlog)
+  precedence_matrix_absolute_impl(eventlog, lead)
+}
 
-  log <- eventlog %>%
-    group_by(
-      !!case_id_(eventlog),
-      !!activity_id_(eventlog),
-      !!activity_instance_id_(eventlog)
-    ) %>%
-    summarize(ts = min(!!timestamp_(eventlog)),
-              min_order = min(.order))  %>%
-    arrange(!!case_id_(eventlog), ts, min_order) %>%
-    select(!!case_id_(eventlog), !!activity_id_(eventlog))
+precedence_matrix_absolute_impl <- function(simplelog, lead = 1) {
+  mat <- as_tibble(count_precedence(simplelog[[case_id(simplelog)]],
+                                    simplelog[[activity_id(simplelog)]],
+                                    lead))
 
-  mat <- as_tibble(count_precedence(log[[case_id(eventlog)]], log[[activity_id(eventlog)]]))
   class(mat) <- c("precedence-matrix", class(mat))
   attr(mat, "matrix_type") <- "absolute"
   return(mat)

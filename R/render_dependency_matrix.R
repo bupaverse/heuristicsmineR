@@ -29,8 +29,8 @@ render_dependency_matrix <- function(dependencies,
 		ifelse(node %in% c("Start"), true, false)
 	}
 
-	activities <- union(dependencies$antecedent,
-	                    dependencies$consequent)
+	activities <- colnames(dependencies)
+  dependencies <- as.data.frame(dependencies)
 
   base_nodes <- data.frame(act = activities, stringsAsFactors = FALSE) %>%
     mutate(id = 1:n())
@@ -50,11 +50,13 @@ render_dependency_matrix <- function(dependencies,
 				   penwidth = 1.5,
 				   fixedsize = FALSE) -> nodes_df
 
-  edges_df <- dependencies %>%
-    				left_join(base_nodes, by = c("antecedent" = "act")) %>%
-					 	rename(from_id = id) %>%
-    			  left_join(base_nodes, by = c("consequent" = "act")) %>%
-					 	rename(to_id = id)
+  suppressWarnings( # factor / char warning
+    edges_df <- dependencies %>%
+      				left_join(base_nodes, by = c("antecedent" = "act")) %>%
+  					 	rename(from_id = id) %>%
+      			  left_join(base_nodes, by = c("consequent" = "act")) %>%
+  					 	rename(to_id = id)
+  )
 
 	create_edge_df(from = edges_df$from_id,
 				   to = edges_df$to_id,

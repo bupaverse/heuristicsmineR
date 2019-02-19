@@ -9,43 +9,33 @@ using namespace Rcpp;
 typedef std::pair<unsigned, unsigned> act_pair;
 
 // [[Rcpp::export]]
-DataFrame count_precedence(CharacterVector cases,
-                           IntegerVector activities,
-                           int lead) {
-
-	CharacterVector levels = activities.attr("levels");
-	int startIdx = levels.size() + 1;
-	int endIdx = levels.size() + 1;
+DataFrame count_length_two_loops(CharacterVector cases, IntegerVector activities) {
 
 	std::unordered_map<act_pair, unsigned, boost::hash<act_pair>> counts;
 
 	String curCase;
+	int aLead = 2;
+	int bLead = 1;
 
 	for (int i = 0; i < cases.size(); ++i) {
 		String c = cases[i];
 		int act = activities[i];
 
-		int leadIdx = i+lead;
-		int leadAct = -1;
-		if (leadIdx < activities.size()) {
-		  if (cases[i+lead] != c) { // i+lead is safe
-		    // End event
-		    leadAct = endIdx;
-		  } else {
-		    // Normal
-        leadAct = activities[leadIdx];
+		int aIdx = i+aLead;
+		int bIdx = i+bLead;
+
+		if (bIdx < cases.size()) {
+		  if (cases[aIdx] == c) {
+		    // Same case
+		    int aAct = activities[aIdx];
+		    int bAct = activities[bIdx];
+        if (aAct == act && aAct != bAct) {
+          counts[act_pair(aAct, bAct)]++;
+        }
 		  }
 		}
 
-		if (leadAct != -1) {
-		  if (c != curCase) {
-		    // Start event
-		    counts[act_pair(startIdx, act)]++;
-		  }
-			counts[act_pair(act, leadAct)]++;
-		}
-
-		 curCase = c;
+		curCase = c;
 	}
 
 	unsigned len = counts.size();
@@ -64,15 +54,16 @@ DataFrame count_precedence(CharacterVector cases,
 		count++;
 	}
 
+	CharacterVector levels = activities.attr("levels");
 
 	CharacterVector antLev(levels.size() + 1);
  	for(int i = 0; i < levels.size(); ++i) {
     	antLev[i] = levels[i];
   	}
  	antLev[levels.size()] = "Start";
+
 	antecedent.attr("levels") = antLev;
   antecedent.attr("class") = "factor";
-
 
   CharacterVector conLev(levels.size() + 1);
  	for(int i = 0; i < levels.size(); ++i) {

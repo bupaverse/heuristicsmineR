@@ -5,7 +5,6 @@
 #' a heuristic that looks ahead (or looks back) until the end of the trace and determines those activities as activated
 #' for which no other cause (activity in a causal dependency) is found. This approach is implemented as type `nearest`.
 #'
-#'
 #' @param eventlog The bupaR event log.
 #' @param dependencies A dependency matrix obtained, for example, through \code{\link{dependency_matrix}}.
 #' @param type The heuristic used to determine the bindings. Currently only `nearest` is available.
@@ -19,7 +18,8 @@ causal_bindings <- function(eventlog,
                             dependencies,
                             type = c("nearest")) {
 
-  case <- start_time <- min_order <- act <- . <- NULL
+  case <- start_time <- min_order <- act <- . <-
+    possible_input <- possible_output <- NULL
 
   stopifnot("eventlog" %in% class(eventlog))
   stopifnot("dependency_matrix" %in% class(dependencies))
@@ -119,9 +119,7 @@ get_active <- function(suffix, act, candidates, competing) {
   candidates[is_nearest]
 }
 
-build_candidates <- function(dependencies) {
-
-  d <- as.matrix(dependencies)
+build_candidates <- function(d) {
 
   succ <- function(act) {
     names(which(d[act,] > 0))
