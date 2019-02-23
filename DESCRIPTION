@@ -10,7 +10,7 @@ Description: Process discovery based on the Heuristics Miner algorithm integrate
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-LinkingTo: Rcpp, Rcpp11, BH
+LinkingTo: Rcpp, BH
 SystemRequirements: C++11
 Depends:
   R (>= 2.10)
@@ -26,8 +26,7 @@ Imports:
     rlang,
     scales,
     Rcpp,
-    Rcpp11,
-    BH
+    Rcpp11
 Suggests: 
   eventdataR,
   edeaR
