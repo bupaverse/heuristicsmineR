@@ -257,8 +257,15 @@ Currently only function <code><a href='causal_frequency.html'>causal_frequency</
 #&gt; </span><span style='color: #555555;'> 7</span><span> b          e          0.917       4     7    21 21         3.1
 #&gt; </span><span style='color: #555555;'> 8</span><span> c          e          0.917       5     7    21 21         3.1
 #&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       6     7    13 13         2.3
-#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       7     2    40 40         5  </div><div class='input'>
-</div></span></pre>
+#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       7     2    40 40         5  </div></span><span class='co'># NOT RUN {</span>
+<span class='co'># The returned DiagrammeR object can be further augmented with</span>
+<span class='co'># panning and zooming before rendering:</span>
+<span class='fu'>causal_net</span>(<span class='no'>L_heur_1</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='render_causal_net.html'>render_causal_net</a></span>(<span class='kw'>render</span> <span class='kw'>=</span> <span class='no'>T</span>) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>DiagrammeRsvg</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/DiagrammeRsvg/topics/export_svg'>export_svg</a></span>() <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/svgPanZoom/topics/svgPanZoom'>svgPanZoom</a></span>()
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

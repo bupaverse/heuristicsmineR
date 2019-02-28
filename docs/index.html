@@ -88,24 +88,24 @@
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co"># Dependency graph / matrix</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw"><a href="reference/dependency_matrix.html">dependency_matrix</a></span>(patients)</a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># Causal graph / Heuristics net</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(patients)</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co"># Efficient precedence matrix</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">m &lt;-<span class="st"> </span><span class="kw"><a href="reference/precedence_matrix_absolute.html">precedence_matrix_absolute</a></span>(L_heur_<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(m)</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co"># Example from Process mining book</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="kw"><a href="reference/dependency_matrix.html">dependency_matrix</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co"># Sepsis log</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(sepsis, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co"># Convert to Petri net</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(petrinetR)</a>
-<a class="sourceLine" id="cb2-23" data-line-number="23">cn &lt;-<span class="st"> </span><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">pn &lt;-<span class="st"> </span><span class="kw"><a href="reference/as.petrinet.html">as.petrinet</a></span>(cn)</a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="kw">render_PN</span>(pn)</a></code></pre></div>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(patients)</a></code></pre></div>
+<p><img src="reference/figures/patients.png"></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Efficient precedence matrix</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">m &lt;-<span class="st"> </span><span class="kw"><a href="reference/precedence_matrix_absolute.html">precedence_matrix_absolute</a></span>(L_heur_<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(m)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># Example from Process mining book</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="reference/dependency_matrix.html">dependency_matrix</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a></code></pre></div>
+<p><img src="reference/figures/L_heur_1_example.png"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Sepsis log</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(sepsis, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># Convert to Petri net</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(petrinetR)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">cn &lt;-<span class="st"> </span><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">pn &lt;-<span class="st"> </span><span class="kw"><a href="reference/as.petrinet.html">as.petrinet</a></span>(cn)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">render_PN</span>(pn)</a></code></pre></div>
 </div>
 </div>
   </div>
