@@ -29,6 +29,6 @@ Flexible heuristics miner dependency type
 }
 \examples{
 dependency_matrix(L_heur_1,
-                  type = dependency_type_fhm(all_connected = TRUE))
+                  dependency_type = dependency_type_fhm(all_connected = TRUE))
 
 }
