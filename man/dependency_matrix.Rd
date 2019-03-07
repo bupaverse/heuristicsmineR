@@ -4,15 +4,18 @@
 \alias{dependency_matrix}
 \title{Create a dependency matrix}
 \usage{
-dependency_matrix(eventlog = NULL, type = dependency_type_fhm(threshold
-  = threshold), threshold = 0.9)
+dependency_matrix(eventlog = NULL,
+  dependency_type = dependency_type_fhm(threshold = threshold, ...),
+  threshold = 0.9, ...)
 }
 \arguments{
 \item{eventlog}{A bupaR event log, may be NULL when a precedence matrix is provided.}
 
-\item{type}{Which approach to use for calculation of the dependency matrix. Currently only (\code{\link{dependency_type_fhm}}) is available.}
+\item{dependency_type}{Which approach to use for calculation of the dependency matrix. Currently only (\code{\link{dependency_type_fhm}}) is available.}
 
 \item{threshold}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out dependencies below the threshold.}
+
+\item{...}{Parameters forwarded to (\code{\link{dependency_type_fhm}}).}
 }
 \value{
 A square matrix with class \code{dependency_matrix} containing the computed dependency values between all activities.

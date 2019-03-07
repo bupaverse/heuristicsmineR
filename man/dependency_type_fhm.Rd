@@ -4,11 +4,16 @@
 \alias{dependency_type_fhm}
 \title{Flexible heuristics miner dependency type}
 \usage{
-dependency_type_fhm(threshold = 0.9, all_connected = FALSE,
-  precedence = NULL, precedence_lenght_two_loops = NULL)
+dependency_type_fhm(threshold = 0.9, threshold_l1 = threshold,
+  threshold_l2 = threshold, all_connected = FALSE, precedence = NULL,
+  precedence_lenght_two_loops = NULL)
 }
 \arguments{
 \item{threshold}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out dependencies below the threshold.}
+
+\item{threshold_l1}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out self-loop dependencies below the threshold.}
+
+\item{threshold_l2}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out length-two loop dependencies below the threshold.}
 
 \item{all_connected}{If \code{TRUE} the best antecedent and consequent (as determined by the dependency measure) are going to be added regardless of the \code{threshold} value.}
 

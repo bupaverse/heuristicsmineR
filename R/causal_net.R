@@ -98,7 +98,8 @@ check_dependencies <- function(dependencies) {
   if (length(missing_acts)  > 0) {
     warning(paste0("Activities [",
                    paste(missing_acts, collapse = ","),
-                   "] have neither an antecedent or consequent in the supplied dependency matrix."))
+                   "] have neither an antecedent or consequent in the supplied dependency matrix.",
+                   "Consider using the `all_connected` parameter when generating the dependency matrix."))
   }
 
   # Check any node contains a ',' in name

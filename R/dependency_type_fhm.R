@@ -2,6 +2,8 @@
 #' Flexible heuristics miner dependency type
 #'
 #' @param threshold A dependency threshold, usually in the interval `[0,1]`, filtering out dependencies below the threshold.
+#' @param threshold_l1 A dependency threshold, usually in the interval `[0,1]`, filtering out self-loop dependencies below the threshold.
+#' @param threshold_l2 A dependency threshold, usually in the interval `[0,1]`, filtering out length-two loop dependencies below the threshold.
 #' @param all_connected If `TRUE` the best antecedent and consequent (as determined by the dependency measure) are going to be added regardless of the `threshold` value.
 #' @param precedence A precedence matrix overriding the default matrix generated from the event log. For example, created from a bupaR event log using (\code{\link{precedence_matrix_absolute}}).
 #' @param precedence_lenght_two_loops A precedence matrix of length two loop patterns (aba) overriding the default matrix generated from the event log. For example, created from a bupaR event log using (\code{\link{precedence_matrix_length_two_loops}}).
@@ -14,6 +16,8 @@
 #'                   type = dependency_type_fhm(all_connected = TRUE))
 #'
 dependency_type_fhm <- function(threshold = 0.9,
+                                threshold_l1 = threshold,
+                                threshold_l2 = threshold,
                                 all_connected = FALSE,
                                 precedence = NULL,
                                 precedence_lenght_two_loops = NULL) {
@@ -50,11 +54,14 @@ dependency_type_fhm <- function(threshold = 0.9,
       mat <- (mat_loops - t_mat_loops) / (mat_loops + t_mat_loops + 1)
     }
 
+    # Filter by threshold
+    mat[mat < threshold_l2] <- 0.0
+
     # L1 loops
     diag(mat) <- diag(mat_pre) / (diag(mat_pre) + 1)
 
     # Filter by threshold
-    mat[mat < threshold] <- 0.0
+    mat[mat < threshold_l1] <- 0.0
 
     # Filter out L2 loops already in L1 loops above threshold
     l1_vals <- diag(mat)
