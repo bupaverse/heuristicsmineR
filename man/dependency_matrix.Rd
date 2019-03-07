@@ -4,20 +4,15 @@
 \alias{dependency_matrix}
 \title{Create a dependency matrix}
 \usage{
-dependency_matrix(eventlog = NULL, precedence = NULL,
-  precedence_lenght_two_loops = NULL, threshold = 0.9,
-  type = c("FHM"))
+dependency_matrix(eventlog = NULL, type = dependency_type_fhm(threshold
+  = threshold), threshold = 0.9)
 }
 \arguments{
 \item{eventlog}{A bupaR event log, may be NULL when a precedence matrix is provided.}
 
-\item{precedence}{A precedence matrix as data frame, for example, created from a bupaR event log using (\code{\link{precedence_matrix_absolute}}).}
-
-\item{precedence_lenght_two_loops}{A precedence matrix of length two loop patterns (aba) as data frame, for example, created from a bupaR event log using (\code{\link{precedence_matrix_length_two_loops}}).}
+\item{type}{Which approach to use for calculation of the dependency matrix. Currently only (\code{\link{dependency_type_fhm}}) is available.}
 
 \item{threshold}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out dependencies below the threshold.}
-
-\item{type}{Which approach to use for calculation of the dependency matrix. Currently only \code{FHM} available.}
 }
 \value{
 A square matrix with class \code{dependency_matrix} containing the computed dependency values between all activities.

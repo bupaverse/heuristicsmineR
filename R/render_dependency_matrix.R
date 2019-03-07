@@ -32,40 +32,46 @@ render_dependency_matrix <- function(dependencies,
 	activities <- colnames(dependencies)
   dependencies <- as.data.frame(dependencies)
 
-  base_nodes <- data.frame(act = activities, stringsAsFactors = FALSE) %>%
-    mutate(id = 1:n())
+  if (nrow(dependencies) > 0) {
 
-  nodes <- base_nodes %>%
-			mutate(shape = if_end(act, "circle", "rectangle"),
-				   fontcolor = if_end(act, if_start(act, "chartreuse4","brown4"), "black"),
-				   color = if_end(act, if_start(act, "chartreuse4","brown4"), "black"),
-				   label = act)
+    base_nodes <- data.frame(act = activities, stringsAsFactors = FALSE) %>%
+      mutate(id = 1:n())
 
-  create_node_df(n = nrow(nodes),
-				   label = nodes$label,
-				   shape = nodes$shape,
-				   style = "",
-				   fontcolor = nodes$fontcolor,
-				   color = nodes$color,
-				   penwidth = 1.5,
-				   fixedsize = FALSE) -> nodes_df
+    nodes <- base_nodes %>%
+  			mutate(shape = if_end(act, "circle", "rectangle"),
+  				   fontcolor = if_end(act, if_start(act, "chartreuse4","brown4"), "black"),
+  				   color = if_end(act, if_start(act, "chartreuse4","brown4"), "black"),
+  				   label = act)
 
-  suppressWarnings( # factor / char warning
-    edges_df <- dependencies %>%
-      				left_join(base_nodes, by = c("antecedent" = "act")) %>%
-  					 	rename(from_id = id) %>%
-      			  left_join(base_nodes, by = c("consequent" = "act")) %>%
-  					 	rename(to_id = id)
-  )
+    create_node_df(n = nrow(nodes),
+  				   label = nodes$label,
+  				   shape = nodes$shape,
+  				   style = "",
+  				   fontcolor = nodes$fontcolor,
+  				   color = nodes$color,
+  				   penwidth = 1.5,
+  				   fixedsize = FALSE) -> nodes_df
 
-	create_edge_df(from = edges_df$from_id,
-				   to = edges_df$to_id,
-				   color = "black",
-				   label =  round(edges_df$dep, 2)) -> edges_df
+    suppressWarnings( # factor / char warning
+      edges_df <- dependencies %>%
+        				left_join(base_nodes, by = c("antecedent" = "act")) %>%
+    					 	rename(from_id = id) %>%
+        			  left_join(base_nodes, by = c("consequent" = "act")) %>%
+    					 	rename(to_id = id)
+    )
 
-	create_graph(nodes_df, edges_df) %>%
-		add_global_graph_attrs(attr = "rankdir", value = rankdir, attr_type = "graph") %>%
-		add_global_graph_attrs(attr = "layout", value = layout, attr_type = "graph") -> graph
+  	create_edge_df(from = edges_df$from_id,
+  				   to = edges_df$to_id,
+  				   color = "black",
+  				   label =  round(edges_df$dep, 2)) -> edges_df
+
+  	create_graph(nodes_df, edges_df) %>%
+  		add_global_graph_attrs(attr = "rankdir", value = rankdir, attr_type = "graph") %>%
+  		add_global_graph_attrs(attr = "layout", value = layout, attr_type = "graph") -> graph
+
+  } else {
+    create_graph() -> graph
+  }
 
 	if(render == T) {
 		graph %>% render_graph() -> graph
