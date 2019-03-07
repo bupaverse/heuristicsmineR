@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' dependency_matrix(L_heur_1,
-#'                   type = dependency_type_fhm(all_connected = TRUE))
+#'                   dependency_type = dependency_type_fhm(all_connected = TRUE))
 #'
 dependency_type_fhm <- function(threshold = 0.9,
                                 threshold_l1 = threshold,
