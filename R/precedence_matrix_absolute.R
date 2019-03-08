@@ -18,7 +18,9 @@ precedence_matrix <- function(eventlog, type = c("absolute","relative","relative
 
   m <- precedence_matrix_absolute(eventlog)
 
-  if (type == "relative") {
+  if (type == "absolute") {
+    # nothing
+  } else if (type == "relative") {
     m %>%
       mutate(rel_n = n / sum(n)) -> m
 
