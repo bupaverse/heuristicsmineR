@@ -1,5 +1,5 @@
 #' @export
-`as.matrix.precedence-matrix` <- function(x, rownames=NULL, rownames.value=NULL, ...) {
+as.matrix.process_matrix <- function(x, rownames=NULL, rownames.value=NULL, ...) {
 
   if (is.factor(x$antecedent) && is.factor(x$consequent)) {
     # our own precedence matrix returns factors

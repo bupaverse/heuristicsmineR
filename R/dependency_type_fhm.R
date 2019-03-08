@@ -25,6 +25,7 @@ dependency_type_fhm <- function(threshold = 0.9,
   dependency_type <- "fhm"
   class(dependency_type) <- c("dependency_type", class(dependency_type))
   attr(dependency_type, "name") <- "Flexible Heuristics Miner"
+
   attr(dependency_type, "compute") <- function(eventlog) {
 
     . <- act <- antecedent <- consequent <- dep <- a_to_c  <- c_to_a <- n.x <- n.y <- na.omit <- NULL
@@ -43,13 +44,13 @@ dependency_type_fhm <- function(threshold = 0.9,
     }
 
     # Prepare precedence matrix
-    mat_pre <-`as.matrix.precedence-matrix`(precedence)
+    mat_pre <-as.matrix(precedence)
     acts <- colnames(mat_pre)
     t_mat_pre <- t(mat_pre)
 
     # L2 loops
     if (!is.null(precedence_lenght_two_loops)) {
-      mat_loops <-`as.matrix.precedence-matrix`(precedence_lenght_two_loops)
+      mat_loops <- as.matrix(precedence_lenght_two_loops)
       t_mat_loops <- t(mat_loops)
       mat <- (mat_loops - t_mat_loops) / (mat_loops + t_mat_loops + 1)
     }

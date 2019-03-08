@@ -17,12 +17,10 @@ This function computes the precedence matrix directly in C++ for efficiency.
 Only the type \code{absolute} of (\code{\link[processmapR]{precedence_matrix}}) is supported.
 }
 \examples{
-\dontrun{
 library(eventdataR)
 data(traffic_fines)
 m <- precedence_matrix_absolute(traffic_fines)
 print(m)
 as.matrix(m)
-}
 
 }

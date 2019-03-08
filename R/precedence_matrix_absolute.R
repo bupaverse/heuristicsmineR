@@ -1,3 +1,54 @@
+
+#' Precendence Matrix
+#'
+#' Construct a precendence matrix, showing how activities are followed by each other.
+#'
+#' @inheritParams processmapR::precedence_matrix
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' library(eventdataR)
+#' data(patients)
+#' precedence_matrix(patients)
+#' }
+precedence_matrix <- function(eventlog, type = c("absolute","relative","relative-antecedent","relative-consequent", "relative-case")) {
+	stopifnot("eventlog" %in% class(eventlog))
+
+  m <- precedence_matrix_absolute(eventlog)
+
+  if (type == "relative") {
+    m %>%
+      mutate(rel_n = n / sum(n)) -> m
+
+  }
+  else if (type == "relative-antecedent") {
+    m %>%
+      group_by(antecedent) %>%
+      mutate(rel_antecedent = n / sum(n)) %>%
+      ungroup() -> m
+
+  }
+  else if (type == "relative-consequent") {
+    m %>%
+      group_by(consequent) %>%
+      mutate(rel_consequent = n / sum(n)) %>%
+      ungroup() -> m
+
+  } else {
+    m <- processmapR::precedence_matrix(eventlog, type)
+  }
+
+  if (!("process_matrix" %in% class(m))) {
+    class(m) <- c("process_matrix", class(m))
+  }
+  attr(type, "perspective") <- "frequency"
+  attr(m, "matrix_type") <- type
+
+  m
+}
+
 #' Precendence Matrix
 #'
 #' Construct a precendence matrix, showing how activities are followed by each other.
@@ -8,13 +59,11 @@
 #' @param lead The distance between activities following/preceding each other.
 #'
 #' @examples
-#' \dontrun{
 #' library(eventdataR)
 #' data(traffic_fines)
 #' m <- precedence_matrix_absolute(traffic_fines)
 #' print(m)
 #' as.matrix(m)
-#' }
 #'
 #' @export precedence_matrix_absolute
 precedence_matrix_absolute <- function(eventlog, lead = 1) {
@@ -30,7 +79,9 @@ precedence_matrix_absolute_impl <- function(simplelog, lead = 1) {
                                     simplelog$activity_id,
                                     lead))
 
-  class(mat) <- c("precedence-matrix", class(mat))
-  attr(mat, "matrix_type") <- "absolute"
+  class(mat) <- c("process_matrix", class(mat))
+  type <- "absolute"
+  attr(type, "perspective") <- "frequency"
+  attr(mat, "matrix_type") <- type
   return(mat)
 }
