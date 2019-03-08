@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Length Two Loop Precedence Matrix — precedence_matrix_length_two_loops • heuristicsmineR</title>
+<title>Flexible heuristics miner dependency type — dependency_type_fhm • heuristicsmineR</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Length Two Loop Precedence Matrix — precedence_matrix_length_two_loops" />
+<meta property="og:title" content="Flexible heuristics miner dependency type — dependency_type_fhm" />
 
-<meta property="og:description" content="Construct a precedence matrix counting how often pattern aba occurs." />
+<meta property="og:description" content="Flexible heuristics miner dependency type" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,44 +102,77 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Length Two Loop Precedence Matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/fmannhardt/heuristicsmineR/blob/master/R/precedence_matrix_length_two_loop.R'><code>R/precedence_matrix_length_two_loop.R</code></a></small>
-    <div class="hidden name"><code>precedence_matrix_length_two_loops.Rd</code></div>
+    <h1>Flexible heuristics miner dependency type</h1>
+    <small class="dont-index">Source: <a href='https://github.com/fmannhardt/heuristicsmineR/blob/master/R/dependency_type_fhm.R'><code>R/dependency_type_fhm.R</code></a></small>
+    <div class="hidden name"><code>dependency_type_fhm.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Construct a precedence matrix counting how often pattern <code>aba</code> occurs.</p>
+    <p>Flexible heuristics miner dependency type</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>precedence_matrix_length_two_loops</span>(<span class='no'>eventlog</span>)</pre>
+    <pre class="usage"><span class='fu'>dependency_type_fhm</span>(<span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>threshold_l1</span> <span class='kw'>=</span> <span class='no'>threshold</span>,
+  <span class='kw'>threshold_l2</span> <span class='kw'>=</span> <span class='no'>threshold</span>, <span class='kw'>all_connected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>precedence</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>precedence_lenght_two_loops</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>eventlog</th>
-      <td><p>The event log object to be used.</p></td>
+      <th>threshold</th>
+      <td><p>A dependency threshold, usually in the interval <code>[0,1]</code>, filtering out dependencies below the threshold.</p></td>
+    </tr>
+    <tr>
+      <th>threshold_l1</th>
+      <td><p>A dependency threshold, usually in the interval <code>[0,1]</code>, filtering out self-loop dependencies below the threshold.</p></td>
+    </tr>
+    <tr>
+      <th>threshold_l2</th>
+      <td><p>A dependency threshold, usually in the interval <code>[0,1]</code>, filtering out length-two loop dependencies below the threshold.</p></td>
+    </tr>
+    <tr>
+      <th>all_connected</th>
+      <td><p>If <code>TRUE</code> the best antecedent and consequent (as determined by the dependency measure) are going to be added regardless of the <code>threshold</code> value.</p></td>
+    </tr>
+    <tr>
+      <th>precedence</th>
+      <td><p>A precedence matrix overriding the default matrix generated from the event log. For example, created from a bupaR event log using (<code><a href='precedence_matrix_absolute.html'>precedence_matrix_absolute</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>precedence_lenght_two_loops</th>
+      <td><p>A precedence matrix of length two loop patterns (aba) overriding the default matrix generated from the event log. For example, created from a bupaR event log using (<code><a href='precedence_matrix_length_two_loops.html'>precedence_matrix_length_two_loops</a></code>).</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A dependency type.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>eventdataR</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>traffic_fines</span>)
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>precedence_matrix_length_two_loop</span>(<span class='no'>traffic_fines</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>m</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>as.matrix</a></span>(<span class='no'>m</span>)
-<span class='co'># }</span><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'><a href='dependency_matrix.html'>dependency_matrix</a></span>(<span class='no'>L_heur_1</span>,
+                  <span class='kw'>dependency_type</span> <span class='kw'>=</span> <span class='fu'>dependency_type_fhm</span>(<span class='kw'>all_connected</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;           consequent
+#&gt; antecedent         a         b         c         d         e   End Start
+#&gt;      a     0.0000000 0.9166667 0.9166667 0.9285714 0.0000000 0.000     0
+#&gt;      b     0.0000000 0.0000000 0.0000000 0.0000000 0.9166667 0.000     0
+#&gt;      c     0.0000000 0.0000000 0.0000000 0.0000000 0.9166667 0.000     0
+#&gt;      d     0.0000000 0.0000000 0.0000000 0.0000000 0.9285714 0.000     0
+#&gt;      e     0.0000000 0.0000000 0.0000000 0.0000000 0.0000000 0.975     0
+#&gt;      End   0.0000000 0.0000000 0.0000000 0.0000000 0.0000000 0.000     0
+#&gt;      Start 0.9756098 0.0000000 0.0000000 0.0000000 0.0000000 0.000     0
+#&gt; attr(,"class")
+#&gt; [1] "dependency_matrix" "matrix"           </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#value">Value</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

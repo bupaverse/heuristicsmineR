@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">heuristicsmineR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic usage example:</p>
+<p>This is a basic usage example discovering the Causal net of the <code>patients</code> event log:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(heuristicsmineR)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(eventdataR)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(patients)</a>
@@ -90,6 +90,7 @@
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># Causal graph / Heuristics net</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(patients)</a></code></pre></div>
 <p><img src="reference/figures/patients.png"></p>
+<p>This discovers the Causal net of the built-in <code>L_heur_1</code> event log that was proposed in the <a href="http://www.processmining.org/book/start">Process Mining book</a>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Efficient precedence matrix</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">m &lt;-<span class="st"> </span><span class="kw"><a href="reference/precedence_matrix_absolute.html">precedence_matrix_absolute</a></span>(L_heur_<span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(m)</a>
@@ -98,14 +99,18 @@
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="reference/dependency_matrix.html">dependency_matrix</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a></code></pre></div>
 <p><img src="reference/figures/L_heur_1_example.png"></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Sepsis log</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(sepsis, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># Convert to Petri net</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(petrinetR)</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">cn &lt;-<span class="st"> </span><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">pn &lt;-<span class="st"> </span><span class="kw"><a href="reference/as.petrinet.html">as.petrinet</a></span>(cn)</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">render_PN</span>(pn)</a></code></pre></div>
+<p>The Causal net can be converted to a Petri net (note that there are some uneccesary invisible transition that are not yet removed):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Convert to Petri net</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(petrinetR)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">cn &lt;-<span class="st"> </span><span class="kw"><a href="reference/causal_net.html">causal_net</a></span>(L_heur_<span class="dv">1</span>, <span class="dt">threshold =</span> <span class="fl">.7</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">pn &lt;-<span class="st"> </span><span class="kw"><a href="reference/as.petrinet.html">as.petrinet</a></span>(cn)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">render_PN</span>(pn)</a></code></pre></div>
+<p><img src="reference/figures/L_heur_1_petrinet.png"></p>
+<p>The Petri net can be further used, for example for conformance checking through the <a href="https://github.com/fmannhardt/pm4py">pm4py</a> package (Note that the final marking is currently not saved in petrinetR):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(pm4py)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">conformance_alignment</span>(L_heur_<span class="dv">1</span>, pn, </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                      <span class="dt">initial_marking =</span> pn<span class="op">$</span>marking, </a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">                      <span class="dt">final_marking =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"p_in_6"</span>))</a></code></pre></div>
 </div>
 </div>
   </div>

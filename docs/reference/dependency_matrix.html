@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">heuristicsmineR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -113,9 +113,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>dependency_matrix</span>(<span class='kw'>eventlog</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>precedence</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>precedence_lenght_two_loops</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"FHM"</span>))</pre>
+    <pre class="usage"><span class='fu'>dependency_matrix</span>(<span class='kw'>eventlog</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dependency_type</span> <span class='kw'>=</span> <span class='fu'><a href='dependency_type_fhm.html'>dependency_type_fhm</a></span>(<span class='kw'>threshold</span> <span class='kw'>=</span> <span class='no'>threshold</span>, <span class='no'>...</span>),
+  <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -125,20 +125,16 @@
       <td><p>A bupaR event log, may be NULL when a precedence matrix is provided.</p></td>
     </tr>
     <tr>
-      <th>precedence</th>
-      <td><p>A precedence matrix as data frame, for example, created from a bupaR event log using (<code><a href='precedence_matrix_absolute.html'>precedence_matrix_absolute</a></code>).</p></td>
-    </tr>
-    <tr>
-      <th>precedence_lenght_two_loops</th>
-      <td><p>A precedence matrix of length two loop patterns (aba) as data frame, for example, created from a bupaR event log using (<code><a href='precedence_matrix_length_two_loops.html'>precedence_matrix_length_two_loops</a></code>).</p></td>
+      <th>dependency_type</th>
+      <td><p>Which approach to use for calculation of the dependency matrix. Currently only (<code><a href='dependency_type_fhm.html'>dependency_type_fhm</a></code>) is available.</p></td>
     </tr>
     <tr>
       <th>threshold</th>
       <td><p>A dependency threshold, usually in the interval <code>[0,1]</code>, filtering out dependencies below the threshold.</p></td>
     </tr>
     <tr>
-      <th>type</th>
-      <td><p>Which approach to use for calculation of the dependency matrix. Currently only <code>FHM</code> available.</p></td>
+      <th>...</th>
+      <td><p>Parameters forwarded to (<code><a href='dependency_type_fhm.html'>dependency_type_fhm</a></code>).</p></td>
     </tr>
     </table>
     
