@@ -8,8 +8,8 @@
 #' @export
 #' @import ggplot2
 plot.dependency_matrix <- function(x, ...) {
-	antecedent <- NULL
-	consequent <- NULL
+
+  antecedent <- consequent <- dep <- NULL
 
 	x <- as.data.frame(x)
 

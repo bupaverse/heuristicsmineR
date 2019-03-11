@@ -1,3 +1,7 @@
+# heuristicsmineR 0.1.2
+
+* Some performance improvements
+
 # heuristicsmineR 0.1.1
 
 * Added causal nets with frequencies and bindings

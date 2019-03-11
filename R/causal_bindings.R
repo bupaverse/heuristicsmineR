@@ -24,7 +24,7 @@ causal_bindings <- function(eventlog,
   stopifnot("eventlog" %in% class(eventlog))
   stopifnot("dependency_matrix" %in% class(dependencies))
 
-  base <- base_precedence(eventlog)
+  base <- base_precedence_simple(eventlog)
 
   candidates <- build_candidates(dependencies)
   in_acts <- candidates$in_acts

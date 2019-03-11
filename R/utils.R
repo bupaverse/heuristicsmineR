@@ -4,6 +4,8 @@
 #
 
 #' @importFrom rlang sym
+#' @importFrom data.table data.table
+#' @importFrom data.table :=
 #' @import dplyr
 NULL
 
@@ -35,13 +37,11 @@ reduce_simple_eventlog <- function(eventlog) {
              activity_instance_id = !!activity_instance_id_(eventlog))
 }
 
-base_precedence <- function(eventlog) {
+base_precedence_simple <- function(eventlog) {
 
   .order <- ACTIVITY_CLASSIFIER_ <- ACTIVITY_INSTANCE_CLASSIFIER_ <-
-  CASE_CLASSIFIER_ <- TIMESTAMP_CLASSIFIER_ <- act <- binding <- binding_input <-
-  binding_output <- bindings_input <- bindings_output <- case <- color_level <-
-  end_time <- from_id <- label <- min_order <- n.x <- n.y <- node_id.x <- node_id.y <-
-  start_time <- NULL
+  CASE_CLASSIFIER_ <- TIMESTAMP_CLASSIFIER_ <- act <- next_act <- case <-
+  from_id <- label <- node_id.x <- node_id.y <- start_time <- end_time <- NULL
 
 	eventlog <- ungroup_eventlog(eventlog)
 
@@ -53,62 +53,59 @@ base_precedence <- function(eventlog) {
 			   CASE_CLASSIFIER_ = !!case_id_(eventlog),
 			   TIMESTAMP_CLASSIFIER_ = !!timestamp_(eventlog),
 			   .order) %>%
-		group_by(ACTIVITY_CLASSIFIER_, ACTIVITY_INSTANCE_CLASSIFIER_, CASE_CLASSIFIER_) -> grouped_log
-
-	grouped_log %>% summarize(start_time = min(TIMESTAMP_CLASSIFIER_),
-							  end_time = max(TIMESTAMP_CLASSIFIER_),
-							  min_order = min(.order)) -> base_log
+	  arrange(CASE_CLASSIFIER_, TIMESTAMP_CLASSIFIER_, .order) %>%
+	  # this does not capture the start timestamp
+	  distinct(CASE_CLASSIFIER_, ACTIVITY_CLASSIFIER_, ACTIVITY_INSTANCE_CLASSIFIER_, .keep_all = TRUE) -> base_log
 
 	base_log %>%
 		group_by(CASE_CLASSIFIER_) %>%
-		arrange(start_time, min_order) -> points_temp
+		arrange(TIMESTAMP_CLASSIFIER_, .order) -> points_temp
 
 	points_temp %>%
 		slice(1) %>%
 		mutate(ACTIVITY_CLASSIFIER_ = "Start",
-			   end_time = start_time,
-			   min_order = -Inf) -> end_points_start
+			   .order = -Inf) -> end_points_start
 	points_temp %>%
 		slice(n()) %>%
 		mutate(ACTIVITY_CLASSIFIER_ = "End",
-			   start_time = end_time,
-			   min_order = Inf) -> end_points_end
+			   .order = Inf) -> end_points_end
 
 	#add endpoints to base log
 
 	suppressWarnings(
-		bind_rows(end_points_start, end_points_end, base_log) -> base_log
+		bind_rows(end_points_start, end_points_end, base_log) %>%
+		  ungroup() -> base_log
 	)
 
 	#create base nodes list
 
 	base_log %>%
-		ungroup() %>%
 		distinct(ACTIVITY_CLASSIFIER_) %>%
 		mutate(node_id = 1:n()) -> base_nodes
 
 	#create base precedence list
 
-	suppressWarnings(base_log %>%
-					 	ungroup() %>%
-					 	mutate(ACTIVITY_CLASSIFIER_ = ordered(ACTIVITY_CLASSIFIER_, levels = c("Start", as.character(sort(activity_labels(eventlog))), "End"))) %>%
-					 	group_by(CASE_CLASSIFIER_) %>%
-					 	arrange(start_time, min_order) %>%
-					 	mutate(next_act = lead(ACTIVITY_CLASSIFIER_),
-					 		   next_start_time = lead(start_time),
-					 		   next_end_time = lead(end_time)) %>%
-					 	full_join(base_nodes, by = c("ACTIVITY_CLASSIFIER_" = "ACTIVITY_CLASSIFIER_")) %>%
-					 	full_join(base_nodes, by = c("next_act" = "ACTIVITY_CLASSIFIER_")) %>%
-					 	ungroup() %>%
-					 	select(everything(),
-					 		   #-n.x, -n.y,
-					 		   from_id = node_id.x,
-					 		   to_id = node_id.y) -> base_precedence)
+	data.table::setDT(base_log, key = c("TIMESTAMP_CLASSIFIER_", ".order"))
+	base_log[, ACTIVITY_CLASSIFIER_ := ordered(ACTIVITY_CLASSIFIER_, levels = c("Start", as.character(sort(activity_labels(eventlog))), "End"))
+	      ][, next_act := data.table::shift(ACTIVITY_CLASSIFIER_, 1, type = "lead"), by = CASE_CLASSIFIER_]
+
+	suppressWarnings(
+  	base_log %>%
+  	  as_tibble() %>%
+  	 	full_join(base_nodes, by = c("ACTIVITY_CLASSIFIER_" = "ACTIVITY_CLASSIFIER_")) %>%
+  	 	full_join(base_nodes, by = c("next_act" = "ACTIVITY_CLASSIFIER_")) %>%
+  	 	select(everything(),
+  	 		   from_id = node_id.x,
+  	 		   to_id = node_id.y) -> base_precedence
+  )
 
 	base_precedence %>%
+	  mutate(end_time = TIMESTAMP_CLASSIFIER_) %>%
 		rename(case = CASE_CLASSIFIER_,
-			   aid = ACTIVITY_INSTANCE_CLASSIFIER_,
-			   act = ACTIVITY_CLASSIFIER_) -> base_precedence
+		       aid = ACTIVITY_INSTANCE_CLASSIFIER_,
+		       act = ACTIVITY_CLASSIFIER_,
+		       start_time = TIMESTAMP_CLASSIFIER_,
+		       min_order = .order) -> base_precedence
 
 	base_precedence
 }

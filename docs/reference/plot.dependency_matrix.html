@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generic print function for a dependency matrix — print.dependency_matrix • heuristicsmineR</title>
+<title>Dependency matrix plot — plot.dependency_matrix • heuristicsmineR</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Generic print function for a dependency matrix — print.dependency_matrix" />
+<meta property="og:title" content="Dependency matrix plot — plot.dependency_matrix" />
 
-<meta property="og:description" content="Generic print function for a dependency matrix" />
+<meta property="og:description" content="Visualize a dependency matrix. A generic plot function for dependency matrices." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,32 +102,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generic print function for a dependency matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/fmannhardt/heuristicsmineR/blob/master/R/print.dependency_matrix.R'><code>R/print.dependency_matrix.R</code></a></small>
-    <div class="hidden name"><code>print.dependency_matrix.Rd</code></div>
+    <h1>Dependency matrix plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/fmannhardt/heuristicsmineR/blob/master/R/plot.dependency_matrix.R'><code>R/plot.dependency_matrix.R</code></a></small>
+    <div class="hidden name"><code>plot.dependency_matrix.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Generic print function for a dependency matrix</p>
+    <p>Visualize a dependency matrix. A generic plot function for dependency matrices.</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for dependency_matrix</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>dependency matrix object</p></td>
+      <td><p>Dependency matrix</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional Arguments</p></td>
+      <td><p>Additional paramters</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A ggplot object, which can be customized further, if deemed necessary.</p>
     
 
   </div>
@@ -135,7 +139,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

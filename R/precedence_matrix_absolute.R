@@ -14,6 +14,9 @@
 #' precedence_matrix(patients)
 #' }
 precedence_matrix <- function(eventlog, type = c("absolute","relative","relative-antecedent","relative-consequent", "relative-case")) {
+
+  antecedent <- consequent <- NULL
+
 	stopifnot("eventlog" %in% class(eventlog))
 
   m <- precedence_matrix_absolute(eventlog)
