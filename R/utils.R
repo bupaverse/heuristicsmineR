@@ -86,7 +86,8 @@ base_precedence_simple <- function(eventlog) {
 	#create base precedence list
 
 	data.table::setDT(base_log, key = c("TIMESTAMP_CLASSIFIER_", ".order"))
-	base_log[, ACTIVITY_CLASSIFIER_ := ordered(ACTIVITY_CLASSIFIER_, levels = c("Start", as.character(sort(activity_labels(eventlog))), "End"))
+	base_log[, ACTIVITY_CLASSIFIER_ := ordered(ACTIVITY_CLASSIFIER_,
+	                                           levels = c("Start", as.character(sort(activity_labels(eventlog))), "End"))
 	      ][, next_act := data.table::shift(ACTIVITY_CLASSIFIER_, 1, type = "lead"), by = CASE_CLASSIFIER_]
 
 	suppressWarnings(

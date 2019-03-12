@@ -16,7 +16,7 @@ plot.dependency_matrix <- function(x, ...) {
 	x %>%
 		ggplot(aes(antecedent, consequent)) +
 		geom_raster(aes(fill = dep)) +
-		geom_text(aes(label = round(dep*100, 2)), color = "white", fontface = "bold") +
+		geom_text(aes(label = round(dep, 2)), color = "white", fontface = "bold") +
 		ggthemes::scale_fill_continuous_tableau(name = "Dependency measure", limits = c(0,1)) +
 		theme_light() +
 		coord_flip() +
