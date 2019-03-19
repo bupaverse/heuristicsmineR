@@ -15,6 +15,7 @@
 #'  Can be left NULL for more control if parameters `dependencies` and `bindings` are provided directly.
 #' @param dependencies A dependency matrix created for the event log, for example, by \code{\link{dependency_matrix}}.
 #' @param threshold The dependency threshold to be used when using the default dependency matrix computation.
+#' @param threshold_frequency The frequency threshold to be used when using the default dependency matrix computation.
 #' @param bindings Causal bindings created by \code{\link{causal_bindings}}.
 #' @param type A causal map type. Currently only function \code{\link{causal_frequency}} is supported.
 #' @param type_edges A causal map type to be used for edges only.
@@ -52,10 +53,12 @@
 causal_net <- function(eventlog = NULL,
                        dependencies = dependency_matrix(eventlog = eventlog,
                                                         threshold = threshold,
+                                                        threshold_frequency = threshold_frequency,
                                                         ...),
                        bindings = causal_bindings(eventlog,
                                                   dependencies),
                        threshold = 0.9,
+                       threshold_frequency = 0,
                        type = causal_frequency("absolute"),
       								 type_nodes = type,
       								 type_edges = type,

@@ -5,8 +5,9 @@
 \title{Create a Causal net (or Heuristics net)}
 \usage{
 causal_net(eventlog = NULL, dependencies = dependency_matrix(eventlog =
-  eventlog, threshold = threshold, ...),
-  bindings = causal_bindings(eventlog, dependencies), threshold = 0.9,
+  eventlog, threshold = threshold, threshold_frequency =
+  threshold_frequency, ...), bindings = causal_bindings(eventlog,
+  dependencies), threshold = 0.9, threshold_frequency = 0,
   type = causal_frequency("absolute"), type_nodes = type,
   type_edges = type, ...)
 }
@@ -19,6 +20,8 @@ Can be left NULL for more control if parameters \code{dependencies} and \code{bi
 \item{bindings}{Causal bindings created by \code{\link{causal_bindings}}.}
 
 \item{threshold}{The dependency threshold to be used when using the default dependency matrix computation.}
+
+\item{threshold_frequency}{The frequency threshold to be used when using the default dependency matrix computation.}
 
 \item{type}{A causal map type. Currently only function \code{\link{causal_frequency}} is supported.}
 

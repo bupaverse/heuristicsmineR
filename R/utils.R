@@ -29,6 +29,7 @@ reduce_simple_eventlog <- function(eventlog) {
 
   eventlog %>%
       as.data.frame() %>%
+      droplevels() %>%
       arrange(!!case_id_(eventlog), !!timestamp_(eventlog), .order) %>%
       # relies on dplyr taking the first distinct value
       distinct(!!case_id_(eventlog), !!activity_id_(eventlog), !!activity_instance_id_(eventlog)) %>%
@@ -47,7 +48,7 @@ base_precedence_simple <- function(eventlog) {
 
 	eventlog %>%
 		as.data.frame() %>%
-		droplevels %>%
+		droplevels() %>%
 		select(ACTIVITY_CLASSIFIER_ = !!activity_id_(eventlog),
 			   ACTIVITY_INSTANCE_CLASSIFIER_ = !!activity_instance_id_(eventlog),
 			   CASE_CLASSIFIER_ = !!case_id_(eventlog),
