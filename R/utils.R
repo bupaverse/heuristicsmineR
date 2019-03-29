@@ -38,6 +38,33 @@ reduce_simple_eventlog <- function(eventlog) {
              activity_instance_id = !!activity_instance_id_(eventlog))
 }
 
+reduce_activitylog <- function(eventlog) {
+  .order <- lifecycle <- min_order <- max_order <- NULL
+
+	eventlog %>%
+		as.data.frame() %>%
+		droplevels %>%
+		select(activity_id = !!activity_id_(eventlog),
+			   activity_instance_id = !!activity_instance_id_(eventlog),
+			   case_id = !!case_id_(eventlog),
+			   timestamp = !!timestamp_(eventlog),
+			   .order) -> prepared_log
+
+	data.table::setDT(prepared_log)
+	prepared_log[, list(start = min(timestamp),
+						complete = max(timestamp),
+						min_order = min(.order),
+						max_order = max(.order)),
+				 by = c("activity_id", "activity_instance_id", "case_id")] %>%
+	  data.table::melt(measure.vars = c("start", "complete"), variable.name = "lifecycle", value.name="timestamp") -> reduced_log
+
+	reduced_log[, .order := if_else(lifecycle == "start", min_order, max_order)][
+    , c("min_order","max_order") := NULL]
+	data.table::setorderv(reduced_log, c("case_id", "timestamp", ".order"))
+
+	return(reduced_log)
+}
+
 base_precedence_simple <- function(eventlog) {
 
   .order <- ACTIVITY_CLASSIFIER_ <- ACTIVITY_INSTANCE_CLASSIFIER_ <-

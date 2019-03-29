@@ -13,12 +13,8 @@ precedence_matrix_length_two_loops(eventlog)
 Construct a precedence matrix counting how often pattern \code{aba} occurs.
 }
 \examples{
-\dontrun{
-library(eventdataR)
-data(traffic_fines)
-m <- precedence_matrix_length_two_loop(traffic_fines)
+m <- precedence_matrix_length_two_loops(hospital_multi_perspective)
 print(m)
 as.matrix(m)
-}
 
 }

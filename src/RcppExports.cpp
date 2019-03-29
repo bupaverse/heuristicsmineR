@@ -17,6 +17,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// count_parallel_lifecycle
+DataFrame count_parallel_lifecycle(CharacterVector cases, IntegerVector activities, IntegerVector lifecycle);
+RcppExport SEXP _heuristicsmineR_count_parallel_lifecycle(SEXP casesSEXP, SEXP activitiesSEXP, SEXP lifecycleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type cases(casesSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type activities(activitiesSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type lifecycle(lifecycleSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_parallel_lifecycle(cases, activities, lifecycle));
+    return rcpp_result_gen;
+END_RCPP
+}
 // count_precedence
 DataFrame count_precedence(CharacterVector cases, IntegerVector activities, int lead);
 RcppExport SEXP _heuristicsmineR_count_precedence(SEXP casesSEXP, SEXP activitiesSEXP, SEXP leadSEXP) {
@@ -30,10 +43,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// count_precedence_lifecycle
+DataFrame count_precedence_lifecycle(CharacterVector cases, IntegerVector activities, IntegerVector lifecycle);
+RcppExport SEXP _heuristicsmineR_count_precedence_lifecycle(SEXP casesSEXP, SEXP activitiesSEXP, SEXP lifecycleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type cases(casesSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type activities(activitiesSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type lifecycle(lifecycleSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_precedence_lifecycle(cases, activities, lifecycle));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_heuristicsmineR_count_length_two_loops", (DL_FUNC) &_heuristicsmineR_count_length_two_loops, 2},
+    {"_heuristicsmineR_count_parallel_lifecycle", (DL_FUNC) &_heuristicsmineR_count_parallel_lifecycle, 3},
     {"_heuristicsmineR_count_precedence", (DL_FUNC) &_heuristicsmineR_count_precedence, 3},
+    {"_heuristicsmineR_count_precedence_lifecycle", (DL_FUNC) &_heuristicsmineR_count_precedence_lifecycle, 3},
     {NULL, NULL, 0}
 };
 

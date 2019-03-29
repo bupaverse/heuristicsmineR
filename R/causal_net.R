@@ -1,8 +1,3 @@
-#
-# Partly based on code from https://github.com/gertjanssenswillen/processmapR
-# (c) Hasselt University released under MIT license
-#
-
 #' Create a Causal net (or Heuristics net)
 #'
 #' Creates a Causal net, also known as Heuristics net. This is similar to a processmapR process map.
@@ -38,7 +33,7 @@
 #' d <- dependency_matrix(L_heur_1, threshold = .8)
 #' causal_net(dependencies = d,
 #'            bindings = causal_bindings(L_heur_1, d, "nearest"))
-#' \dontrun{
+#' \donttest{
 #' # The returned DiagrammeR object can be further augmented with
 #' # panning and zooming before rendering:
 #' causal_net(L_heur_1) %>%

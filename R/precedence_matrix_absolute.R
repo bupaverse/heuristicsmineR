@@ -1,18 +1,18 @@
-
 #' Precendence Matrix
 #'
 #' Construct a precendence matrix, showing how activities are followed by each other.
+#' This is a performance improved variant of \code{\link[processmapR]{precedence_matrix}}
+#' in the processmapR package.
 #'
 #' @inheritParams processmapR::precedence_matrix
 #'
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' library(eventdataR)
-#' data(patients)
-#' precedence_matrix(patients)
-#' }
+#' m <- precedence_matrix(hospital_multi_perspective, type = "absolute")
+#' print(m)
+#' as.matrix(m)
+#'
 precedence_matrix <- function(eventlog, type = c("absolute","relative","relative-antecedent","relative-consequent", "relative-case")) {
 
   antecedent <- consequent <- NULL

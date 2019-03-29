@@ -1,3 +1,8 @@
+# heuristicsmineR 0.1.3
+
+* Bugfix for `all_connected` heuristics, which correctly ignores self-loops now.
+* Added frequency threshold as described in the Process Mining book.
+
 # heuristicsmineR 0.1.2
 
 * Some performance improvements

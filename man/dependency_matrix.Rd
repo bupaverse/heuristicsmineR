@@ -16,7 +16,7 @@ dependency_matrix(eventlog = NULL,
 
 \item{threshold}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out dependencies below the threshold.}
 
-\item{threshold_frequency}{A frequency threshold,}
+\item{threshold_frequency}{An absolute frequency threshold filtering dependencies which are observed infrequently.}
 
 \item{...}{Parameters forwarded to (\code{\link{dependency_type_fhm}}).}
 }

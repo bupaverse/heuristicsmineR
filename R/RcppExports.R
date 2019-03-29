@@ -5,7 +5,15 @@ count_length_two_loops <- function(cases, activities) {
     .Call(`_heuristicsmineR_count_length_two_loops`, cases, activities)
 }
 
+count_parallel_lifecycle <- function(cases, activities, lifecycle) {
+    .Call(`_heuristicsmineR_count_parallel_lifecycle`, cases, activities, lifecycle)
+}
+
 count_precedence <- function(cases, activities, lead) {
     .Call(`_heuristicsmineR_count_precedence`, cases, activities, lead)
+}
+
+count_precedence_lifecycle <- function(cases, activities, lifecycle) {
+    .Call(`_heuristicsmineR_count_precedence_lifecycle`, cases, activities, lifecycle)
 }
 
