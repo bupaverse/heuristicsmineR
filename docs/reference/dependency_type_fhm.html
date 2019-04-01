@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Flexible heuristics miner dependency type — dependency_type_fhm • heuristicsmineR</title>
+<title>Dependency type based on Flexible Heuristics Miner (FHM) — dependency_type_fhm • heuristicsmineR</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Flexible heuristics miner dependency type — dependency_type_fhm" />
+<meta property="og:title" content="Dependency type based on Flexible Heuristics Miner (FHM) — dependency_type_fhm" />
 
-<meta property="og:description" content="Flexible heuristics miner dependency type" />
+<meta property="og:description" content="Computes the dependencies based on the approach known as Flexible Heuristics Miner." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,26 +102,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Flexible heuristics miner dependency type</h1>
+    <h1>Dependency type based on Flexible Heuristics Miner (FHM)</h1>
     <small class="dont-index">Source: <a href='https://github.com/fmannhardt/heuristicsmineR/blob/master/R/dependency_type_fhm.R'><code>R/dependency_type_fhm.R</code></a></small>
     <div class="hidden name"><code>dependency_type_fhm.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Flexible heuristics miner dependency type</p>
+    <p>Computes the dependencies based on the approach known as Flexible Heuristics Miner.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>dependency_type_fhm</span>(<span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>threshold_l1</span> <span class='kw'>=</span> <span class='no'>threshold</span>,
-  <span class='kw'>threshold_l2</span> <span class='kw'>=</span> <span class='no'>threshold</span>, <span class='kw'>all_connected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>precedence</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>precedence_lenght_two_loops</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>dependency_type_fhm</span>(<span class='kw'>threshold_dependency</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+  <span class='kw'>threshold_l1</span> <span class='kw'>=</span> <span class='no'>threshold_dependency</span>,
+  <span class='kw'>threshold_l2</span> <span class='kw'>=</span> <span class='no'>threshold_dependency</span>, <span class='kw'>threshold_frequency</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>all_connected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>threshold</th>
+      <th>threshold_dependency</th>
       <td><p>A dependency threshold, usually in the interval <code>[0,1]</code>, filtering out dependencies below the threshold.</p></td>
     </tr>
     <tr>
@@ -133,22 +134,22 @@
       <td><p>A dependency threshold, usually in the interval <code>[0,1]</code>, filtering out length-two loop dependencies below the threshold.</p></td>
     </tr>
     <tr>
+      <th>threshold_frequency</th>
+      <td><p>An absolute frequency threshold filtering dependencies which are observed infrequently.</p></td>
+    </tr>
+    <tr>
       <th>all_connected</th>
       <td><p>If <code>TRUE</code> the best antecedent and consequent (as determined by the dependency measure) are going to be added regardless of the <code>threshold</code> value.</p></td>
-    </tr>
-    <tr>
-      <th>precedence</th>
-      <td><p>A precedence matrix overriding the default matrix generated from the event log. For example, created from a bupaR event log using (<code><a href='precedence_matrix_absolute.html'>precedence_matrix_absolute</a></code>).</p></td>
-    </tr>
-    <tr>
-      <th>precedence_lenght_two_loops</th>
-      <td><p>A precedence matrix of length two loop patterns (aba) overriding the default matrix generated from the event log. For example, created from a bupaR event log using (<code><a href='precedence_matrix_length_two_loops.html'>precedence_matrix_length_two_loops</a></code>).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A dependency type.</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>A. J. M. M. Weijters and J. T. S. Ribeiro, "Flexible Heuristics Miner (FHM)," 2011 IEEE Symposium on Computational Intelligence and Data Mining (CIDM), Paris, 2011, pp. 310-317. doi: 10.1109/CIDM.2011.5949453</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -172,6 +173,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

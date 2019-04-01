@@ -57,7 +57,14 @@ causal_bindings <- function(eventlog,
             } else {
               act <- act_vec[i]
               suffix <- act_vec[(i + 1):e_idx]
-              get_active(suffix, act, out_act, in_acts[out_act])
+              res <- get_active(suffix, act, out_act, in_acts[out_act])
+              if (length(res) == 0) {
+                # No effect may lead to disconnected activitues, so parse again ignoring `in_acts`
+                # This is different from what Flexible Heuristics Miner paper does
+                get_active(suffix, act, out_act, c(NA))
+              } else {
+                res
+              }
             }
           } else {
             character() # last one is always empty
@@ -83,7 +90,14 @@ causal_bindings <- function(eventlog,
             } else {
               act <- act_vec[i]
               prefix <- act_vec[(i - 1):e_idx]
-              get_active(prefix, act, in_act, out_acts[in_act])
+              res <- get_active(prefix, act, in_act, out_acts[in_act])
+              if (length(res) == 0) {
+                # No cause may lead to disconnected activitues, so parse again ignoring `out_acts`
+                # This is different from what Flexible Heuristics Miner paper does
+                get_active(prefix, act, in_act, c(NA))
+              } else {
+                res
+              }
             }
           } else {
             character() # first one is always empty

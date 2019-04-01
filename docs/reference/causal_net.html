@@ -118,8 +118,9 @@ between activities using several heuristics.</p>
     </div>
 
     <pre class="usage"><span class='fu'>causal_net</span>(<span class='kw'>eventlog</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fu'><a href='dependency_matrix.html'>dependency_matrix</a></span>(<span class='kw'>eventlog</span> <span class='kw'>=</span>
-  <span class='no'>eventlog</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='no'>threshold</span>, <span class='no'>...</span>),
-  <span class='kw'>bindings</span> <span class='kw'>=</span> <span class='fu'><a href='causal_bindings.html'>causal_bindings</a></span>(<span class='no'>eventlog</span>, <span class='no'>dependencies</span>), <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+  <span class='no'>eventlog</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='no'>threshold</span>, <span class='kw'>threshold_frequency</span> <span class='kw'>=</span>
+  <span class='no'>threshold_frequency</span>, <span class='no'>...</span>), <span class='kw'>bindings</span> <span class='kw'>=</span> <span class='fu'><a href='causal_bindings.html'>causal_bindings</a></span>(<span class='no'>eventlog</span>,
+  <span class='no'>dependencies</span>), <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>threshold_frequency</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='causal_frequency.html'>causal_frequency</a></span>(<span class='st'>"absolute"</span>), <span class='kw'>type_nodes</span> <span class='kw'>=</span> <span class='no'>type</span>,
   <span class='kw'>type_edges</span> <span class='kw'>=</span> <span class='no'>type</span>, <span class='no'>...</span>)</pre>
     
@@ -142,6 +143,10 @@ Can be left NULL for more control if parameters <code>dependencies</code> and <c
     <tr>
       <th>threshold</th>
       <td><p>The dependency threshold to be used when using the default dependency matrix computation.</p></td>
+    </tr>
+    <tr>
+      <th>threshold_frequency</th>
+      <td><p>The frequency threshold to be used when using the default dependency matrix computation.</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -257,14 +262,12 @@ Currently only function <code><a href='causal_frequency.html'>causal_frequency</
 #&gt; </span><span style='color: #555555;'> 7</span><span> b          e          0.917       5     4    21 21         3.1
 #&gt; </span><span style='color: #555555;'> 8</span><span> c          e          0.917       6     4    21 21         3.1
 #&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       7     4    13 13         2.3
-#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       4     2    40 40         5  </div></span><span class='co'># NOT RUN {</span>
-<span class='co'># The returned DiagrammeR object can be further augmented with</span>
+#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       4     2    40 40         5  </div></span><div class='input'><span class='co'># The returned DiagrammeR object can be further augmented with</span>
 <span class='co'># panning and zooming before rendering:</span>
 <span class='fu'>causal_net</span>(<span class='no'>L_heur_1</span>) <span class='kw'>%&gt;%</span>
  <span class='fu'><a href='render_causal_net.html'>render_causal_net</a></span>(<span class='kw'>render</span> <span class='kw'>=</span> <span class='no'>T</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>DiagrammeRsvg</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/DiagrammeRsvg/topics/export_svg'>export_svg</a></span>() <span class='kw'>%&gt;%</span>
- <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/svgPanZoom/topics/svgPanZoom'>svgPanZoom</a></span>()
-<span class='co'># }</span><div class='input'>
+ <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/svgPanZoom/topics/svgPanZoom'>svgPanZoom</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error in causal_net(L_heur_1) %&gt;% render_causal_net(render = T) %&gt;% DiagrammeRsvg::export_svg() %&gt;%     svgPanZoom::svgPanZoom(): could not find function "%&gt;%"</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

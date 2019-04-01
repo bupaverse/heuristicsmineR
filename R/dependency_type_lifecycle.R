@@ -66,10 +66,9 @@ dependency_type_lifecycle <- function(threshold_dependency = 0.9,
     mat[dep_mat > mat] <- dep_mat[which(dep_mat > mat, arr.ind = TRUE)]
     mat[mat < threshold_dependency | mat_pre < threshold_frequency] <- 0.0
 
-    browser()
-
     # All connected heuristic
     if (all_connected) {
+
       # Add best consequents (rows)
       missing_rows <- (rowSums(mat) - diag(mat)) == 0  # subtract diag(mat) to not count self loops
       row_zero <- dep_mat[missing_rows, , drop=FALSE] # no consequents
@@ -80,13 +79,28 @@ dependency_type_lifecycle <- function(threshold_dependency = 0.9,
 
       # Add best antecedents (columns)
       missing_cols <- (colSums(mat) - diag(mat)) == 0 # subtract diag(mat) to not count self loops
-      col_zero <- dep_mat[, missing_cols, drop=FALSE] # no consequents
+      col_zero <- dep_mat[, missing_cols, drop=FALSE] # no antecedents
       col_max <- apply(col_zero, 2, max)
       # keep only best
       col_zero[col_zero < rep(col_max, each = nrow(col_zero))] <- 0
       mat[, missing_cols] <- col_zero
-    }
 
+      # For those without any consequent add artifical END dependency
+      missing_rows <- (rowSums(mat) - diag(mat)) == 0  # subtract diag(mat) to not count self loops
+      row_zero <- dep_mat[missing_rows, , drop=FALSE] # no consequents
+      row_zero[row_zero < 0] <- 0
+      row_zero[rownames(row_zero) != "End", colnames(row_zero) == "End"] <- 1
+      row_zero[rownames(row_zero) == "End",] <- 0
+      mat[missing_rows,] <- row_zero
+
+      # For those without any antecedent add artificial START dependency
+      missing_cols <- (colSums(mat) - diag(mat)) == 0 # subtract diag(mat) to not count self loops
+      col_zero <- dep_mat[, missing_cols, drop=FALSE] # no antecedents
+      col_zero[col_zero < 0] <- 0
+      col_zero[rownames(col_zero) == "Start", colnames(col_zero) != "Start"] <- 1
+      col_zero[,colnames(col_zero) == "Start"] <- 0
+      mat[, missing_cols] <- col_zero
+    }
 
     mat
   }

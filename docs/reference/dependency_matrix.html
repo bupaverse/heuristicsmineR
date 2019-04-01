@@ -114,8 +114,9 @@
     </div>
 
     <pre class="usage"><span class='fu'>dependency_matrix</span>(<span class='kw'>eventlog</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dependency_type</span> <span class='kw'>=</span> <span class='fu'><a href='dependency_type_fhm.html'>dependency_type_fhm</a></span>(<span class='kw'>threshold</span> <span class='kw'>=</span> <span class='no'>threshold</span>, <span class='no'>...</span>),
-  <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>dependency_type</span> <span class='kw'>=</span> <span class='fu'><a href='dependency_type_fhm.html'>dependency_type_fhm</a></span>(<span class='kw'>threshold_dependency</span> <span class='kw'>=</span> <span class='no'>threshold</span>,
+  <span class='kw'>threshold_frequency</span> <span class='kw'>=</span> <span class='no'>threshold_frequency</span>, <span class='no'>...</span>), <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+  <span class='kw'>threshold_frequency</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,6 +132,10 @@
     <tr>
       <th>threshold</th>
       <td><p>A dependency threshold, usually in the interval <code>[0,1]</code>, filtering out dependencies below the threshold.</p></td>
+    </tr>
+    <tr>
+      <th>threshold_frequency</th>
+      <td><p>An absolute frequency threshold filtering dependencies which are observed infrequently.</p></td>
     </tr>
     <tr>
       <th>...</th>

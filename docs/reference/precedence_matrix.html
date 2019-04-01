@@ -32,7 +32,9 @@
 
 <meta property="og:title" content="Precendence Matrix — precedence_matrix" />
 
-<meta property="og:description" content="Construct a precendence matrix, showing how activities are followed by each other." />
+<meta property="og:description" content="Construct a precendence matrix, showing how activities are followed by each other.
+This is a performance improved variant of precedence_matrix
+in the processmapR package." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,7 +111,9 @@
 
     <div class="ref-description">
     
-    <p>Construct a precendence matrix, showing how activities are followed by each other.</p>
+    <p>Construct a precendence matrix, showing how activities are followed by each other.
+This is a performance improved variant of <code><a href='https://www.rdocumentation.org/packages/processmapR/topics/precedence_matrix'>precedence_matrix</a></code>
+in the processmapR package.</p>
     
     </div>
 
@@ -134,11 +138,45 @@ Relative-consequent will do the reverse.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>eventdataR</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>patients</span>)
-<span class='fu'>precedence_matrix</span>(<span class='no'>patients</span>)
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>precedence_matrix</span>(<span class='no'>hospital_multi_perspective</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"absolute"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 29 x 3</span><span>
+#&gt;    antecedent         consequent             n
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Final Visit        Triage                 1
+#&gt; </span><span style='color: #555555;'> 2</span><span> Check              Organize Ambulance    81
+#&gt; </span><span style='color: #555555;'> 3</span><span> Organize Ambulance End                  381
+#&gt; </span><span style='color: #555555;'> 4</span><span> Prepare            Organize Ambulance   338
+#&gt; </span><span style='color: #555555;'> 5</span><span> Register           Visit                942
+#&gt; </span><span style='color: #555555;'> 6</span><span> Final Visit        Check               </span><span style='text-decoration: underline;'>3</span><span>638
+#&gt; </span><span style='color: #555555;'> 7</span><span> Prepare            End                 </span><span style='text-decoration: underline;'>7</span><span>182
+#&gt; </span><span style='color: #555555;'> 8</span><span> Final Visit        Prepare             </span><span style='text-decoration: underline;'>6</span><span>209
+#&gt; </span><span style='color: #555555;'> 9</span><span> Register           X-Ray               </span><span style='text-decoration: underline;'>4</span><span>008
+#&gt; </span><span style='color: #555555;'>10</span><span> Visit              Final Visit         </span><span style='text-decoration: underline;'>3</span><span>384
+#&gt; </span><span style='color: #555555;'># ... with 19 more rows</span><span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>as.matrix</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt;                     consequent
+#&gt; antecedent           Check  End Final Visit Organize Ambulance Prepare Register
+#&gt;   Check               5783 2284        5654                 81    3639        0
+#&gt;   End                    0    0           0                  0       0        0
+#&gt;   Final Visit         3638    0           0                  0    6209        0
+#&gt;   Organize Ambulance    38  381           0                  0       0        0
+#&gt;   Prepare             2327 7182           0                338       0        0
+#&gt;   Register            4898  152           0                  0       0        0
+#&gt;   Start                  0    0           0                  0       0        1
+#&gt;   Triage                 1    0           0                  0       0     9999
+#&gt;   Visit               6012    0        3384                  0       0        0
+#&gt;   X-Ray               6959    0         810                  0       0        0
+#&gt;                     consequent
+#&gt; antecedent           Start Triage Visit X-Ray
+#&gt;   Check                  0      0  6827  5388
+#&gt;   End                    0      0     0     0
+#&gt;   Final Visit            0      1     0     0
+#&gt;   Organize Ambulance     0      0     0     0
+#&gt;   Prepare                0      0     0     0
+#&gt;   Register               0      0   942  4008
+#&gt;   Start                  0   9999     0     0
+#&gt;   Triage                 0      0     0     0
+#&gt;   Visit                  0      0     0   452
+#&gt;   X-Ray                  0      0  2079     0</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -128,6 +128,7 @@ causal_frequency <- function(value = c("absolute", "relative"),
         rename(to_id = id) %>%
         left_join(summary_freq,
                   by = c("antecedent" = "act", "consequent" = "binding")) %>%
+        na.omit() %>%
   			group_by(from_id) %>%
         mutate(n = as.double(if_else(is.na(n), 0L, n))) %>%
   			mutate(label = case_when(type == "relative" ~ round(100*n/sum(n),2),
