@@ -35,7 +35,8 @@ causal_bindings <- function(eventlog,
     filter(!is.na(act)) %>%
     mutate(possible_output = out_acts[act],
            possible_input = in_acts[act]) %>%
-    filter_at(vars(possible_input, possible_output), all_vars(sapply(., function(x) !is.null(x))))
+    filter_at(vars(possible_input, possible_output),
+              all_vars(sapply(., function(x) !is.null(x))))
 
   act_vec <- prepared_base$act
   rle_ids <- rle(prepared_base$case)

@@ -28,25 +28,6 @@ causal_frequency <- function(value = c("absolute", "relative"),
 	attr(value, "color") <- color_scale
 	attr(value, "color_edges") <- color_edges
 
-	format_bindings <- function(bindings) {
-	  lapply(bindings, function(x) {
-	    x <- unlist(x)
-	    if (length(x) > 0) {
-	      paste0(unname(x), "x [",names(x),"]", collapse=", ")
-	    } else {
-	      "[]"
-	    }
-	  })
-	}
-
-	replace_null <- function(x, replacement = list()) {
-    if (is.null(x)) {
-      replacement
-    } else {
-      x
-    }
-  }
-
 	attr(value, "create_nodes") <- function(bindings, type, extra_data) {
 
 	  n_cases <- extra_data$n_cases

@@ -69,7 +69,8 @@ base_precedence_simple <- function(eventlog) {
 
   .order <- ACTIVITY_CLASSIFIER_ <- ACTIVITY_INSTANCE_CLASSIFIER_ <-
   CASE_CLASSIFIER_ <- TIMESTAMP_CLASSIFIER_ <- act <- next_act <- case <-
-  from_id <- label <- node_id.x <- node_id.y <- start_time <- end_time <- NULL
+  from_id <- label <- node_id.x <- node_id.y <- start_time <- end_time <-
+    n.x <- n.y <- min_order <- NULL
 
 	eventlog <- ungroup_eventlog(eventlog)
 
@@ -80,61 +81,82 @@ base_precedence_simple <- function(eventlog) {
 			   ACTIVITY_INSTANCE_CLASSIFIER_ = !!activity_instance_id_(eventlog),
 			   CASE_CLASSIFIER_ = !!case_id_(eventlog),
 			   TIMESTAMP_CLASSIFIER_ = !!timestamp_(eventlog),
-			   .order) %>%
-	  arrange(CASE_CLASSIFIER_, TIMESTAMP_CLASSIFIER_, .order) %>%
-	  # this does not capture the start timestamp
-	  distinct(CASE_CLASSIFIER_, ACTIVITY_CLASSIFIER_, ACTIVITY_INSTANCE_CLASSIFIER_, .keep_all = TRUE) -> base_log
+			   .order) -> prepared_log
+
+	data.table::setDT(prepared_log)
+	prepared_log[, list(start_time = min(TIMESTAMP_CLASSIFIER_),
+	                    end_time = max(TIMESTAMP_CLASSIFIER_),
+	                    min_order = min(.order)),
+	             by = c("ACTIVITY_CLASSIFIER_", "ACTIVITY_INSTANCE_CLASSIFIER_", "CASE_CLASSIFIER_")] %>%
+	  as.data.frame() -> base_log
+
+	#create end points for graph
 
 	base_log %>%
 		group_by(CASE_CLASSIFIER_) %>%
-		arrange(TIMESTAMP_CLASSIFIER_, .order) -> points_temp
+		arrange(start_time, min_order) -> points_temp
 
 	points_temp %>%
 		slice(1) %>%
 		mutate(ACTIVITY_CLASSIFIER_ = "Start",
-			   .order = -Inf) -> end_points_start
+			   end_time = start_time,
+			   min_order = -Inf) -> end_points_start
 	points_temp %>%
 		slice(n()) %>%
 		mutate(ACTIVITY_CLASSIFIER_ = "End",
-			   .order = Inf) -> end_points_end
+			   start_time = end_time,
+			   min_order = Inf) -> end_points_end
 
 	#add endpoints to base log
 
 	suppressWarnings(
 		bind_rows(end_points_start, end_points_end, base_log) %>%
-		  ungroup() -> base_log
+			ungroup() -> base_log
 	)
 
-	#create base nodes list
-
 	base_log %>%
-		distinct(ACTIVITY_CLASSIFIER_) %>%
+		count(ACTIVITY_CLASSIFIER_) %>%
 		mutate(node_id = 1:n()) -> base_nodes
+	data.table::setDT(base_nodes, key = c("ACTIVITY_CLASSIFIER_"))
 
 	#create base precedence list
 
-	data.table::setDT(base_log, key = c("TIMESTAMP_CLASSIFIER_", ".order"))
+	data.table::setDT(base_log, key = c("start_time", "min_order"))
 	base_log[, ACTIVITY_CLASSIFIER_ := ordered(ACTIVITY_CLASSIFIER_,
-	                                           levels = c("Start", as.character(sort(activity_labels(eventlog))), "End"))
-	      ][, next_act := data.table::shift(ACTIVITY_CLASSIFIER_, 1, type = "lead"), by = CASE_CLASSIFIER_]
-
-	suppressWarnings(
-  	base_log %>%
-  	  as_tibble() %>%
-  	 	full_join(base_nodes, by = c("ACTIVITY_CLASSIFIER_" = "ACTIVITY_CLASSIFIER_")) %>%
-  	 	full_join(base_nodes, by = c("next_act" = "ACTIVITY_CLASSIFIER_")) %>%
-  	 	select(everything(),
-  	 		   from_id = node_id.x,
-  	 		   to_id = node_id.y) -> base_precedence
-  )
-
-	base_precedence %>%
-	  mutate(end_time = TIMESTAMP_CLASSIFIER_) %>%
-		rename(case = CASE_CLASSIFIER_,
-		       aid = ACTIVITY_INSTANCE_CLASSIFIER_,
-		       act = ACTIVITY_CLASSIFIER_,
-		       start_time = TIMESTAMP_CLASSIFIER_,
-		       min_order = .order) -> base_precedence
+											   levels = c("Start", as.character(sort(activity_labels(eventlog))), "End"))
+	      	][, `:=`(next_act = data.table::shift(ACTIVITY_CLASSIFIER_, 1, type = "lead"),
+	      			 next_start_time = data.table::shift(start_time, 1, type = "lead"),
+	      			 next_end_time = data.table::shift(end_time, 1, type = "lead")),
+	      	  by = CASE_CLASSIFIER_] %>%
+	 	merge(base_nodes, by.x = c("ACTIVITY_CLASSIFIER_"), by.y = c("ACTIVITY_CLASSIFIER_"), all = TRUE) %>%
+	 	merge(base_nodes, by.x = c("next_act"), by.y = c("ACTIVITY_CLASSIFIER_"), all = TRUE) %>%
+		as.data.frame() %>%
+	 	select(everything(),
+	 		   -n.x, -n.y,
+	 		   from_id = node_id.x,
+	 		   to_id = node_id.y) %>%
+    rename(case = CASE_CLASSIFIER_,
+           aid = ACTIVITY_INSTANCE_CLASSIFIER_,
+           act = ACTIVITY_CLASSIFIER_) -> base_precedence
 
 	base_precedence
+}
+
+format_bindings <- function(bindings) {
+  lapply(bindings, function(x) {
+    x <- unlist(x)
+    if (length(x) > 0) {
+      paste0(unname(x), "x [", names(x), "]", collapse = ", ")
+    } else {
+      "[]"
+    }
+  })
+}
+
+replace_null <- function(x, replacement = list()) {
+  if (is.null(x)) {
+    replacement
+  } else {
+    x
+  }
 }

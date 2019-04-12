@@ -2,7 +2,7 @@
 % Please edit documentation in R/causal_net.R
 \name{causal_net}
 \alias{causal_net}
-\title{Create a Causal net (or Heuristics net)}
+\title{Create a Causal net (also Heuristics net)}
 \usage{
 causal_net(eventlog = NULL, dependencies = dependency_matrix(eventlog =
   eventlog, threshold = threshold, threshold_frequency =
@@ -23,13 +23,11 @@ Can be left NULL for more control if parameters \code{dependencies} and \code{bi
 
 \item{threshold_frequency}{The frequency threshold to be used when using the default dependency matrix computation.}
 
-\item{type}{A causal map type. Currently only function \code{\link{causal_frequency}} is supported.}
+\item{type}{A causal map type. For example, \code{\link{causal_frequency}} or \code{\link{causal_performance}}.}
 
-\item{type_nodes}{A causal map type to be used for nodes only.
-Currently only function \code{\link{causal_frequency}} is supported.}
+\item{type_nodes}{A causal map type to be used for nodes only.}
 
-\item{type_edges}{A causal map type to be used for edges only.
-Currently only function \code{\link{causal_frequency}} is supported.}
+\item{type_edges}{A causal map type to be used for edges only.}
 
 \item{...}{Further parameters forwarded to the default \code{\link{dependency_matrix}} function.}
 }
@@ -39,7 +37,7 @@ A DiagrammeR graph of the causal map.
 \description{
 Creates a Causal net, also known as Heuristics net. This is similar to a processmapR process map.
 However, the causal map deals with parallelism by trying to identifying causal dependencies
-between activities using several heuristics.
+between activities by using different heuristics as documented in \code{\link{dependency_matrix}}.
 }
 \details{
 Warning: Projected frequencies are heuristically determined and counts may not add up.
