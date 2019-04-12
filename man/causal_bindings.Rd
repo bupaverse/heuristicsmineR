@@ -22,3 +22,8 @@ the activities that are activated or consumed by an event. The Flexible Heuristi
 a heuristic that looks ahead (or looks back) until the end of the trace and determines those activities as activated
 for which no other cause (activity in a causal dependency) is found. This approach is implemented as type \code{nearest}.
 }
+\examples{
+causal_bindings(L_heur_1,
+                dependencies = dependency_matrix(L_heur_1))
+
+}

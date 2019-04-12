@@ -11,6 +11,10 @@
 #'
 #' @return A data frame
 #'
+#' @examples
+#' causal_bindings(L_heur_1,
+#'                 dependencies = dependency_matrix(L_heur_1))
+#'
 #' @import purrr
 #' @import dplyr
 #' @export

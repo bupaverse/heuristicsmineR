@@ -1,14 +1,15 @@
 Package: heuristicsmineR
 Type: Package
-Title: Discover Process Models With the Heuristics Miner
-Version: 0.1.2
+Title: Discovery of Process Models With the Heuristics Miner
+Version: 0.2.0
 Authors@R: 
     person(given = "Felix",
            family = "Mannhardt",
            role = c("aut", "cre"),
            email = "felix.mannhardt@sintef.no")
-Description: Discovery of process models from event logs based on the 
- Heuristics Miner algorithm integrated into the 'bupaR' framework.
+Description: Discovery of process models (Causal nets) from 'bupaR' event logs based on the 
+ Heuristics Miner algorithm. The discovered Causal nets can be visualised with frequency 
+ and performance annotations.  
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

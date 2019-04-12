@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Causal net (or Heuristics net) — causal_net • heuristicsmineR</title>
+<title>Create a Causal net (also Heuristics net) — causal_net • heuristicsmineR</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,11 @@
 
 
 
-<meta property="og:title" content="Create a Causal net (or Heuristics net) — causal_net" />
+<meta property="og:title" content="Create a Causal net (also Heuristics net) — causal_net" />
 
 <meta property="og:description" content="Creates a Causal net, also known as Heuristics net. This is similar to a processmapR process map.
 However, the causal map deals with parallelism by trying to identifying causal dependencies
-between activities using several heuristics." />
+between activities by using different heuristics as documented in dependency_matrix." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,7 +65,7 @@ between activities using several heuristics." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">heuristicsmineR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -104,7 +104,7 @@ between activities using several heuristics." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a Causal net (or Heuristics net)</h1>
+    <h1>Create a Causal net (also Heuristics net)</h1>
     <small class="dont-index">Source: <a href='https://github.com/fmannhardt/heuristicsmineR/blob/master/R/causal_net.R'><code>R/causal_net.R</code></a></small>
     <div class="hidden name"><code>causal_net.Rd</code></div>
     </div>
@@ -113,7 +113,7 @@ between activities using several heuristics." />
     
     <p>Creates a Causal net, also known as Heuristics net. This is similar to a processmapR process map.
 However, the causal map deals with parallelism by trying to identifying causal dependencies
-between activities using several heuristics.</p>
+between activities by using different heuristics as documented in <code><a href='dependency_matrix.html'>dependency_matrix</a></code>.</p>
     
     </div>
 
@@ -150,17 +150,15 @@ Can be left NULL for more control if parameters <code>dependencies</code> and <c
     </tr>
     <tr>
       <th>type</th>
-      <td><p>A causal map type. Currently only function <code><a href='causal_frequency.html'>causal_frequency</a></code> is supported.</p></td>
+      <td><p>A causal map type. For example, <code><a href='causal_frequency.html'>causal_frequency</a></code> or <code><a href='causal_performance.html'>causal_performance</a></code>.</p></td>
     </tr>
     <tr>
       <th>type_nodes</th>
-      <td><p>A causal map type to be used for nodes only.
-Currently only function <code><a href='causal_frequency.html'>causal_frequency</a></code> is supported.</p></td>
+      <td><p>A causal map type to be used for nodes only.</p></td>
     </tr>
     <tr>
       <th>type_edges</th>
-      <td><p>A causal map type to be used for edges only.
-Currently only function <code><a href='causal_frequency.html'>causal_frequency</a></code> is supported.</p></td>
+      <td><p>A causal map type to be used for edges only.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -183,55 +181,55 @@ Currently only function <code><a href='causal_frequency.html'>causal_frequency</
 #&gt; <span style='color: #555555;'># A tibble: 7 x 12</span><span>
 #&gt;   act   from_id     n n_distinct_cases bindings_input bindings_output label
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a           3    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>a\n~
-#&gt; </span><span style='color: #555555;'>2</span><span> b           5    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>b\n~
-#&gt; </span><span style='color: #555555;'>3</span><span> c           6    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>c\n~
-#&gt; </span><span style='color: #555555;'>4</span><span> d           7    17               13 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>d\n~
-#&gt; </span><span style='color: #555555;'>5</span><span> e           4    40               40 </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>e\n~
-#&gt; </span><span style='color: #555555;'>6</span><span> End         2    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>      End  
-#&gt; </span><span style='color: #555555;'>7</span><span> Start       1    40               40 </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      Start
+#&gt; </span><span style='color: #555555;'>1</span><span> a           1    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>a\n~
+#&gt; </span><span style='color: #555555;'>2</span><span> b           2    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>b\n~
+#&gt; </span><span style='color: #555555;'>3</span><span> c           3    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>c\n~
+#&gt; </span><span style='color: #555555;'>4</span><span> d           4    17               13 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>d\n~
+#&gt; </span><span style='color: #555555;'>5</span><span> e           5    40               40 </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>e\n~
+#&gt; </span><span style='color: #555555;'>6</span><span> End         6    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>      End  
+#&gt; </span><span style='color: #555555;'>7</span><span> Start       7    40               40 </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      Start
 #&gt; </span><span style='color: #555555;'># ... with 5 more variables: color_level </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, shape </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, fontcolor </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   color </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, tooltip </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; Edges
 #&gt; </span><span style='color: #555555;'># A tibble: 8 x 8</span><span>
 #&gt;   antecedent consequent   dep from_id to_id     n label penwidth
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Start      a          0.976       1     3    40 40         5  
-#&gt; </span><span style='color: #555555;'>2</span><span> a          b          0.917       3     5    21 21         3.1
-#&gt; </span><span style='color: #555555;'>3</span><span> a          c          0.917       3     6    21 21         3.1
-#&gt; </span><span style='color: #555555;'>4</span><span> a          d          0.929       3     7    13 13         2.3
-#&gt; </span><span style='color: #555555;'>5</span><span> b          e          0.917       5     4    21 21         3.1
-#&gt; </span><span style='color: #555555;'>6</span><span> c          e          0.917       6     4    21 21         3.1
-#&gt; </span><span style='color: #555555;'>7</span><span> d          e          0.929       7     4    17 17         2.7
-#&gt; </span><span style='color: #555555;'>8</span><span> e          End        0.975       4     2    40 40         5  </div><div class='input'>
+#&gt; </span><span style='color: #555555;'>1</span><span> Start      a          0.976       7     1    40 40         5  
+#&gt; </span><span style='color: #555555;'>2</span><span> a          b          0.917       1     2    21 21         3.1
+#&gt; </span><span style='color: #555555;'>3</span><span> a          c          0.917       1     3    21 21         3.1
+#&gt; </span><span style='color: #555555;'>4</span><span> a          d          0.929       1     4    13 13         2.3
+#&gt; </span><span style='color: #555555;'>5</span><span> b          e          0.917       2     5    21 21         3.1
+#&gt; </span><span style='color: #555555;'>6</span><span> c          e          0.917       3     5    21 21         3.1
+#&gt; </span><span style='color: #555555;'>7</span><span> d          e          0.929       4     5    17 17         2.7
+#&gt; </span><span style='color: #555555;'>8</span><span> e          End        0.975       5     6    40 40         5  </div><div class='input'>
 <span class='co'># Causal map with lower dependency treshold</span>
 <span class='fu'>causal_net</span>(<span class='no'>L_heur_1</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>.8</span>)</div><div class='output co'>#&gt; Nodes
 #&gt; </span><span style='color: #555555;'># A tibble: 7 x 12</span><span>
 #&gt;   act   from_id     n n_distinct_cases bindings_input bindings_output label
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a           3    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [5]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>a\n~
-#&gt; </span><span style='color: #555555;'>2</span><span> b           5    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>b\n~
-#&gt; </span><span style='color: #555555;'>3</span><span> c           6    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>c\n~
-#&gt; </span><span style='color: #555555;'>4</span><span> d           7    17               13 </span><span style='color: #555555;'>&lt;list [2]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [2]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>d\n~
-#&gt; </span><span style='color: #555555;'>5</span><span> e           4    40               40 </span><span style='color: #555555;'>&lt;list [5]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>e\n~
-#&gt; </span><span style='color: #555555;'>6</span><span> End         2    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>      End  
-#&gt; </span><span style='color: #555555;'>7</span><span> Start       1    40               40 </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      Start
+#&gt; </span><span style='color: #555555;'>1</span><span> a           1    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [5]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>a\n~
+#&gt; </span><span style='color: #555555;'>2</span><span> b           2    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>b\n~
+#&gt; </span><span style='color: #555555;'>3</span><span> c           3    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>c\n~
+#&gt; </span><span style='color: #555555;'>4</span><span> d           4    17               13 </span><span style='color: #555555;'>&lt;list [2]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [2]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>d\n~
+#&gt; </span><span style='color: #555555;'>5</span><span> e           5    40               40 </span><span style='color: #555555;'>&lt;list [5]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>e\n~
+#&gt; </span><span style='color: #555555;'>6</span><span> End         6    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>      End  
+#&gt; </span><span style='color: #555555;'>7</span><span> Start       7    40               40 </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      Start
 #&gt; </span><span style='color: #555555;'># ... with 5 more variables: color_level </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, shape </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, fontcolor </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   color </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, tooltip </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; Edges
 #&gt; </span><span style='color: #555555;'># A tibble: 10 x 8</span><span>
 #&gt;    antecedent consequent   dep from_id to_id     n label penwidth
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Start      a          0.976       1     3    40 40         5  
-#&gt; </span><span style='color: #555555;'> 2</span><span> a          b          0.917       3     5    21 21         3.1
-#&gt; </span><span style='color: #555555;'> 3</span><span> a          c          0.917       3     6    21 21         3.1
-#&gt; </span><span style='color: #555555;'> 4</span><span> a          d          0.929       3     7    13 13         2.3
-#&gt; </span><span style='color: #555555;'> 5</span><span> d          d          0.8         7     7     4 4          1.4
-#&gt; </span><span style='color: #555555;'> 6</span><span> a          e          0.833       3     4     5 5          1.5
-#&gt; </span><span style='color: #555555;'> 7</span><span> b          e          0.917       5     4    21 21         3.1
-#&gt; </span><span style='color: #555555;'> 8</span><span> c          e          0.917       6     4    21 21         3.1
-#&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       7     4    13 13         2.3
-#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       4     2    40 40         5  </div><div class='input'>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Start      a          0.976       7     1    40 40         5  
+#&gt; </span><span style='color: #555555;'> 2</span><span> a          b          0.917       1     2    21 21         3.1
+#&gt; </span><span style='color: #555555;'> 3</span><span> a          c          0.917       1     3    21 21         3.1
+#&gt; </span><span style='color: #555555;'> 4</span><span> a          d          0.929       1     4    13 13         2.3
+#&gt; </span><span style='color: #555555;'> 5</span><span> d          d          0.8         4     4     4 4          1.4
+#&gt; </span><span style='color: #555555;'> 6</span><span> a          e          0.833       1     5     5 5          1.5
+#&gt; </span><span style='color: #555555;'> 7</span><span> b          e          0.917       2     5    21 21         3.1
+#&gt; </span><span style='color: #555555;'> 8</span><span> c          e          0.917       3     5    21 21         3.1
+#&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       4     5    13 13         2.3
+#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       5     6    40 40         5  </div><div class='input'>
 <span class='co'># For even more control omit the `eventlog` parameter</span>
 <span class='co'># and provide `dependencies` and `bindings` directly.</span>
 <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dependency_matrix.html'>dependency_matrix</a></span>(<span class='no'>L_heur_1</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>.8</span>)
@@ -240,29 +238,29 @@ Currently only function <code><a href='causal_frequency.html'>causal_frequency</
 #&gt; </span><span style='color: #555555;'># A tibble: 7 x 12</span><span>
 #&gt;   act   from_id     n n_distinct_cases bindings_input bindings_output label
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a           3    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [5]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>a\n~
-#&gt; </span><span style='color: #555555;'>2</span><span> b           5    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>b\n~
-#&gt; </span><span style='color: #555555;'>3</span><span> c           6    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>c\n~
-#&gt; </span><span style='color: #555555;'>4</span><span> d           7    17               13 </span><span style='color: #555555;'>&lt;list [2]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [2]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>d\n~
-#&gt; </span><span style='color: #555555;'>5</span><span> e           4    40               40 </span><span style='color: #555555;'>&lt;list [5]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>e\n~
-#&gt; </span><span style='color: #555555;'>6</span><span> End         2    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>      End  
-#&gt; </span><span style='color: #555555;'>7</span><span> Start       1    40               40 </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      Start
+#&gt; </span><span style='color: #555555;'>1</span><span> a           1    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [5]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>a\n~
+#&gt; </span><span style='color: #555555;'>2</span><span> b           2    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>b\n~
+#&gt; </span><span style='color: #555555;'>3</span><span> c           3    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>c\n~
+#&gt; </span><span style='color: #555555;'>4</span><span> d           4    17               13 </span><span style='color: #555555;'>&lt;list [2]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [2]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>d\n~
+#&gt; </span><span style='color: #555555;'>5</span><span> e           5    40               40 </span><span style='color: #555555;'>&lt;list [5]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>e\n~
+#&gt; </span><span style='color: #555555;'>6</span><span> End         6    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>      End  
+#&gt; </span><span style='color: #555555;'>7</span><span> Start       7    40               40 </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      Start
 #&gt; </span><span style='color: #555555;'># ... with 5 more variables: color_level </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, shape </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, fontcolor </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   color </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, tooltip </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; Edges
 #&gt; </span><span style='color: #555555;'># A tibble: 10 x 8</span><span>
 #&gt;    antecedent consequent   dep from_id to_id     n label penwidth
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Start      a          0.976       1     3    40 40         5  
-#&gt; </span><span style='color: #555555;'> 2</span><span> a          b          0.917       3     5    21 21         3.1
-#&gt; </span><span style='color: #555555;'> 3</span><span> a          c          0.917       3     6    21 21         3.1
-#&gt; </span><span style='color: #555555;'> 4</span><span> a          d          0.929       3     7    13 13         2.3
-#&gt; </span><span style='color: #555555;'> 5</span><span> d          d          0.8         7     7     4 4          1.4
-#&gt; </span><span style='color: #555555;'> 6</span><span> a          e          0.833       3     4     5 5          1.5
-#&gt; </span><span style='color: #555555;'> 7</span><span> b          e          0.917       5     4    21 21         3.1
-#&gt; </span><span style='color: #555555;'> 8</span><span> c          e          0.917       6     4    21 21         3.1
-#&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       7     4    13 13         2.3
-#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       4     2    40 40         5  </div></span><div class='input'><span class='co'># The returned DiagrammeR object can be further augmented with</span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Start      a          0.976       7     1    40 40         5  
+#&gt; </span><span style='color: #555555;'> 2</span><span> a          b          0.917       1     2    21 21         3.1
+#&gt; </span><span style='color: #555555;'> 3</span><span> a          c          0.917       1     3    21 21         3.1
+#&gt; </span><span style='color: #555555;'> 4</span><span> a          d          0.929       1     4    13 13         2.3
+#&gt; </span><span style='color: #555555;'> 5</span><span> d          d          0.8         4     4     4 4          1.4
+#&gt; </span><span style='color: #555555;'> 6</span><span> a          e          0.833       1     5     5 5          1.5
+#&gt; </span><span style='color: #555555;'> 7</span><span> b          e          0.917       2     5    21 21         3.1
+#&gt; </span><span style='color: #555555;'> 8</span><span> c          e          0.917       3     5    21 21         3.1
+#&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       4     5    13 13         2.3
+#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       5     6    40 40         5  </div></span><div class='input'><span class='co'># The returned DiagrammeR object can be further augmented with</span>
 <span class='co'># panning and zooming before rendering:</span>
 <span class='fu'>causal_net</span>(<span class='no'>L_heur_1</span>) <span class='kw'>%&gt;%</span>
  <span class='fu'><a href='render_causal_net.html'>render_causal_net</a></span>(<span class='kw'>render</span> <span class='kw'>=</span> <span class='no'>T</span>) <span class='kw'>%&gt;%</span>
