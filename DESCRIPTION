@@ -1,6 +1,6 @@
 Package: heuristicsmineR
 Type: Package
-Title: Discovery of Process Models With the Heuristics Miner
+Title: Discovery of Process Models with the Heuristics Miner
 Version: 0.2.0
 Authors@R: 
     person(given = "Felix",

@@ -56,7 +56,7 @@ dependency_type_fhm <- function(threshold_dependency = 0.9,
     }
 
     t_mat_loops <- t(mat_loops)
-    mat <- (mat_loops - t_mat_loops) / (mat_loops + t_mat_loops + 1)
+    mat <- (mat_loops + t_mat_loops) / (mat_loops + t_mat_loops + 1)
 
     # Filter by l2 thresholds
     mat[mat < threshold_l2 | mat_loops < threshold_frequency] <- 0.0
