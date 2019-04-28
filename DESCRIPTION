@@ -7,9 +7,14 @@ Authors@R:
            family = "Mannhardt",
            role = c("aut", "cre"),
            email = "felix.mannhardt@sintef.no")
-Description: Discovery of process models (Causal nets) from 'bupaR' event logs based on the 
- Heuristics Miner algorithm. The discovered Causal nets can be visualised with frequency 
- and performance annotations.  
+Description: Provides the heuristics miner algorithm for process discovery 
+   as proposed by Weijters et al. (2011) <doi:10.1109/CIDM.2011.5949453>. The
+   algorithm builds a causal net from an event log created with the 'bupaR' 
+   package. Event logs are a set of ordered sequences of events for which 
+   'bupaR' provides the S3 class eventlog(). The discovered causal nets 
+   can be visualised as 'htmlwidgets' and it is possible to annotate them with
+   the occurrence frequency or processing and waiting time of process 
+   activities.  
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

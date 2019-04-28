@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{Dependency matrix}
 
-\item{...}{Additional paramters}
+\item{...}{Additional parameters}
 }
 \value{
 A ggplot object, which can be customized further, if deemed necessary.

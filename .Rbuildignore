@@ -3,3 +3,5 @@
 ^heuristicsmineR\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+^CRAN-RELEASE$
+^cran-comments\.md$

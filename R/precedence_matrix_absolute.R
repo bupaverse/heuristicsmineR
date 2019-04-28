@@ -1,6 +1,6 @@
-#' Precendence Matrix
+#' Precedence Matrix
 #'
-#' Construct a precendence matrix, showing how activities are followed by each other.
+#' Construct a precedence matrix, showing how activities are followed by each other.
 #' This is a performance improved variant of \code{\link[processmapR]{precedence_matrix}}
 #' in the processmapR package.
 #'
@@ -54,9 +54,9 @@ precedence_matrix <- function(eventlog, type = c("absolute","relative","relative
   m
 }
 
-#' Precendence Matrix
+#' Precedence Matrix
 #'
-#' Construct a precendence matrix, showing how activities are followed by each other.
+#' Construct a precedence matrix, showing how activities are followed by each other.
 #' This function computes the precedence matrix directly in C++ for efficiency.
 #' Only the type `absolute` of (\code{\link[processmapR]{precedence_matrix}}) is supported.
 #'

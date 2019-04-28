@@ -2,7 +2,7 @@
 % Please edit documentation in R/precedence_matrix_lifecycle.R
 \name{precedence_matrix_lifecycle}
 \alias{precedence_matrix_lifecycle}
-\title{Precendence Matrix with Lifecycle}
+\title{Precedence Matrix with Lifecycle}
 \usage{
 precedence_matrix_lifecycle(eventlog)
 }
@@ -10,7 +10,7 @@ precedence_matrix_lifecycle(eventlog)
 \item{eventlog}{The event log object to be used.}
 }
 \description{
-Precendence Matrix with Lifecycle
+Precedence Matrix with Lifecycle
 }
 \examples{
 precedence_matrix_lifecycle(L_heur_1)

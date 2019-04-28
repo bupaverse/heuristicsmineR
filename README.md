@@ -1,3 +1,9 @@
+> Process discovery with variants of the Heuristics Miner algorithm
+
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/heuristicsmineR)](https://cran.r-project.org/package=heuristicsmineR)
+[![Travis-CI Build Status](https://travis-ci.org/fmannhardt/heuristicsmineR.svg?branch=master)](https://travis-ci.org/fmannhardt/heuristicsmineR)
+
+
 # Discover Process Models With the Heuristics Miner
 
 Discovery of process models from event logs based on the Heuristics Miner algorithm integrated into the [bupaR](http://bupar.net/) framework.
@@ -47,7 +53,7 @@ causal_net(L_heur_1, threshold = .7)
 
 ![](man/figures/L_heur_1_example.png)
 
-The Causal net can be converted to a Petri net (note that there are some uneccesary invisible transition that are not yet removed):
+The Causal net can be converted to a Petri net (note that there are some unnecessary invisible transition that are not yet removed):
 
 ``` r
 # Convert to Petri net

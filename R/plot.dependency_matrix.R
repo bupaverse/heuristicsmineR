@@ -3,7 +3,7 @@
 #' Visualize a dependency matrix. A generic plot function for dependency matrices.
 #'
 #' @param x Dependency matrix
-#' @param ... Additional paramters
+#' @param ... Additional parameters
 #' @return A ggplot object, which can be customized further, if deemed necessary.
 #' @export
 #' @import ggplot2

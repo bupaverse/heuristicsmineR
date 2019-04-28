@@ -2,7 +2,7 @@
 % Please edit documentation in R/precedence_matrix_absolute.R
 \name{precedence_matrix_absolute}
 \alias{precedence_matrix_absolute}
-\title{Precendence Matrix}
+\title{Precedence Matrix}
 \usage{
 precedence_matrix_absolute(eventlog, lead = 1)
 }
@@ -12,7 +12,7 @@ precedence_matrix_absolute(eventlog, lead = 1)
 \item{lead}{The distance between activities following/preceding each other.}
 }
 \description{
-Construct a precendence matrix, showing how activities are followed by each other.
+Construct a precedence matrix, showing how activities are followed by each other.
 This function computes the precedence matrix directly in C++ for efficiency.
 Only the type \code{absolute} of (\code{\link[processmapR]{precedence_matrix}}) is supported.
 }

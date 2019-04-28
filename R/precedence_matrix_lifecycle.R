@@ -1,5 +1,5 @@
 
-#' Precendence Matrix with Lifecycle
+#' Precedence Matrix with Lifecycle
 #'
 #' @param eventlog The event log object to be used.
 #'

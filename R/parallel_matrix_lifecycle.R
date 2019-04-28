@@ -1,4 +1,3 @@
-
 #' Parallel Matrix with Lifecycle
 #'
 #' @param eventlog The event log object to be used.

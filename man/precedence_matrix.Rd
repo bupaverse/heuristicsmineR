@@ -2,7 +2,7 @@
 % Please edit documentation in R/precedence_matrix_absolute.R
 \name{precedence_matrix}
 \alias{precedence_matrix}
-\title{Precendence Matrix}
+\title{Precedence Matrix}
 \usage{
 precedence_matrix(eventlog, type = c("absolute", "relative",
   "relative-antecedent", "relative-consequent", "relative-case"))
@@ -16,7 +16,7 @@ Relative-antecedent will return relative frequencies within each antecendent, i.
 Relative-consequent will do the reverse.}
 }
 \description{
-Construct a precendence matrix, showing how activities are followed by each other.
+Construct a precedence matrix, showing how activities are followed by each other.
 This is a performance improved variant of \code{\link[processmapR]{precedence_matrix}}
 in the processmapR package.
 }
