@@ -1,3 +1,9 @@
+# heuristicsmineR 0.2.0
+
+* Bugfix L2 loop detection
+* Lifecycle-aware heuristic `dependency_type_lifecycle`
+* Performance visualisation `causal_performance`
+
 # heuristicsmineR 0.1.3
 
 * Bugfix for `all_connected` heuristics, which correctly ignores self-loops now.
