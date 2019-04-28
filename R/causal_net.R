@@ -34,6 +34,7 @@
 #' \donttest{
 #' # The returned DiagrammeR object can be further augmented with
 #' # panning and zooming before rendering:
+#' library(magrittr)
 #' causal_net(L_heur_1) %>%
 #'  render_causal_net(render = T) %>%
 #'  DiagrammeRsvg::export_svg() %>%

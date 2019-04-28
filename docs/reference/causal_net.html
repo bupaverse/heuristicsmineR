@@ -262,10 +262,11 @@ Can be left NULL for more control if parameters <code>dependencies</code> and <c
 #&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       4     5    13 13         2.3
 #&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       5     6    40 40         5  </div></span><div class='input'><span class='co'># The returned DiagrammeR object can be further augmented with</span>
 <span class='co'># panning and zooming before rendering:</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>magrittr</span>)
 <span class='fu'>causal_net</span>(<span class='no'>L_heur_1</span>) <span class='kw'>%&gt;%</span>
  <span class='fu'><a href='render_causal_net.html'>render_causal_net</a></span>(<span class='kw'>render</span> <span class='kw'>=</span> <span class='no'>T</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>DiagrammeRsvg</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/DiagrammeRsvg/topics/export_svg'>export_svg</a></span>() <span class='kw'>%&gt;%</span>
- <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/svgPanZoom/topics/svgPanZoom'>svgPanZoom</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error in causal_net(L_heur_1) %&gt;% render_causal_net(render = T) %&gt;% DiagrammeRsvg::export_svg() %&gt;%     svgPanZoom::svgPanZoom(): could not find function "%&gt;%"</span></div><div class='input'>
+ <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/svgPanZoom/topics/svgPanZoom'>svgPanZoom</a></span>()</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
