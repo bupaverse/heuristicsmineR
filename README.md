@@ -4,6 +4,12 @@ Discovery of process models from event logs based on the Heuristics Miner algori
 
 ## Installation
 
+You can install the release CRAN version with:
+
+``` r
+install.packages("heuristicsmineR")
+```
+
 You can install the development version of heuristicsmineR with:
 
 ``` r
