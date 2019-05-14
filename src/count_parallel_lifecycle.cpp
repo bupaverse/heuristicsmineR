@@ -13,6 +13,11 @@ DataFrame count_parallel_lifecycle(CharacterVector cases,
                                    IntegerVector activities,
                                    IntegerVector lifecycle) {
 
+  if (cases.size() != activities.size() ||
+    cases.size() != lifecycle.size()) {
+    stop("Inputs should be of equal length!");
+  }
+
 	CharacterVector levels = activities.attr("levels");
 
 	std::unordered_map<act_pair, unsigned, boost::hash<act_pair>> counts;

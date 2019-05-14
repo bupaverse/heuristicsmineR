@@ -13,6 +13,11 @@ DataFrame count_precedence_lifecycle(CharacterVector cases,
                            IntegerVector activities,
                            IntegerVector lifecycle) {
 
+  if (cases.size() != activities.size() ||
+    cases.size() != lifecycle.size()) {
+    stop("Inputs should be of equal length!");
+  }
+
 	CharacterVector levels = activities.attr("levels");
 	int startIdx = levels.size() + 1;
 	int endIdx = levels.size() + 1;

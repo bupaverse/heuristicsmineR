@@ -1,3 +1,7 @@
+# heuristicsmineR 0.2.1
+
+* Bugfix buffer over-read in `count_length_two_loops.cpp`
+
 # heuristicsmineR 0.2.0
 
 * Bugfix L2 loop detection

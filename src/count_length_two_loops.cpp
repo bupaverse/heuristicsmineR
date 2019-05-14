@@ -11,6 +11,10 @@ typedef std::pair<unsigned, unsigned> act_pair;
 // [[Rcpp::export]]
 DataFrame count_length_two_loops(CharacterVector cases, IntegerVector activities) {
 
+  if (cases.size() != activities.size()) {
+    stop("Inputs should be of equal length!");
+  }
+
 	std::unordered_map<act_pair, unsigned, boost::hash<act_pair>> counts;
 
 	String curCase;
@@ -19,12 +23,12 @@ DataFrame count_length_two_loops(CharacterVector cases, IntegerVector activities
 
 	for (int i = 0; i < cases.size(); ++i) {
 		String c = cases[i];
-		int act = activities[i];
+		int act = activities[i]; // safe as equal length
 
 		int aIdx = i+aLead;
 		int bIdx = i+bLead;
 
-		if (bIdx < cases.size()) {
+		if (aIdx < cases.size() && bIdx < cases.size()) { // guard against overflow
 		  if (cases[aIdx] == c) {
 		    // Same case
 		    int aAct = activities[aIdx];

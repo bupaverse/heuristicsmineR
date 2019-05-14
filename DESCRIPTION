@@ -1,7 +1,7 @@
 Package: heuristicsmineR
 Type: Package
 Title: Discovery of Process Models with the Heuristics Miner
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person(given = "Felix",
            family = "Mannhardt",
@@ -34,7 +34,6 @@ Imports:
     rlang,
     scales,
     Rcpp,
-    Rcpp11,
     ggplot2,
     ggthemes,
     data.table
