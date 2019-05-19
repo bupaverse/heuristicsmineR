@@ -80,9 +80,12 @@ render_causal_net <- function(causal_net,
 
 	if(render == T) {
 		graph %>% render_graph(...) -> graph
-		graph %>% return()
-	} else  {
-		graph %>% return()
 	}
 
+  attr(graph, "causal_dependencies") <- attr(causal_net, "dependencies")
+  attr(graph, "causal_bindings") <- attr(causal_net, "bindings")
+  attr(graph, "causal_nodes") <- causal_net$nodes
+  attr(graph, "causal_edges") <- causal_net$edges
+
+  return(graph)
 }
