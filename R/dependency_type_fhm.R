@@ -7,6 +7,7 @@
 #' @param threshold_l2 A dependency threshold, usually in the interval `[0,1]`, filtering out length-two loop dependencies below the threshold.
 #' @param threshold_frequency An absolute frequency threshold filtering dependencies which are observed infrequently.
 #' @param all_connected If `TRUE` the best antecedent and consequent (as determined by the dependency measure) are going to be added regardless of the `threshold` value.
+#' @param endpoints_connected If `TRUE` the start/end activity is added as antecedent/consequent when an activity would not be connected according to the `threshold` value.
 #'
 #' @return A dependency type.
 #' @export
@@ -20,7 +21,8 @@ dependency_type_fhm <- function(threshold_dependency = 0.9,
                                 threshold_l1 = threshold_dependency,
                                 threshold_l2 = threshold_dependency,
                                 threshold_frequency = 0,
-                                all_connected = FALSE) {
+                                all_connected = FALSE,
+                                endpoints_connected = FALSE) {
 
   dependency_type <- "fhm"
   class(dependency_type) <- c("dependency_type", class(dependency_type))
@@ -105,24 +107,25 @@ dependency_type_fhm <- function(threshold_dependency = 0.9,
       col_zero[col_zero < rep(col_max, each = nrow(col_zero))] <- 0
       mat[, missing_cols] <- col_zero
 
+    }
+
+    if (endpoints_connected) {
+
       # For those without any consequent add artifical END dependency
       missing_rows <- (rowSums(mat) - diag(mat)) == 0  # subtract diag(mat) to not count self loops
-      row_zero <- dep_mat[missing_rows, , drop=FALSE] # no consequents
-      row_zero[row_zero < 0] <- 0
+      row_zero <- mat[missing_rows, , drop=FALSE] # no consequents
       row_zero[rownames(row_zero) != "End", colnames(row_zero) == "End"] <- 1
       row_zero[rownames(row_zero) == "End",] <- 0
       mat[missing_rows,] <- row_zero
 
       # For those without any antecedent add artificial START dependency
       missing_cols <- (colSums(mat) - diag(mat)) == 0 # subtract diag(mat) to not count self loops
-      col_zero <- dep_mat[, missing_cols, drop=FALSE] # no antecedents
-      col_zero[col_zero < 0] <- 0
+      col_zero <- mat[, missing_cols, drop=FALSE] # no antecedents
       col_zero[rownames(col_zero) == "Start", colnames(col_zero) != "Start"] <- 1
       col_zero[,colnames(col_zero) == "Start"] <- 0
       mat[, missing_cols] <- col_zero
 
     }
-
 
     mat
   }

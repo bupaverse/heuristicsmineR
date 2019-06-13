@@ -153,7 +153,9 @@ causal_performance <- function(FUN = mean,
                     "Dependant activity ",
                     current_binding,
                     " not found in \n",
-                    paste(suffix_act, suffix_start, collapse = "\n")
+                    paste(suffix_act, suffix_start, collapse = "\n"),
+                    "\n",
+                    "Returning NA!"
                   )
                 )
                 return(NA)
@@ -168,13 +170,15 @@ causal_performance <- function(FUN = mean,
                       "Dependant activity ",
                       current_binding,
                       " has negative waiting time \n",
-                      "Current time: ",
+                      "End of activity: ",
                       current_end,
                       "\n",
-                      paste(suffix_act, suffix_start, collapse = "\n")
+                      paste(suffix_act, suffix_start, collapse = "\n"),
+                      "\n",
+                      "Returning 0!"
                     )
                   )
-                  return(wait)
+                  return(0)
                 }
               }
             }
