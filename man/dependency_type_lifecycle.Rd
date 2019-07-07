@@ -6,7 +6,7 @@
 \usage{
 dependency_type_lifecycle(threshold_dependency = 0.9,
   threshold_l1 = threshold_dependency, threshold_frequency = 0,
-  all_connected = FALSE)
+  all_connected = FALSE, endpoints_connected = FALSE)
 }
 \arguments{
 \item{threshold_dependency}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out dependencies below the threshold.}
@@ -16,6 +16,8 @@ dependency_type_lifecycle(threshold_dependency = 0.9,
 \item{threshold_frequency}{An absolute frequency threshold filtering dependencies which are observed infrequently.}
 
 \item{all_connected}{If \code{TRUE} the best antecedent and consequent (as determined by the dependency measure) are going to be added regardless of the \code{threshold} value.}
+
+\item{endpoints_connected}{If \code{TRUE} the start/end activity is added as antecedent/consequent when an activity would not be connected according to the \code{threshold} value.}
 }
 \value{
 A dependency type.
