@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' causal_net(L_heur_1,
-#'            type = causal_custom())
+#'            type_nodes = causal_custom(attribute = "timestamp"))
 #'
 #' @export
 causal_custom <- function(FUN = mean,
