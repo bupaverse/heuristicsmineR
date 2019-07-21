@@ -13,8 +13,11 @@
 #' @param threshold_frequency The frequency threshold to be used when using the default dependency matrix computation.
 #' @param bindings Causal bindings created by \code{\link{causal_bindings}}.
 #' @param type A causal map type. For example, \code{\link{causal_frequency}} or \code{\link{causal_performance}}.
+#' @param sec A causal process map type. Values are shown between brackets.
 #' @param type_edges A causal map type to be used for edges only.
 #' @param type_nodes A causal map type to be used for nodes only.
+#' @param sec_nodes A secondary causal map type for nodes only.
+#' @param sec_edges A secondary causal map type for edges only.
 #' @param ... Further parameters forwarded to the default \code{\link{dependency_matrix}} function.
 #'
 #' @return A DiagrammeR graph of the causal map.
@@ -54,8 +57,11 @@ causal_net <- function(eventlog = NULL,
                        threshold = 0.9,
                        threshold_frequency = 0,
                        type = causal_frequency("absolute"),
-      								 type_nodes = type,
+      								 sec = NULL,
+                       type_nodes = type,
       								 type_edges = type,
+      								 sec_nodes = sec,
+								       sec_edges = sec,
       								 ...) {
 
   act <- dep <- binding <- binding_input <- binding_output <-
@@ -69,8 +75,72 @@ causal_net <- function(eventlog = NULL,
   check_dependencies(dependencies)
 
   # Build base structure
+
+  is_custom_nodes <- attr(type_nodes, "perspective") == "custom"
+  is_custom_edges <- attr(type_edges, "perspective") == "custom"
+
+  if (is_custom_nodes || is_custom_edges) {
+
+    eventlog %>%
+      as_tibble() %>%
+      group_by(!!sym(case_id(eventlog)),
+               !!sym(activity_id(eventlog)),
+               !!sym(activity_instance_id(eventlog))) -> log_custom
+
+    if (is_custom_nodes && is_custom_edges) {
+      attribute_nodes <- sym(attr(type_nodes, "attribute"))
+      attribute_edges <- sym(attr(type_edges, "attribute"))
+
+      log_custom %>%
+        summarise(CUSTOM_ATTR_NODES = first(!!attribute_nodes),
+                  CUSTOM_ATTR_EDGES = first(!!attribute_edges)) -> log_custom
+
+    } else if (is_custom_nodes) {
+      attribute_nodes <- sym(attr(type_nodes, "attribute"))
+
+      log_custom %>%
+        summarise(CUSTOM_ATTR_NODES = first(!!attribute_nodes)) -> log_custom
+    } else if (is_custom_edges) {
+      attribute_edges <- sym(attr(type_edges, "attribute"))
+
+      log_custom %>%
+        summarise(CUSTOM_ATTR_EDGES = first(!!attribute_edges)) -> log_custom
+    }
+
+    suppressWarnings({
+      bindings %>%
+        left_join(log_custom, by = c("act" = activity_id(eventlog),
+                                     "aid" = activity_instance_id(eventlog),
+                                     "case" = case_id(eventlog))) -> bindings
+    })
+  }
+
 	nodes <- attr(type_nodes, "create_nodes")(bindings, type_nodes, extra_data)
 	edges <- attr(type_edges, "create_edges")(dependencies, bindings, type_edges, extra_data)
+
+	# secondary info
+	if(!is.null(sec_nodes)) {
+		nodes_secondary <- attr(sec_nodes, "create_nodes")(bindings, type_nodes, extra_data) %>%
+			select(ACTIVITY_CLASSIFIER_, from_id, label) %>%
+			rename(sec_label = label)
+
+
+		nodes %>%
+			full_join(nodes_secondary, by = c("ACTIVITY_CLASSIFIER_", "from_id")) %>%
+			mutate(label = if_end(ACTIVITY_CLASSIFIER_,
+								  ACTIVITY_CLASSIFIER_,
+								  str_replace(paste0(label, "\n","(", map(sec_label, ~str_split(.x, "\n")[[1]][2]), ")"), "\n\\(\\)",""))) -> nodes
+	}
+
+	if(!is.null(sec_edges)) {
+		edges_secondary <- attr(sec_edges, "create_edges")(dependencies, bindings, type_edges, extra_data) %>%
+			select(from_id, to_id, label) %>%
+			rename(sec_label = label)
+
+		edges %>%
+			full_join(edges_secondary, by = c("from_id","to_id")) %>%
+			mutate(label = str_replace(paste0(label, "\n (", sec_label, ')'), "\n \\( \\)","")) -> edges
+	}
 
 	cnet <- list(nodes = nodes,
 	             edges = edges)

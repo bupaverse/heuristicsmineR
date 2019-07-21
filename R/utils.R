@@ -81,6 +81,7 @@ base_precedence_simple <- function(eventlog) {
 			   ACTIVITY_INSTANCE_CLASSIFIER_ = !!activity_instance_id_(eventlog),
 			   CASE_CLASSIFIER_ = !!case_id_(eventlog),
 			   TIMESTAMP_CLASSIFIER_ = !!timestamp_(eventlog),
+			   everything(),
 			   .order) -> prepared_log
 
 	data.table::setDT(prepared_log)

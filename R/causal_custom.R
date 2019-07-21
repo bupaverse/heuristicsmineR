@@ -3,52 +3,36 @@
 # (c) Hasselt University under MIT license
 #
 
-#' @title Performance map profile
-#' @description Function to create a performance profile for a causal map.
-#'
+#' @title Custom map profile
+#' @description Function to create a custom map profile based on some event log attribute.
+#' @details If used for edges, it will show the attribute values which related to the out-going node of the edge.#'
 #' @param FUN A summary function to be called on the process time of a specific activity, e.g. mean, median, min, max
-#' @param units The time unit in which processing time should be presented (mins, hours, days, weeks, months, quarters, semesters, years. A month is defined as 30 days. A quarter is 13 weeks. A semester is 26 weeks and a year is 365 days
-#' @param color_scale Name of color scale to be used for nodes. Defaults to Reds. See `Rcolorbrewer::brewer.pal.info()` for all options.
+#' @param attribute The name of the case attribute to visualize (should be numeric)
+#' @param units Character to be placed after values (e.g. EUR for monitary euro values)
+#' @param color_scale Name of color scale to be used for nodes. Defaults to RdPu See `Rcolorbrewer::brewer.pal.info()` for all options.
 #' @param color_edges The color used for edges. Defaults to red4.
 #' @param ... Additional arguments forwarded to FUN
 #'
 #' @examples
 #' causal_net(L_heur_1,
-#'            type = causal_performance())
+#'            type = causal_custom())
 #'
 #' @export
-causal_performance <- function(FUN = mean,
-                               units = c("mins","secs", "hours","days","weeks", "months", "quarters", "semesters","years"),
-                               color_scale = "Reds",
-                               color_edges = "red4",
-                               ...) {
+causal_custom <- function(FUN = mean,
+                          attribute,
+                          units = "",
+                          color_scale = "RdPu",
+                          color_edges = "red4",
+                          ...) {
 
   act <- binding <- binding_input <- binding_output <- bindings_input <-
     bindings_output <- case <- from_id <- label <- NULL
 
+  attr(FUN, "attribute") <- attribute
   units <- match.arg(units)
-	attr(FUN, "perspective") <- "performance"
+	attr(FUN, "perspective") <- "custom"
 	attr(FUN, "units_label") <- units
 	attr(FUN, "arguments") <- list(...)
-
-	if(units %in% c("mins","hours","days","weeks", "secs")) {
-		attr(FUN, "units") <- units
-		attr(FUN, "scale_time") <- 1
-	} else if (units == "months") {
-		attr(FUN, "units") <- "days"
-		attr(FUN, "scale_time") <- 1/30
-	} else if (units == "semesters") {
-		attr(FUN, "units") <- "days"
-		attr(FUN, "scale_time") <- 1/(26*7)
-	}
-	else if (units == "years") {
-		attr(FUN, "units") <- "days"
-		attr(FUN, "scale_time") <- 1/(365)
-	} else if(units == "quarters") {
-		attr(FUN, "units") <- "days"
-		attr(FUN, "scale_time") <- 1/(13*7)
-	}
-
 	attr(FUN, "color") <- color_scale
 	attr(FUN, "color_edges") <- color_edges
 
@@ -79,6 +63,8 @@ causal_performance <- function(FUN = mean,
         y
       })))
 
+    browser()
+
     nodes <- bindings %>%
       left_join(nested_input,  by = c("act" = "act")) %>%
       rename(bindings_input = bindings) %>%
@@ -86,11 +72,11 @@ causal_performance <- function(FUN = mean,
       rename(bindings_output = bindings) %>%
       mutate(bindings_input = map(bindings_input, replace_null),
              bindings_output = map(bindings_output, replace_null)) %>%
-			mutate(duration = as.double(end_time-start_time, units = attr(type, "units"))*attr(type, "scale_time")) %>%
       group_by(act, from_id) %>%
 			summarize(bindings_input = first(bindings_input),
 			          bindings_output = first(bindings_output),
-			          label = do.call(function(...) type(duration, na.rm = T,...),  attr(type, "arguments"))) %>%
+			          label = do.call(function(...) type(CUSTOM_ATTR_NODES, na.rm = T,...),  attr(type, "arguments"))) %>%
+      mutate(label = if_end(act, 0, if_start(act, 0, label))) %>%
 			na.omit() %>%
 			ungroup() %>%
 			mutate(color_level = label,
@@ -122,72 +108,11 @@ causal_performance <- function(FUN = mean,
       tidyr::unnest(binding_output) %>%
       arrange(case, start_time, min_order)
 
-    rle_ids <- rle(unnested_bindings$case)
-    end = cumsum(rle_ids$lengths)
-    start = c(1, lag(end)[-1] + 1)
-
-    # TODO improve the performance of this part
     summary_freq <- unnested_bindings %>%
-      mutate(waiting_time = unlist(pmap(
-        .l = list(start, end),
-        .f = function(s_idx, e_idx) {
-          map_dbl(
-            .x = (s_idx:e_idx),
-            .f = function(i) {
-              if (i %in% c(s_idx, e_idx)) {
-                # no time from/until artifical start/end
-                return(0.0)
-              }
-              current_binding <- .$binding_output[i]
-              if (current_binding == "End") {
-                return(0.0) # no time until artifical end
-              }
-              current_end <- .$end_time[i]
-              suffix_act <- .$act[(i + 1):e_idx]
-              suffix_start <- .$start_time[(i + 1):e_idx]
-              next_start <-
-                suffix_start[match(current_binding, suffix_act)]
-              if (is.na(next_start)) {
-                warning(
-                  paste0(
-                    "Dependant activity ",
-                    current_binding,
-                    " not found in \n",
-                    paste(suffix_act, suffix_start, collapse = "\n"),
-                    "\n",
-                    "Returning NA!"
-                  )
-                )
-                return(NA)
-              } else {
-                wait <- as.double(next_start - current_end,
-                                  units = attr(type, "units")) * attr(type, "scale_time")
-                if (wait >= 0) {
-                  return(wait)
-                } else {
-                  warning(
-                    paste0(
-                      "Dependant activity ",
-                      current_binding,
-                      " has negative waiting time \n",
-                      "End of activity: ",
-                      current_end,
-                      "\n",
-                      paste(suffix_act, suffix_start, collapse = "\n"),
-                      "\n",
-                      "Returning 0!"
-                    )
-                  )
-                  return(0)
-                }
-              }
-            }
-          )
-        }
-      ))) %>%
       group_by(act, binding_output) %>%
       summarise(n = n(),
-                value = do.call(function(...) type(waiting_time, na.rm = T,...),  attr(type, "arguments"))) %>%
+                value = do.call(function(...) type(CUSTOM_ATTR_EDGES, na.rm = T,...),  attr(type, "arguments"))) %>%
+      mutate(value = if_end(act, 0, if_start(act, 0, label))) %>%
       rename(binding = binding_output)
 
     base_nodes <- bindings %>%
