@@ -64,13 +64,14 @@ causal_frequency <- function(value = c("absolute", "relative"),
       rename(bindings_output = bindings) %>%
       mutate(bindings_input = map(bindings_input, replace_null),
              bindings_output = map(bindings_output, replace_null)) %>%
+      na.omit() %>%
       mutate(label = case_when(type == "relative" ~ 100*n/n_activity_instances,
               								 type == "absolute" ~ n,
               								 type == "absolute_case" ~ n_distinct_cases,
               								 type == "relative_case" ~ 100*n_distinct_cases/n_cases)) %>%
   		mutate(color_level = label,
     			   shape = if_end(act,"circle","rectangle"),
-    			   fontcolor = if_end(act, if_start(act, "chartreuse4","brown4"),  ifelse(label <= (min(label) + (5/8)*diff(range(label))), "black","white")),
+    			   fontcolor = if_end(act, if_start(act, "chartreuse4","brown4"),  ifelse(label <= (min(label) + (4/8)*diff(range(label))), "black","white")),
     			   color = if_end(act, if_start(act, "chartreuse4","brown4"),"black"),
     			   label = if_end(act, act, paste0(act, "\n",
               			                    round(label, 2),

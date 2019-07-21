@@ -66,10 +66,12 @@ causal_bindings <- function(eventlog,
               if (length(res) == 0) {
                 # No effect may lead to disconnected activitues, so parse again ignoring `in_acts`
                 # This is different from what Flexible Heuristics Miner paper does
-                get_active(suffix, act, out_act, c(NA))
-              } else {
-                res
+                res <- get_active(suffix, act, out_act, c(NA))
               }
+              if (length(res) > 1) {
+                res <- res[!res %in% c("Start","End")] # endpoint should not be part when there is another possibility
+              }
+              res
             }
           } else {
             character() # last one is always empty

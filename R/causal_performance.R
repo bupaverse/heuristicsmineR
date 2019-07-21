@@ -87,7 +87,8 @@ causal_performance <- function(FUN = mean,
       mutate(bindings_input = map(bindings_input, replace_null),
              bindings_output = map(bindings_output, replace_null)) %>%
 			mutate(duration = as.double(end_time-start_time, units = attr(type, "units"))*attr(type, "scale_time")) %>%
-			group_by(act, from_id) %>%
+			na.omit() %>%
+      group_by(act, from_id) %>%
 			summarize(bindings_input = first(bindings_input),
 			          bindings_output = first(bindings_output),
 			          label = do.call(function(...) type(duration, na.rm = T,...),  attr(type, "arguments"))) %>%
@@ -95,7 +96,7 @@ causal_performance <- function(FUN = mean,
 			ungroup() %>%
 			mutate(color_level = label,
 				   shape = if_end(act,"circle","rectangle"),
-				   fontcolor = if_end(act, if_start(act, "chartreuse4","brown4"),  ifelse(label <= (min(label) + (5/8)*diff(range(label))), "black","white")),
+				   fontcolor = if_end(act, if_start(act, "chartreuse4","brown4"),  ifelse(label <= (min(label) + (4/8)*diff(range(label))), "black","white")),
 				   color = if_end(act, if_start(act, "chartreuse4","brown4"),"grey"),
 				   tooltip = paste0(act, "\n", round(label, 2), " ",attr(type, "units_label")),
 				   label = if_end(act, act, tooltip),
