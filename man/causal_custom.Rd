@@ -28,6 +28,7 @@ If used for edges, it will show the attribute values which related to the out-go
 }
 \examples{
 causal_net(L_heur_1,
-           type_nodes = causal_custom(attribute = "timestamp"))
+           type_nodes = causal_custom(attribute = "timestamp"),
+           type_edges = causal_custom(attribute = "timestamp"))
 
 }
