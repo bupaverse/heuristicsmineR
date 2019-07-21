@@ -15,7 +15,8 @@
 #'
 #' @examples
 #' causal_net(L_heur_1,
-#'            type_nodes = causal_custom(attribute = "timestamp"))
+#'            type_nodes = causal_custom(attribute = "timestamp"),
+#'            type_edges = causal_custom(attribute = "timestamp"))
 #'
 #' @export
 causal_custom <- function(FUN = mean,
@@ -38,7 +39,8 @@ causal_custom <- function(FUN = mean,
 
 	attr(FUN, "create_nodes") <- function(bindings, type, extra_data) {
 
-	  . <- duration <-  end_time <- start_time <- tooltip <- NULL
+	  . <- duration <-  end_time <- start_time <- tooltip <-
+	    CUSTOM_ATTR_NODES <- NULL
 
 	  n_cases <- extra_data$n_cases
 		n_activity_instances <- extra_data$n_activity_instances
@@ -95,13 +97,14 @@ causal_custom <- function(FUN = mean,
 
 	attr(FUN, "create_edges") <- function(dependencies, bindings, type, extra_data) {
 
-	  . <- end_time <- min_order <- start_time <- value <- waiting_time <- NULL
+	  . <- end_time <- min_order <- start_time <- value <- waiting_time <-
+	    CUSTOM_ATTR_EDGES <- NULL
 
 	  n_cases <- extra_data$n_cases
 		n_activity_instances <- extra_data$n_activity_instances
 
     unnested_bindings <- bindings %>%
-      select(case, act, min_order, start_time, end_time, binding_output) %>%
+      select(case, act, min_order, start_time, end_time, binding_output, CUSTOM_ATTR_EDGES) %>%
       filter(lengths(binding_output) > 0) %>%
       tidyr::unnest(binding_output) %>%
       arrange(case, start_time, min_order)

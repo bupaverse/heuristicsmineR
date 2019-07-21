@@ -4,22 +4,21 @@
 \alias{causal_custom}
 \title{Custom map profile}
 \usage{
-causal_custom(FUN = mean, units = c("mins", "secs", "hours", "days",
-  "weeks", "months", "quarters", "semesters", "years"),
-  color_scale = "Reds", color_edges = "red4", ...)
+causal_custom(FUN = mean, attribute, units = "",
+  color_scale = "RdPu", color_edges = "red4", ...)
 }
 \arguments{
 \item{FUN}{A summary function to be called on the process time of a specific activity, e.g. mean, median, min, max}
 
+\item{attribute}{The name of the case attribute to visualize (should be numeric)}
+
 \item{units}{Character to be placed after values (e.g. EUR for monitary euro values)}
 
-\item{color_scale}{Name of color scale to be used for nodes. Defaults to Reds. See \code{Rcolorbrewer::brewer.pal.info()} for all options.}
+\item{color_scale}{Name of color scale to be used for nodes. Defaults to RdPu See \code{Rcolorbrewer::brewer.pal.info()} for all options.}
 
 \item{color_edges}{The color used for edges. Defaults to red4.}
 
 \item{...}{Additional arguments forwarded to FUN}
-
-\item{attribute}{The name of the case attribute to visualize (should be numeric)}
 }
 \description{
 Function to create a custom map profile based on some event log attribute.
@@ -29,6 +28,6 @@ If used for edges, it will show the attribute values which related to the out-go
 }
 \examples{
 causal_net(L_heur_1,
-           type = causal_custom())
+           type_nodes = causal_custom(attribute = "timestamp"))
 
 }

@@ -8,8 +8,8 @@ causal_net(eventlog = NULL, dependencies = dependency_matrix(eventlog =
   eventlog, threshold = threshold, threshold_frequency =
   threshold_frequency, ...), bindings = causal_bindings(eventlog,
   dependencies), threshold = 0.9, threshold_frequency = 0,
-  type = causal_frequency("absolute"), type_nodes = type,
-  type_edges = type, ...)
+  type = causal_frequency("absolute"), sec = NULL, type_nodes = type,
+  type_edges = type, sec_nodes = sec, sec_edges = sec, ...)
 }
 \arguments{
 \item{eventlog}{The event log for which a causal map should be computed.
@@ -25,9 +25,15 @@ Can be left NULL for more control if parameters \code{dependencies} and \code{bi
 
 \item{type}{A causal map type. For example, \code{\link{causal_frequency}} or \code{\link{causal_performance}}.}
 
+\item{sec}{A causal process map type. Values are shown between brackets.}
+
 \item{type_nodes}{A causal map type to be used for nodes only.}
 
 \item{type_edges}{A causal map type to be used for edges only.}
+
+\item{sec_nodes}{A secondary causal map type for nodes only.}
+
+\item{sec_edges}{A secondary causal map type for edges only.}
 
 \item{...}{Further parameters forwarded to the default \code{\link{dependency_matrix}} function.}
 }

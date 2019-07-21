@@ -66,7 +66,8 @@ causal_net <- function(eventlog = NULL,
 
   act <- dep <- binding <- binding_input <- binding_output <-
     bindings_input <- bindings_output <- case <-
-    color_level <- from_id <- label <- NULL
+    color_level <- from_id <- label <-
+    ACTIVITY_CLASSIFIER_ <- sec_label <- str_replace <- to_id <- NULL
 
 	extra_data <- list()
 	extra_data$n_cases <- length(unique(bindings$case))
