@@ -63,8 +63,6 @@ causal_custom <- function(FUN = mean,
         y
       })))
 
-    browser()
-
     nodes <- bindings %>%
       left_join(nested_input,  by = c("act" = "act")) %>%
       rename(bindings_input = bindings) %>%
