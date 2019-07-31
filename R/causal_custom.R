@@ -113,7 +113,7 @@ causal_custom <- function(FUN = mean,
       group_by(act, binding_output) %>%
       summarise(n = n(),
                 value = do.call(function(...) type(CUSTOM_ATTR_EDGES, na.rm = T,...),  attr(type, "arguments"))) %>%
-      mutate(value = if_end(act, 0, if_start(act, 0, label))) %>%
+      mutate(value = if_end(act, 0, if_start(act, 0, value))) %>%
       rename(binding = binding_output)
 
     base_nodes <- bindings %>%
