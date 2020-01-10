@@ -15,6 +15,8 @@
 #'
 precedence_matrix <- function(eventlog, type = c("absolute","relative","relative-antecedent","relative-consequent", "relative-case")) {
 
+  type = match.arg(type)
+	
   antecedent <- consequent <- NULL
 
 	stopifnot("eventlog" %in% class(eventlog))
