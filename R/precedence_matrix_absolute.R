@@ -15,11 +15,11 @@
 #'
 precedence_matrix <- function(eventlog, type = c("absolute","relative","relative-antecedent","relative-consequent", "relative-case")) {
 
-  type = match.arg(type)
-	
   antecedent <- consequent <- NULL
 
-	stopifnot("eventlog" %in% class(eventlog))
+  stopifnot("eventlog" %in% class(eventlog))
+
+  type = match.arg(type)
 
   m <- precedence_matrix_absolute(eventlog)
 

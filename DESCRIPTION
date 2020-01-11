@@ -1,7 +1,7 @@
 Package: heuristicsmineR
 Type: Package
 Title: Discovery of Process Models with the Heuristics Miner
-Version: 0.2.2.9000
+Version: 0.2.2.9001
 Authors@R: 
     person(given = "Felix",
            family = "Mannhardt",
@@ -44,5 +44,5 @@ Suggests:
   DiagrammeRsvg
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-URL: https://github.com/fmannhardt/heuristicsmineR
-BugReports: https://github.com/fmannhardt/heuristicsmineR/issues
+URL: https://github.com/bupaverse/heuristicsmineR
+BugReports: https://github.com/bupaverse/heuristicsmineR/issues
