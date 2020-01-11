@@ -1,3 +1,10 @@
+# heuristicsmineR 0.2.2
+
+* Prepare integration with `processanimateR`  
+* Fix occasional negative values in `performance` profile
+* Added `custom` profile
+* Fixed warning in  `precedence_matrix` (Thanks to @nacnudus for the PR)
+
 # heuristicsmineR 0.2.1
 
 * Bugfix buffer over-read in `count_length_two_loops.cpp`
