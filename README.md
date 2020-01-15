@@ -1,5 +1,6 @@
 > Process discovery with variants of the Heuristics Miner algorithm
 
+[![](https://cranlogs.r-pkg.org/badges/heuristicsmineR)](https://cran.r-project.org/package=heuristicsmineR)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/heuristicsmineR)](https://cran.r-project.org/package=heuristicsmineR)
 [![Travis-CI Build Status](https://travis-ci.org/bupaverse/heuristicsmineR.svg?branch=master)](https://travis-ci.org/bupaverse/heuristicsmineR)
 
@@ -19,6 +20,7 @@ install.packages("heuristicsmineR")
 You can install the development version of heuristicsmineR with:
 
 ``` r
+source("https://install-github.me/r-lib/remotes")
 remotes::install_github("bupaverse/heuristicsmineR")
 ```
 
