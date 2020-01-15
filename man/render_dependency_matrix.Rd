@@ -4,8 +4,12 @@
 \alias{render_dependency_matrix}
 \title{Renders a dependency matrix as dependency graph}
 \usage{
-render_dependency_matrix(dependencies, rankdir = "LR", layout = "dot",
-  render = T)
+render_dependency_matrix(
+  dependencies,
+  rankdir = "LR",
+  layout = "dot",
+  render = T
+)
 }
 \arguments{
 \item{dependencies}{A dependency matrix created by \code{\link{dependency_matrix}}}

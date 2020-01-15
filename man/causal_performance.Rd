@@ -4,9 +4,14 @@
 \alias{causal_performance}
 \title{Performance map profile}
 \usage{
-causal_performance(FUN = mean, units = c("mins", "secs", "hours",
-  "days", "weeks", "months", "quarters", "semesters", "years"),
-  color_scale = "Reds", color_edges = "red4", ...)
+causal_performance(
+  FUN = mean,
+  units = c("mins", "secs", "hours", "days", "weeks", "months", "quarters", "semesters",
+    "years"),
+  color_scale = "Reds",
+  color_edges = "red4",
+  ...
+)
 }
 \arguments{
 \item{FUN}{A summary function to be called on the process time of a specific activity, e.g. mean, median, min, max}

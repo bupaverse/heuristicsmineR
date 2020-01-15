@@ -4,8 +4,14 @@
 \alias{causal_custom}
 \title{Custom map profile}
 \usage{
-causal_custom(FUN = mean, attribute, units = "",
-  color_scale = "RdPu", color_edges = "red4", ...)
+causal_custom(
+  FUN = mean,
+  attribute,
+  units = "",
+  color_scale = "RdPu",
+  color_edges = "red4",
+  ...
+)
 }
 \arguments{
 \item{FUN}{A summary function to be called on the process time of a specific activity, e.g. mean, median, min, max}

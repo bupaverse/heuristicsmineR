@@ -12,8 +12,8 @@
 L_heur_2
 }
 \description{
-Artifical eventlog for illustrating Heuristics Miner published as supplementary material to the book
-\code{Process Mining: Discovery, Conformance and Enhancement of Business Processes}.
+Artificial eventlog for illustrating Heuristics Miner published as supplementary material to the book
+\verb{Process Mining: Discovery, Conformance and Enhancement of Business Processes}.
 }
 \references{
 Process Mining: Discovery, Conformance and Enhancement of Business Processes by W.M.P. van der Aalst, Springer Verlag, 2011 (ISBN 978-3-642-19344-6).

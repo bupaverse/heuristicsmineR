@@ -4,12 +4,21 @@
 \alias{causal_net}
 \title{Create a Causal net (also Heuristics net)}
 \usage{
-causal_net(eventlog = NULL, dependencies = dependency_matrix(eventlog =
-  eventlog, threshold = threshold, threshold_frequency =
-  threshold_frequency, ...), bindings = causal_bindings(eventlog,
-  dependencies), threshold = 0.9, threshold_frequency = 0,
-  type = causal_frequency("absolute"), sec = NULL, type_nodes = type,
-  type_edges = type, sec_nodes = sec, sec_edges = sec, ...)
+causal_net(
+  eventlog = NULL,
+  dependencies = dependency_matrix(eventlog = eventlog, threshold = threshold,
+    threshold_frequency = threshold_frequency, ...),
+  bindings = causal_bindings(eventlog, dependencies),
+  threshold = 0.9,
+  threshold_frequency = 0,
+  type = causal_frequency("absolute"),
+  sec = NULL,
+  type_nodes = type,
+  type_edges = type,
+  sec_nodes = sec,
+  sec_edges = sec,
+  ...
+)
 }
 \arguments{
 \item{eventlog}{The event log for which a causal map should be computed.
