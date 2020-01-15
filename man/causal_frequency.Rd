@@ -4,8 +4,11 @@
 \alias{causal_frequency}
 \title{Frequency map profile}
 \usage{
-causal_frequency(value = c("absolute", "relative"),
-  color_scale = "PuBu", color_edges = "dodgerblue4")
+causal_frequency(
+  value = c("absolute", "relative"),
+  color_scale = "PuBu",
+  color_edges = "dodgerblue4"
+)
 }
 \arguments{
 \item{value}{The type of frequency value to be used:

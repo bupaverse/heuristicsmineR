@@ -4,8 +4,15 @@
 \alias{render_causal_net}
 \title{Renders a Causal net as graph}
 \usage{
-render_causal_net(causal_net, rankdir = "LR", layout = "dot",
-  render = T, fixed_edge_width = F, fixed_node_pos = NULL, ...)
+render_causal_net(
+  causal_net,
+  rankdir = "LR",
+  layout = "dot",
+  render = T,
+  fixed_edge_width = F,
+  fixed_node_pos = NULL,
+  ...
+)
 }
 \arguments{
 \item{causal_net}{A causal net created by \code{\link{causal_net}}}

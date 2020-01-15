@@ -4,8 +4,11 @@
 \alias{precedence_matrix}
 \title{Precedence Matrix}
 \usage{
-precedence_matrix(eventlog, type = c("absolute", "relative",
-  "relative-antecedent", "relative-consequent", "relative-case"))
+precedence_matrix(
+  eventlog,
+  type = c("absolute", "relative", "relative-antecedent", "relative-consequent",
+    "relative-case")
+)
 }
 \arguments{
 \item{eventlog}{The event log object to be used}

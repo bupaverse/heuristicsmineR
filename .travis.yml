@@ -1,11 +1,12 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
+dist: xenial
 language: R
 sudo: required
 addons:
   apt:
     packages:
-      - libv8-3.14-dev
+      - libnode-dev
       - valgrind
 r:
   - oldrel

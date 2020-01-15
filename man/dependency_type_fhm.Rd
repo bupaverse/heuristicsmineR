@@ -4,17 +4,21 @@
 \alias{dependency_type_fhm}
 \title{Dependency type based on Flexible Heuristics Miner (FHM)}
 \usage{
-dependency_type_fhm(threshold_dependency = 0.9,
+dependency_type_fhm(
+  threshold_dependency = 0.9,
   threshold_l1 = threshold_dependency,
-  threshold_l2 = threshold_dependency, threshold_frequency = 0,
-  all_connected = FALSE, endpoints_connected = FALSE)
+  threshold_l2 = threshold_dependency,
+  threshold_frequency = 0,
+  all_connected = FALSE,
+  endpoints_connected = FALSE
+)
 }
 \arguments{
-\item{threshold_dependency}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out dependencies below the threshold.}
+\item{threshold_dependency}{A dependency threshold, usually in the interval \verb{[0,1]}, filtering out dependencies below the threshold.}
 
-\item{threshold_l1}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out self-loop dependencies below the threshold.}
+\item{threshold_l1}{A dependency threshold, usually in the interval \verb{[0,1]}, filtering out self-loop dependencies below the threshold.}
 
-\item{threshold_l2}{A dependency threshold, usually in the interval \code{[0,1]}, filtering out length-two loop dependencies below the threshold.}
+\item{threshold_l2}{A dependency threshold, usually in the interval \verb{[0,1]}, filtering out length-two loop dependencies below the threshold.}
 
 \item{threshold_frequency}{An absolute frequency threshold filtering dependencies which are observed infrequently.}
 
