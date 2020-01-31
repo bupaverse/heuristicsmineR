@@ -4,7 +4,7 @@
 \name{hospital_multi_perspective}
 \alias{hospital_multi_perspective}
 \title{Hospital example event log capturing multi-perspectives}
-\format{Eventlog containing a sample of 10000 cases}
+\format{Eventlog containing a sample of 10 000 cases}
 \source{
 \url{https://data.4tu.nl/repository/uuid:32cad43f-8bb9-46af-8333-48aae2bea037}
 }
@@ -12,7 +12,7 @@
 hospital_multi_perspective
 }
 \description{
-Sample of 10000 traces from an artifical eventlog from the PhD thesis 'Multi-perspective Process Mining' used to illustrate the Data-aware Heuristic Miner algorithm.
+Sample of 10 000 traces from an artificial eventlog from the PhD thesis 'Multi-perspective Process Mining' used to illustrate the Data-aware Heuristic Miner algorithm.
 }
 \references{
 Mannhardt, F. (Felix) (2016) Data-driven Process Discovery - Artificial Event Log. Eindhoven University of Technology. Dataset. https://doi.org/10.4121/uuid:32cad43f-8bb9-46af-8333-48aae2bea037

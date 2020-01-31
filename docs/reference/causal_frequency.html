@@ -117,8 +117,11 @@
     <p>Function to create a frequency profile for a process map.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>causal_frequency</span>(<span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"absolute"</span>, <span class='st'>"relative"</span>),
-  <span class='kw'>color_scale</span> <span class='kw'>=</span> <span class='st'>"PuBu"</span>, <span class='kw'>color_edges</span> <span class='kw'>=</span> <span class='st'>"dodgerblue4"</span>)</pre>
+    <pre class="usage"><span class='fu'>causal_frequency</span>(
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"absolute"</span>, <span class='st'>"relative"</span>),
+  <span class='kw'>color_scale</span> <span class='kw'>=</span> <span class='st'>"PuBu"</span>,
+  <span class='kw'>color_edges</span> <span class='kw'>=</span> <span class='st'>"dodgerblue4"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,14 +148,14 @@ absolute, relative (percentage of activity instances).</p></td>
 #&gt; <span style='color: #555555;'># A tibble: 7 x 12</span><span>
 #&gt;   act   from_id     n n_distinct_cases bindings_input bindings_output label
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a           1    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>a\n…
-#&gt; </span><span style='color: #555555;'>2</span><span> b           2    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>b\n…
-#&gt; </span><span style='color: #555555;'>3</span><span> c           3    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>c\n…
-#&gt; </span><span style='color: #555555;'>4</span><span> d           4    17               13 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>d\n…
-#&gt; </span><span style='color: #555555;'>5</span><span> e           5    40               40 </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>e\n…
+#&gt; </span><span style='color: #555555;'>1</span><span> a           1    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>a\n~
+#&gt; </span><span style='color: #555555;'>2</span><span> b           2    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>b\n~
+#&gt; </span><span style='color: #555555;'>3</span><span> c           3    21               21 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>c\n~
+#&gt; </span><span style='color: #555555;'>4</span><span> d           4    17               13 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>d\n~
+#&gt; </span><span style='color: #555555;'>5</span><span> e           5    40               40 </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>e\n~
 #&gt; </span><span style='color: #555555;'>6</span><span> End         6    40               40 </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>End</span><span style='color: #555555;'>"</span><span>
-#&gt; </span><span style='color: #555555;'>7</span><span> Start       7    40               40 </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>Sta…
-#&gt; </span><span style='color: #555555;'># … with 5 more variables: color_level </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, shape </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, fontcolor </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; </span><span style='color: #555555;'>7</span><span> Start       7    40               40 </span><span style='color: #555555;'>&lt;list [0]&gt;</span><span>     </span><span style='color: #555555;'>&lt;list [1]&gt;</span><span>      </span><span style='color: #555555;'>"</span><span>Sta~
+#&gt; </span><span style='color: #555555;'># ... with 5 more variables: color_level </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, shape </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, fontcolor </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   color </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, tooltip </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; Edges
 #&gt; </span><span style='color: #555555;'># A tibble: 8 x 8</span><span>

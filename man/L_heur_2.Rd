@@ -12,7 +12,7 @@
 L_heur_2
 }
 \description{
-Artifical eventlog for illustrating Heuristics Miner published as supplementary material to the book
+Artificial eventlog for illustrating Heuristics Miner published as supplementary material to the book
 \verb{Process Mining: Discovery, Conformance and Enhancement of Business Processes}.
 }
 \references{
