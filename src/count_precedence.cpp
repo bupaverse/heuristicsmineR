@@ -24,22 +24,26 @@ DataFrame count_precedence(CharacterVector cases,
 	std::unordered_map<act_pair, unsigned, boost::hash<act_pair>> counts;
 
 	String curCase;
+  int act = -1;
 
 	for (int i = 0; i < cases.size(); ++i) {
 		String c = cases[i];
-		int act = activities[i];
 
 		int leadIdx = i+lead;
+
 		int leadAct = -1;
-		if (leadIdx < activities.size()) {
-		  if (cases[i+lead] != c) { // i+lead is safe
+		if (leadIdx < cases.size()) {
+		  if (cases[leadIdx] != c) { // i+lead is safe
 		    // End event
 		    leadAct = endIdx;
 		  } else {
-		    // Normal
+		    // Normal, assert(cases.size() == activities.size());
+		    //
         leadAct = activities[leadIdx];
 		  }
 		}
+
+		act = activities[i];
 
 		if (leadAct != -1) {
 		  if (c != curCase) {
@@ -49,7 +53,12 @@ DataFrame count_precedence(CharacterVector cases,
 			counts[act_pair(act, leadAct)]++;
 		}
 
-		 curCase = c;
+		curCase = c;
+	}
+
+	if (act != -1) {
+    // Add last end event
+    counts[act_pair(act, endIdx)]++;
 	}
 
 	unsigned len = counts.size();
