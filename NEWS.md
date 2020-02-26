@@ -4,6 +4,7 @@
 * Fix occasional negative values in `performance` profile
 * Added `custom` profile
 * Fixed warning in  `precedence_matrix` (Thanks to @nacnudus for the PR)
+* Fixed off-by-one error leading to not counting last event correctly.
 
 # heuristicsmineR 0.2.1
 

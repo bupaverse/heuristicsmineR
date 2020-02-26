@@ -5,10 +5,10 @@
 
 #' @title Custom map profile
 #' @description Function to create a custom map profile based on some event log attribute.
-#' @details If used for edges, it will show the attribute values which related to the out-going node of the edge.#'
+#' @details If used for edges, it will show the attribute values which related to the out-going node of the edge.
 #' @param FUN A summary function to be called on the process time of a specific activity, e.g. mean, median, min, max
 #' @param attribute The name of the case attribute to visualize (should be numeric)
-#' @param units Character to be placed after values (e.g. EUR for monitary euro values)
+#' @param units Character to be placed after values (e.g. EUR for monetary euro values)
 #' @param color_scale Name of color scale to be used for nodes. Defaults to RdPu See `Rcolorbrewer::brewer.pal.info()` for all options.
 #' @param color_edges The color used for edges. Defaults to red4.
 #' @param ... Additional arguments forwarded to FUN

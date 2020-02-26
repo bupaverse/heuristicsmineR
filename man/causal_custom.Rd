@@ -18,7 +18,7 @@ causal_custom(
 
 \item{attribute}{The name of the case attribute to visualize (should be numeric)}
 
-\item{units}{Character to be placed after values (e.g. EUR for monitary euro values)}
+\item{units}{Character to be placed after values (e.g. EUR for monetary euro values)}
 
 \item{color_scale}{Name of color scale to be used for nodes. Defaults to RdPu See \code{Rcolorbrewer::brewer.pal.info()} for all options.}
 
@@ -30,7 +30,7 @@ causal_custom(
 Function to create a custom map profile based on some event log attribute.
 }
 \details{
-If used for edges, it will show the attribute values which related to the out-going node of the edge.#'
+If used for edges, it will show the attribute values which related to the out-going node of the edge.
 }
 \examples{
 causal_net(L_heur_1,
