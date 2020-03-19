@@ -286,11 +286,13 @@ Can be left NULL for more control if parameters <code>dependencies</code> and <c
 #&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.976       5     6    40 40         5  </div><div class='input'>
 <span class='co'># The returned DiagrammeR object can be further augmented with</span>
 <span class='co'># panning and zooming before rendering:</span>
+<span class='co'># \donttest{</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
 <span class='fu'>causal_net</span>(<span class='no'>L_heur_1</span>) <span class='kw'>%&gt;%</span>
  <span class='fu'><a href='render_causal_net.html'>render_causal_net</a></span>(<span class='kw'>render</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>DiagrammeRsvg</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DiagrammeRsvg/man/export_svg.html'>export_svg</a></span>() <span class='kw'>%&gt;%</span>
- <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/svgPanZoom/man/svgPanZoom.html'>svgPanZoom</a></span>()</div></span></pre>
+ <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/svgPanZoom/man/svgPanZoom.html'>svgPanZoom</a></span>()
+<span class='co'># }</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

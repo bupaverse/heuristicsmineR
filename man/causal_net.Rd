@@ -72,10 +72,12 @@ causal_net(dependencies = d,
 
 # The returned DiagrammeR object can be further augmented with
 # panning and zooming before rendering:
+\donttest{
 library(magrittr)
 causal_net(L_heur_1) \%>\%
  render_causal_net(render = TRUE) \%>\%
  DiagrammeRsvg::export_svg() \%>\%
  svgPanZoom::svgPanZoom()
+}
 
 }
