@@ -4,7 +4,9 @@
 \name{L_heur_2}
 \alias{L_heur_2}
 \title{Heuristics miner example log #2}
-\format{Eventlog containing 85 cases}
+\format{
+Eventlog containing 85 cases
+}
 \source{
 \url{http://www.processmining.org/event_logs_and_models_used_in_book}
 }

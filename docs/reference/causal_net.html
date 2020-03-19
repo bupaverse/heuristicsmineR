@@ -71,7 +71,7 @@ between activities by using different heuristics as documented in dependency_mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">heuristicsmineR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -224,7 +224,7 @@ Can be left NULL for more control if parameters <code>dependencies</code> and <c
 #&gt; </span><span style='color: #555555;'>5</span><span> b          e          0.917       2     5    21 21         3.1
 #&gt; </span><span style='color: #555555;'>6</span><span> c          e          0.917       3     5    21 21         3.1
 #&gt; </span><span style='color: #555555;'>7</span><span> d          e          0.929       4     5    17 17         2.7
-#&gt; </span><span style='color: #555555;'>8</span><span> e          End        0.975       5     6    40 40         5  </div><div class='input'>
+#&gt; </span><span style='color: #555555;'>8</span><span> e          End        0.976       5     6    40 40         5  </div><div class='input'>
 <span class='co'># Causal map with lower dependency treshold</span>
 <span class='fu'>causal_net</span>(<span class='no'>L_heur_1</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>.8</span>)</div><div class='output co'>#&gt; Nodes
 #&gt; </span><span style='color: #555555;'># A tibble: 7 x 12</span><span>
@@ -252,7 +252,7 @@ Can be left NULL for more control if parameters <code>dependencies</code> and <c
 #&gt; </span><span style='color: #555555;'> 7</span><span> b          e          0.917       2     5    21 21         3.1
 #&gt; </span><span style='color: #555555;'> 8</span><span> c          e          0.917       3     5    21 21         3.1
 #&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       4     5    13 13         2.3
-#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       5     6    40 40         5  </div><div class='input'>
+#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.976       5     6    40 40         5  </div><div class='input'>
 <span class='co'># For even more control omit the `eventlog` parameter</span>
 <span class='co'># and provide `dependencies` and `bindings` directly.</span>
 <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dependency_matrix.html'>dependency_matrix</a></span>(<span class='no'>L_heur_1</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>.8</span>)
@@ -283,15 +283,14 @@ Can be left NULL for more control if parameters <code>dependencies</code> and <c
 #&gt; </span><span style='color: #555555;'> 7</span><span> b          e          0.917       2     5    21 21         3.1
 #&gt; </span><span style='color: #555555;'> 8</span><span> c          e          0.917       3     5    21 21         3.1
 #&gt; </span><span style='color: #555555;'> 9</span><span> d          e          0.929       4     5    13 13         2.3
-#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.975       5     6    40 40         5  </div><div class='input'><span class='co'># \donttest{</span>
+#&gt; </span><span style='color: #555555;'>10</span><span> e          End        0.976       5     6    40 40         5  </div><div class='input'>
 <span class='co'># The returned DiagrammeR object can be further augmented with</span>
 <span class='co'># panning and zooming before rendering:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
 <span class='fu'>causal_net</span>(<span class='no'>L_heur_1</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='render_causal_net.html'>render_causal_net</a></span>(<span class='kw'>render</span> <span class='kw'>=</span> <span class='no'>T</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='render_causal_net.html'>render_causal_net</a></span>(<span class='kw'>render</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>DiagrammeRsvg</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DiagrammeRsvg/man/export_svg.html'>export_svg</a></span>() <span class='kw'>%&gt;%</span>
- <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/svgPanZoom/man/svgPanZoom.html'>svgPanZoom</a></span>()
-<span class='co'># }</span></div></span></pre>
+ <span class='kw pkg'>svgPanZoom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/svgPanZoom/man/svgPanZoom.html'>svgPanZoom</a></span>()</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

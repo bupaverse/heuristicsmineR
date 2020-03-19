@@ -1,3 +1,7 @@
+# heuristicsmineR 0.2.3
+
+* Fix issue with \donttest example causing errors
+
 # heuristicsmineR 0.2.2
 
 * Prepare integration with `processanimateR`  

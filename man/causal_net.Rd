@@ -69,14 +69,13 @@ causal_net(L_heur_1, threshold = .8)
 d <- dependency_matrix(L_heur_1, threshold = .8)
 causal_net(dependencies = d,
            bindings = causal_bindings(L_heur_1, d, "nearest"))
-\donttest{
+
 # The returned DiagrammeR object can be further augmented with
 # panning and zooming before rendering:
 library(magrittr)
 causal_net(L_heur_1) \%>\%
- render_causal_net(render = T) \%>\%
+ render_causal_net(render = TRUE) \%>\%
  DiagrammeRsvg::export_svg() \%>\%
  svgPanZoom::svgPanZoom()
-}
 
 }

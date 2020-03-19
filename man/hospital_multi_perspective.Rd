@@ -4,7 +4,9 @@
 \name{hospital_multi_perspective}
 \alias{hospital_multi_perspective}
 \title{Hospital example event log capturing multi-perspectives}
-\format{Eventlog containing a sample of 10 000 cases}
+\format{
+Eventlog containing a sample of 10 000 cases
+}
 \source{
 \url{https://data.4tu.nl/repository/uuid:32cad43f-8bb9-46af-8333-48aae2bea037}
 }

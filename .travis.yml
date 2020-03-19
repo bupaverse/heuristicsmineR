@@ -16,4 +16,4 @@ r_packages:
  - DiagrammeRsvg
 cache: packages
 latex: false
-r_check_args: "--as-cran --use-valgrind"
+r_check_args: "--as-cran --use-valgrind --run-donttest"
