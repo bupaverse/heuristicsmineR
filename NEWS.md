@@ -1,3 +1,7 @@
+# heuristicsmineR 0.2.4
+
+* Fix bug when using sec_edges or sec_nodes parameter
+
 # heuristicsmineR 0.2.3
 
 * Fix issue with \donttest example causing errors

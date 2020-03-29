@@ -122,7 +122,7 @@ causal_net <- function(eventlog = NULL,
 
 	# secondary info
 	if(!is.null(sec_nodes)) {
-		nodes_secondary <- attr(sec_nodes, "create_nodes")(bindings, type_nodes, extra_data) %>%
+		nodes_secondary <- attr(sec_nodes, "create_nodes")(bindings, sec_nodes, extra_data) %>%
 			select(ACTIVITY_CLASSIFIER_, from_id, label) %>%
 			rename(sec_label = label)
 
@@ -131,17 +131,17 @@ causal_net <- function(eventlog = NULL,
 			full_join(nodes_secondary, by = c("ACTIVITY_CLASSIFIER_", "from_id")) %>%
 			mutate(label = if_end(ACTIVITY_CLASSIFIER_,
 								  ACTIVITY_CLASSIFIER_,
-								  str_replace(paste0(label, "\n","(", map(sec_label, ~str_split(.x, "\n")[[1]][2]), ")"), "\n\\(\\)",""))) -> nodes
+								  stringr::str_replace(paste0(label, "\n","(", map(sec_label, ~str_split(.x, "\n")[[1]][2]), ")"), "\n\\(\\)",""))) -> nodes
 	}
 
 	if(!is.null(sec_edges)) {
-		edges_secondary <- attr(sec_edges, "create_edges")(dependencies, bindings, type_edges, extra_data) %>%
+		edges_secondary <- attr(sec_edges, "create_edges")(dependencies, bindings, sec_edges, extra_data) %>%
 			select(from_id, to_id, label) %>%
 			rename(sec_label = label)
 
 		edges %>%
 			full_join(edges_secondary, by = c("from_id","to_id")) %>%
-			mutate(label = str_replace(paste0(label, "\n (", sec_label, ')'), "\n \\( \\)","")) -> edges
+			mutate(label = stringr::str_replace(paste0(label, "\n (", sec_label, ')'), "\n \\( \\)","")) -> edges
 	}
 
 	cnet <- list(nodes = nodes,

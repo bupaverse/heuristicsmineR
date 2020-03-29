@@ -18,7 +18,7 @@
 #'
 #' @export
 causal_performance <- function(FUN = mean,
-                               units = c("mins","secs", "hours","days","weeks", "months", "quarters", "semesters","years"),
+                               units = c("mins", "secs", "hours","days","weeks", "months", "quarters", "semesters","years"),
                                color_scale = "Reds",
                                color_edges = "red4",
                                ...) {
