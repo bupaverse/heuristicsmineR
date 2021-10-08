@@ -6,7 +6,7 @@ Authors@R:
     person(given = "Felix",
            family = "Mannhardt",
            role = c("aut", "cre"),
-           email = "felix.mannhardt@sintef.no")
+           email = "f.mannhardt@tue.nl")
 Description: Provides the heuristics miner algorithm for process discovery 
    as proposed by Weijters et al. (2011) <doi:10.1109/CIDM.2011.5949453>. The
    algorithm builds a causal net from an event log created with the 'bupaR' 
