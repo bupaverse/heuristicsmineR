@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 <meta property="og:description" content="Construct a precedence matrix, showing how activities are followed by each other.
 This function computes the precedence matrix directly in C++ for efficiency.
 Only the type absolute of (precedence_matrix) is supported." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -57,7 +60,7 @@ Only the type absolute of (precedence_matrix) is supported." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +74,7 @@ Only the type absolute of (precedence_matrix) is supported." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">heuristicsmineR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
       </span>
     </div>
 
@@ -79,7 +82,7 @@ Only the type absolute of (precedence_matrix) is supported." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -92,8 +95,8 @@ Only the type absolute of (precedence_matrix) is supported." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bupaverse/heuristicsmineR">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/bupaverse/heuristicsmineR/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -121,7 +124,7 @@ This function computes the precedence matrix directly in C++ for efficiency.
 Only the type <code>absolute</code> of (<code><a href='https://rdrr.io/pkg/processmapR/man/precedence_matrix.html'>precedence_matrix</a></code>) is supported.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>precedence_matrix_absolute</span>(<span class='no'>eventlog</span>, <span class='kw'>lead</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>precedence_matrix_absolute</span><span class='op'>(</span><span class='va'>eventlog</span>, lead <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,23 +141,25 @@ Only the type <code>absolute</code> of (<code><a href='https://rdrr.io/pkg/proce
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>eventdataR</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>traffic_fines</span>)
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>precedence_matrix_absolute</span>(<span class='no'>traffic_fines</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 47 x 3</span><span>
-#&gt;    antecedent                          consequent                              n
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>                               </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>                               </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Receive Result Appeal from Prefect~ Notify Result Appeal to Offender       51
-#&gt; </span><span style='color: #555555;'> 2</span><span> Send for Credit Collection          End                                  </span><span style='text-decoration: underline;'>3</span><span>384
-#&gt; </span><span style='color: #555555;'> 3</span><span> Add penalty                         Receive Result Appeal from Prefect~    15
-#&gt; </span><span style='color: #555555;'> 4</span><span> Send Fine                           End                                  </span><span style='text-decoration: underline;'>1</span><span>893
-#&gt; </span><span style='color: #555555;'> 5</span><span> Add penalty                         Send Appeal to Prefecture             171
-#&gt; </span><span style='color: #555555;'> 6</span><span> Insert Fine Notification            Insert Date Appeal to Prefecture      188
-#&gt; </span><span style='color: #555555;'> 7</span><span> Insert Date Appeal to Prefecture    Add penalty                           170
-#&gt; </span><span style='color: #555555;'> 8</span><span> Send Fine                           Insert Fine Notification             </span><span style='text-decoration: underline;'>4</span><span>633
-#&gt; </span><span style='color: #555555;'> 9</span><span> Create Fine                         Send Fine                            </span><span style='text-decoration: underline;'>6</span><span>557
-#&gt; </span><span style='color: #555555;'>10</span><span> Appeal to Judge                     Insert Date Appeal to Prefecture        1
-#&gt; </span><span style='color: #555555;'># ... with 37 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt;                                        consequent
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://www.bupar.net'>eventdataR</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>traffic_fines</span><span class='op'>)</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>precedence_matrix_absolute</span><span class='op'>(</span><span class='va'>traffic_fines</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 47 x 3</span>
+#&gt;    antecedent                            consequent                            n
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>                                 <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> Payment                               Insert Fine Notification              1
+#&gt; <span style='color: #BCBCBC;'> 2</span> Receive Result Appeal from Prefecture Send for Credit Collection            1
+#&gt; <span style='color: #BCBCBC;'> 3</span> Notify Result Appeal to Offender      Receive Result Appeal from Prefe~     1
+#&gt; <span style='color: #BCBCBC;'> 4</span> Receive Result Appeal from Prefecture Payment                               1
+#&gt; <span style='color: #BCBCBC;'> 5</span> Payment                               Receive Result Appeal from Prefe~     1
+#&gt; <span style='color: #BCBCBC;'> 6</span> Add penalty                           Notify Result Appeal to Offender      3
+#&gt; <span style='color: #BCBCBC;'> 7</span> Receive Result Appeal from Prefecture Add penalty                           2
+#&gt; <span style='color: #BCBCBC;'> 8</span> Notify Result Appeal to Offender      Add penalty                           3
+#&gt; <span style='color: #BCBCBC;'> 9</span> Insert Date Appeal to Prefecture      Add penalty                         170
+#&gt; <span style='color: #BCBCBC;'>10</span> Create Fine                           Payment                            <span style='text-decoration: underline;'>3</span>443
+#&gt; <span style='color: #949494;'># ... with 37 more rows</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                        consequent
 #&gt; antecedent                              Add penalty Appeal to Judge Create Fine
 #&gt;   Add penalty                                     0               0           0
 #&gt;   Appeal to Judge                                13               0           0
@@ -178,7 +183,7 @@ Only the type <code>absolute</code> of (<code><a href='https://rdrr.io/pkg/proce
 #&gt;   Insert Date Appeal to Prefecture         0                                0
 #&gt;   Insert Fine Notification                 0                              188
 #&gt;   Notify Result Appeal to Offender         1                                0
-#&gt;   Payment                               4536                                0
+#&gt;   Payment                               4535                                0
 #&gt;   Receive Result Appeal from Prefecture    0                                0
 #&gt;   Send Appeal to Prefecture              182                                0
 #&gt;   Send Fine                             1893                                2
@@ -274,15 +279,12 @@ Only the type <code>absolute</code> of (<code><a href='https://rdrr.io/pkg/proce
 #&gt;   Send Fine                                                      0     0
 #&gt;   Send for Credit Collection                                     0     0
 #&gt;   Start                                                          0     0</div><div class='input'>
-</div></span></pre>
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -293,7 +295,7 @@ Only the type <code>absolute</code> of (<code><a href='https://rdrr.io/pkg/proce
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

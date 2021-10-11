@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 <meta property="og:description" content="Construct a precedence matrix, showing how activities are followed by each other.
 This is a performance improved variant of precedence_matrix
 in the processmapR package." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -57,7 +60,7 @@ in the processmapR package." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +74,7 @@ in the processmapR package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">heuristicsmineR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
       </span>
     </div>
 
@@ -79,7 +82,7 @@ in the processmapR package." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -92,8 +95,8 @@ in the processmapR package." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bupaverse/heuristicsmineR">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/bupaverse/heuristicsmineR/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -121,11 +124,11 @@ This is a performance improved variant of <code><a href='https://rdrr.io/pkg/pro
 in the processmapR package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>precedence_matrix</span>(
-  <span class='no'>eventlog</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"absolute"</span>, <span class='st'>"relative"</span>, <span class='st'>"relative-antecedent"</span>, <span class='st'>"relative-consequent"</span>,
-    <span class='st'>"relative-case"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>precedence_matrix</span><span class='op'>(</span>
+  <span class='va'>eventlog</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"absolute"</span>, <span class='st'>"relative"</span>, <span class='st'>"relative-antecedent"</span>, <span class='st'>"relative-consequent"</span>,
+    <span class='st'>"relative-case"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,27 +148,29 @@ Relative-consequent will do the reverse.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>precedence_matrix</span>(<span class='no'>hospital_multi_perspective</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"absolute"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 29 x 3</span><span>
+    <pre class="examples"><div class='input'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>precedence_matrix</span><span class='op'>(</span><span class='va'>hospital_multi_perspective</span>, type <span class='op'>=</span> <span class='st'>"absolute"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 29 x 3</span>
 #&gt;    antecedent         consequent             n
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Final Visit        Triage                 1
-#&gt; </span><span style='color: #555555;'> 2</span><span> Check              Organize Ambulance    81
-#&gt; </span><span style='color: #555555;'> 3</span><span> Organize Ambulance End                  381
-#&gt; </span><span style='color: #555555;'> 4</span><span> Prepare            Organize Ambulance   338
-#&gt; </span><span style='color: #555555;'> 5</span><span> Register           Visit                942
-#&gt; </span><span style='color: #555555;'> 6</span><span> Final Visit        Check               </span><span style='text-decoration: underline;'>3</span><span>638
-#&gt; </span><span style='color: #555555;'> 7</span><span> Prepare            End                 </span><span style='text-decoration: underline;'>7</span><span>184
-#&gt; </span><span style='color: #555555;'> 8</span><span> Final Visit        Prepare             </span><span style='text-decoration: underline;'>6</span><span>209
-#&gt; </span><span style='color: #555555;'> 9</span><span> Register           X-Ray               </span><span style='text-decoration: underline;'>4</span><span>008
-#&gt; </span><span style='color: #555555;'>10</span><span> Visit              Final Visit         </span><span style='text-decoration: underline;'>3</span><span>384
-#&gt; </span><span style='color: #555555;'># ... with 19 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt;                     consequent
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> Triage             Check                  1
+#&gt; <span style='color: #BCBCBC;'> 2</span> Final Visit        Triage                 1
+#&gt; <span style='color: #BCBCBC;'> 3</span> Start              Register               1
+#&gt; <span style='color: #BCBCBC;'> 4</span> Organize Ambulance Check                 38
+#&gt; <span style='color: #BCBCBC;'> 5</span> Check              Organize Ambulance    81
+#&gt; <span style='color: #BCBCBC;'> 6</span> Organize Ambulance End                  381
+#&gt; <span style='color: #BCBCBC;'> 7</span> Prepare            Organize Ambulance   338
+#&gt; <span style='color: #BCBCBC;'> 8</span> Visit              X-Ray                452
+#&gt; <span style='color: #BCBCBC;'> 9</span> Check              End                 <span style='text-decoration: underline;'>2</span>284
+#&gt; <span style='color: #BCBCBC;'>10</span> Prepare            Check               <span style='text-decoration: underline;'>2</span>327
+#&gt; <span style='color: #949494;'># ... with 19 more rows</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                     consequent
 #&gt; antecedent           Check  End Final Visit Organize Ambulance Prepare Register
 #&gt;   Check               5783 2284        5654                 81    3639        0
 #&gt;   End                    0    0           0                  0       0        0
 #&gt;   Final Visit         3638    0           0                  0    6209        0
 #&gt;   Organize Ambulance    38  381           0                  0       0        0
-#&gt;   Prepare             2327 7184           0                338       0        0
+#&gt;   Prepare             2327 7183           0                338       0        0
 #&gt;   Register            4898  152           0                  0       0        0
 #&gt;   Start                  0    0           0                  0       0        1
 #&gt;   Triage                 1    0           0                  0       0     9999
@@ -183,15 +188,12 @@ Relative-consequent will do the reverse.</p></td>
 #&gt;   Triage                 0      0     0     0
 #&gt;   Visit                  0      0     0   452
 #&gt;   X-Ray                  0      0  2079     0</div><div class='input'>
-</div></span></pre>
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -202,7 +204,7 @@ Relative-consequent will do the reverse.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
