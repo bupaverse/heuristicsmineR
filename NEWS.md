@@ -1,3 +1,7 @@
+# heuristicsmineR 0.2.5
+
+* Change of maintainer e-mail to new affiliation
+
 # heuristicsmineR 0.2.4
 
 * Fix bug when using sec_edges or sec_nodes parameter

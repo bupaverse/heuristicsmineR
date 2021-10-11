@@ -7,9 +7,6 @@
 \format{
 Eventlog containing 40  cases
 }
-\source{
-\url{http://www.processmining.org/event_logs_and_models_used_in_book}
-}
 \usage{
 L_heur_1
 }

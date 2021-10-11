@@ -8,7 +8,7 @@
 Eventlog containing a sample of 10 000 cases
 }
 \source{
-\url{https://data.4tu.nl/repository/uuid:32cad43f-8bb9-46af-8333-48aae2bea037}
+\doi{10.4121/uuid:32cad43f-8bb9-46af-8333-48aae2bea037}
 }
 \usage{
 hospital_multi_perspective

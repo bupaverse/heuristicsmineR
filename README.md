@@ -41,7 +41,7 @@ causal_net(patients)
 
 ![](man/figures/patients.png)
 
-This discovers the Causal net of the built-in `L_heur_1` event log that was proposed in the [Process Mining book](http://www.processmining.org/book/start):
+This discovers the Causal net of the built-in `L_heur_1` event log that was proposed in the book [Process Mining: Data Science in Action](http://www.processmining.org/publications.html#books):
 
 ``` r
 # Efficient precedence matrix
