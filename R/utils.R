@@ -35,7 +35,8 @@ reduce_simple_eventlog <- function(eventlog) {
       distinct(!!case_id_(eventlog), !!activity_id_(eventlog), !!activity_instance_id_(eventlog)) %>%
       rename(case_id = !!case_id_(eventlog),
              activity_id = !!activity_id_(eventlog),
-             activity_instance_id = !!activity_instance_id_(eventlog))
+             activity_instance_id = !!activity_instance_id_(eventlog)) %>%
+      mutate(activity_id = as.factor(activity_id)) # fix for bupaR 0.5 since activity_id is not necessarily a factor anymore
 }
 
 reduce_activitylog <- function(eventlog) {
@@ -48,7 +49,9 @@ reduce_activitylog <- function(eventlog) {
 			   activity_instance_id = !!activity_instance_id_(eventlog),
 			   case_id = !!case_id_(eventlog),
 			   timestamp = !!timestamp_(eventlog),
-			   .order) -> prepared_log
+			   .order) %>%
+	  mutate(activity_id = as.factor(activity_id)) -> prepared_log # fix for bupaR 0.5 since activity_id is not necessarily a factor anymore
+
 
 	data.table::setDT(prepared_log)
 	prepared_log[, list(start = min(timestamp),

@@ -1,3 +1,8 @@
+# heuristicsmineR 0.2.7
+
+* Compatibility update for bupaR 0.5.0
+* 
+
 # heuristicsmineR 0.2.5
 
 * Change of maintainer e-mail to new affiliation

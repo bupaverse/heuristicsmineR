@@ -5,9 +5,9 @@
 [![Travis-CI Build Status](https://travis-ci.org/bupaverse/heuristicsmineR.svg?branch=master)](https://travis-ci.org/bupaverse/heuristicsmineR)
 
 
-# Discover Process Models With the Heuristics Miner
+# Discover process models with the Heuristics Miner
 
-Discovery of process models from event logs based on the Heuristics Miner algorithm integrated into the [bupaR](http://bupar.net/) framework.
+Discovery of process models from event logs based on the Heuristics Miner algorithm integrated into the [bupaR](https://bupar.net/) framework.
 
 ## Installation
 
