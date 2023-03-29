@@ -84,11 +84,14 @@ as.petrinet.causal_net <- function(obj) {
   })
 
 
-  trans_final <- setdiff(union(act_trans, inv_trans), c("Start", "End"))
-  places_final <- union(gate_places,
+  trans_final <- tibble(id = setdiff(union(act_trans, inv_trans), c("Start", "End"))) %>%
+    mutate(label = id)
+  places_final <- tibble(id = union(gate_places,
                         setdiff(act_places,
                                 c(act_flow[act_flow$to == "Start",]$from,
-                                  act_flow[act_flow$from == "End",]$to)))
+                                  act_flow[act_flow$from == "End",]$to))))  %>%
+    mutate(label = id)
+
   flows_final <- bind_rows(act_flow, binding_flow) %>%
     distinct() %>%
     filter(!(to %in% c("Start", "End")),
@@ -98,8 +101,8 @@ as.petrinet.causal_net <- function(obj) {
 
   pn <- petrinetR::create_PN(places_final,
                        trans_final,
-                       flows_final,
-                       marking)
+                       flows_final)
+
   pn$transitions <- pn$transitions %>%
     mutate(label = if_else(startsWith(id,"inv_"), NA_character_, id))
 
