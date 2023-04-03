@@ -1,12 +1,16 @@
 Package: heuristicsmineR
 Type: Package
 Title: Discovery of Process Models with the Heuristics Miner
-Version: 0.2.7
+Version: 0.3.0
 Authors@R: 
-    person(given = "Felix",
+    c(person(given = "Felix",
            family = "Mannhardt",
            role = c("aut", "cre"),
-           email = "f.mannhardt@tue.nl")
+           email = "f.mannhardt@tue.nl"),
+           person(given = "Gert",
+           family = "Janssenswillen",
+           role = "ctb",
+           email = "gert.janssenswillen@uhasselt.be"))
 Description: Provides the heuristics miner algorithm for process discovery 
    as proposed by Weijters et al. (2011) <doi:10.1109/CIDM.2011.5949453>. The
    algorithm builds a causal net from an event log created with the 'bupaR' 
@@ -30,7 +34,7 @@ Imports:
     dplyr,
     tidyr,
     DiagrammeR (>= 1.0.0),
-    petrinetR,
+    petrinetR (>= 0.3.0),
     purrr,
     scales,
     Rcpp,
@@ -43,6 +47,6 @@ Suggests:
   svgPanZoom,
   DiagrammeRsvg
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 URL: https://github.com/bupaverse/heuristicsmineR
 BugReports: https://github.com/bupaverse/heuristicsmineR/issues
